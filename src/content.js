@@ -9,7 +9,7 @@ export const navigation = [
 
 export const hero = {
   name: 'Aatika Khan',
-  title: 'Senior Mobile & Cloud Consultant',
+  title: 'Senior Mobile, Software Engineer & Consultant',
   statement:
     'I help international teams ship Flutter-first, cloud-ready products that convert — pairing polished UX with reliable APIs and infrastructure.',
   highlights: [
@@ -63,6 +63,7 @@ export const experiences = [
       'Scaled infrastructure across AWS (EC2, S3, RDS) with reliable deployment pipelines.',
     ],
     tech: ['Flutter', 'FastAPI', 'AWS'],
+    link: 'http://treasurefox.ai',
   },
   {
     role: 'Full Stack Engineer',
@@ -88,6 +89,7 @@ export const experiences = [
       'Partnered with distributed teams to ensure parity across platforms.',
     ],
     tech: ['Flutter', 'PayPal', 'Product Strategy'],
+    link: 'https://www.ebuygumm.co.uk/shop/Online_market_stall',
   },
   {
     role: 'Lead Mobile Engineer (Contract)',
@@ -114,6 +116,7 @@ export const experiences = [
       'Reduced time-to-value for analytics setup from days to minutes.',
     ],
     tech: ['Flutter', 'DashX', 'Analytics'],
+    link: 'https://dashx.com/',
   },
   {
     role: 'Mobile Developer (Contract)',
@@ -126,6 +129,7 @@ export const experiences = [
       'Collaborated closely with design to deliver a refined experience end-to-end.',
     ],
     tech: ['iOS', 'RevenueCat', 'Hive'],
+    link: 'http://machinelove.co',
   },
   {
     role: 'Mobile Developer',
@@ -138,6 +142,7 @@ export const experiences = [
       'Shipped Android and iOS apps that connect organizations with shared mobility.',
     ],
     tech: ['Flutter', 'Firebase', 'BLoC'],
+    link: 'https://www.uryde.de/',
   },
   {
     role: 'Mobile Developer',
@@ -150,6 +155,7 @@ export const experiences = [
       'Delivered income visibility, task lifecycle tracking, and payment breakdowns.',
     ],
     tech: ['Flutter', 'Firebase', 'Geolocation'],
+    link: 'https://www.easeyourlife.in/',
   },
 ]
 

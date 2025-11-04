@@ -234,7 +234,19 @@ function App() {
                   <div className="experience-meta">
                     <span className="experience-period">{item.period}</span>
                     <h3>
-                      {item.role} · <span>{item.company}</span>
+                      {item.role} ·{' '}
+                      {item.link ? (
+                        <a
+                          href={item.link}
+                          className="experience-company"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {item.company}
+                        </a>
+                      ) : (
+                        <span className="experience-company">{item.company}</span>
+                      )}
                     </h3>
                     <p>{item.summary}</p>
                     <div className="experience-tech">

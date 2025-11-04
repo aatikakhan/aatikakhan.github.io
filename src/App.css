@@ -105,7 +105,7 @@
   position: relative;
   max-width: var(--layout-max);
   margin: 0 auto clamp(4rem, 10vw, 7rem);
-  padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+  padding: clamp(2.6rem, 6vw, 3.8rem) clamp(1.6rem, 5vw, 3.6rem);
   z-index: 1;
 }
 
@@ -153,6 +153,7 @@
 
 .hero {
   padding-top: clamp(6rem, 12vw, 9rem);
+  padding-bottom: clamp(2.4rem, 6vw, 3.6rem);
 }
 
 .hero__layout {
@@ -461,9 +462,15 @@
   font-size: 1.4rem;
 }
 
-.experience-meta h3 span {
+.experience-company {
   color: var(--text-secondary);
   font-weight: 500;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.experience-company:hover {
+  color: var(--text-primary);
 }
 
 .experience-meta p {
@@ -610,6 +617,7 @@
 }
 
 .volunteering-role {
+  display: block;
   font-weight: 600;
 }
 
@@ -651,50 +659,59 @@
 }
 
 .contact-card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(1.8rem, 4vw, 2.5rem);
-  padding: clamp(2.2rem, 4vw, 3rem);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(12, 12, 12, 0.88));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 35px 75px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.1rem, 3vw, 1.6rem);
+  padding: clamp(1.4rem, 3.5vw, 2rem);
+  border-radius: var(--radius-md);
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.4);
 }
 
 .contact-details {
-  display: grid;
-  gap: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .contact-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.95rem 1.2rem;
-  border-radius: 1.1rem;
-  background: rgba(8, 8, 8, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 0.55rem;
+  padding: 0.58rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
-  transition: transform 200ms ease, background 200ms ease;
+  font-size: 0.9rem;
+  transition: transform 150ms ease, background 150ms ease, border 150ms ease;
 }
 
 .contact-link svg {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.contact-link svg:last-of-type {
+  width: 0.85rem;
+  height: 0.85rem;
+  opacity: 0.75;
 }
 
 .contact-link:hover {
-  transform: translateX(4px);
-  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.24);
   color: var(--bg);
 }
 
 .contact-note {
   margin: 0;
   color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 38ch;
+  line-height: 1.55;
+  max-width: 34ch;
 }
 
 .footer {
@@ -744,7 +761,7 @@
   }
 
   .section {
-    padding: 0 1.5rem;
+    padding: clamp(2.2rem, 6vw, 3.4rem) 1.5rem;
   }
 
   .section--accent {
@@ -775,6 +792,7 @@
 
   .section {
     margin-bottom: 3.5rem;
+    padding: clamp(2rem, 7vw, 3rem) 1.25rem;
   }
 
   .hero__actions {
