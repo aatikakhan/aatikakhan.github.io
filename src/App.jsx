@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react'
 import { motion as Motion } from 'framer-motion'
 import {
   navigation,
@@ -9,17 +10,18 @@ import {
   projects,
   skills,
   volunteering,
-  articles,
   contact,
 } from './content'
 import {
   FiArrowUpRight,
-  FiDownload,
   FiGithub,
   FiLinkedin,
   FiMail,
-  FiPhoneCall,
   FiTwitter,
+  FiChevronDown,
+  FiChevronLeft,
+  FiChevronRight,
+  FiDownload,
 } from 'react-icons/fi'
 import './App.css'
 
@@ -51,17 +53,21 @@ const SectionTitle = ({ kicker, title, description, align = 'left' }) => (
 const Pill = ({ children }) => <span className="pill">{children}</span>
 
 function App() {
+  const [expandedExperience, setExpandedExperience] = useState(null)
+  const projectsTrackRef = useRef(null)
+
+  const scrollProjects = (direction) => {
+    if (!projectsTrackRef.current) return
+    const container = projectsTrackRef.current
+    const scrollAmount = container.clientWidth * 0.8 * direction
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  }
+
   const contactLinks = [
     {
       href: `mailto:${contact.email}`,
-      label: contact.email,
+      label: 'Email',
       Icon: FiMail,
-      external: false,
-    },
-    {
-      href: `tel:${contact.phone}`,
-      label: contact.phone,
-      Icon: FiPhoneCall,
       external: false,
     },
     {
@@ -81,13 +87,6 @@ function App() {
       label: 'Twitter',
       Icon: FiTwitter,
       external: true,
-    },
-    {
-      href: contact.resume,
-      label: 'Résumé (PDF)',
-      Icon: FiDownload,
-      external: false,
-      download: 'Aatika-Khan-Resume.pdf',
     },
   ]
 
@@ -134,34 +133,28 @@ function App() {
                 <a className="button button--primary" href={contact.resume} download="Aatika-Khan-Resume.pdf">
                   <FiDownload aria-hidden="true" /> Download résumé
                 </a>
-                <a className="button button--ghost" href="tel:+918268274827">
-                  <FiPhoneCall aria-hidden="true" /> Book a discovery call
+                <a className="button button--ghost" href="https://cal.com/aatikakhan/discovery" target="_blank" rel="noreferrer">
+                  <FiArrowUpRight aria-hidden="true" /> Book a discovery call
                 </a>
               </Motion.div>
               <Motion.div className="hero__insights" variants={fadeUp}>
-                <Motion.ul className="hero__metrics" variants={stagger}>
+                <Motion.div className="hero__highlights" variants={stagger}>
                   {hero.highlights.map((item) => (
-                    <Motion.li key={item.label} className="hero__metric" variants={fadeUp}>
-                      <div className="hero__metric-header">
-                        <span className="hero__metric-badge">{item.label}</span>
-                        <span className="hero__metric-value">{item.value}</span>
-                      </div>
-                      {item.description ? <p className="hero__metric-caption">{item.description}</p> : null}
-                    </Motion.li>
+                    <Motion.div key={item.label} className="hero-highlight" variants={fadeUp}>
+                      <span className="hero-highlight__label">{item.label}</span>
+                      <span className="hero-highlight__title">{item.value}</span>
+                      {item.description ? <p className="hero-highlight__caption">{item.description}</p> : null}
+                    </Motion.div>
                   ))}
-                </Motion.ul>
+                </Motion.div>
                 <div className="hero__signals">
                   <div className="hero__signal">
                     <span className="hero__signal-label">Currently</span>
-                    <p>Partnering with founding teams on outcome framing, UX research loops, and Flutter delivery that ships faster.</p>
-                  </div>
-                  <div className="hero__signal">
-                    <span className="hero__signal-label">Why clients choose me</span>
-                    <p>{about.paragraphs[1]}</p>
+                    <p>Co-driving Treasure Fox marketplace scale-up with weekly product diaries and shipped Flutter releases.</p>
                   </div>
                   <div className="hero__signal hero__signal--availability">
                     <span className="hero__signal-label">Availability</span>
-                    <p>Accepting new product partnerships worldwide · Remote-first</p>
+                    <p>Opening one new product partnership for Q1 2026 · Remote-friendly and async-first.</p>
                   </div>
                 </div>
               </Motion.div>
@@ -172,8 +165,8 @@ function App() {
         <section id="approach" className="section section--accent">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="Product approach"
-              title="Partnering with you from problem framing to measurable outcomes"
+              kicker="Working model"
+              title="How an engagement moves from idea to live release"
               description={about.tagline}
             />
             <div className="about__grid">
@@ -183,11 +176,11 @@ function App() {
                 ))}
               </Motion.div>
               <Motion.div className="about__outline" variants={fadeUp}>
-                <span className="about__outline-label">Product levers</span>
+                <span className="about__outline-label">Engagement rituals</span>
                 <ul>
-                  <li>North-star alignment with measurable success metrics and decision narratives.</li>
-                  <li>Experiment loops that blend research, prototyping, and instrumentation.</li>
-                  <li>Delivery rituals and runbooks that enable teams to scale independently.</li>
+                  <li>Kickoff briefs link user jobs, constraints, and success signals into one narrative.</li>
+                  <li>Weekly Loom walkthroughs and async notes tie design choices to telemetry and code.</li>
+                  <li>Launch checklists cover analytics dashboards, QA automation, and support follow-ups.</li>
                 </ul>
               </Motion.div>
             </div>
@@ -197,9 +190,9 @@ function App() {
         <section id="principles" className="section">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="Product principles"
-              title="Guiding beliefs that keep shipping disciplined and outcome-led"
-              description="These principles shape every engagement — from discovery workshops to post-launch iteration — so teams stay aligned and confident."
+              kicker="Operating principles"
+              title="Guardrails that keep momentum honest"
+              description="These are the habits I rely on across marketplaces, mobility products, and AI-powered assistants."
             />
             <div className="principles-grid">
               {principles.map((principle) => (
@@ -226,9 +219,9 @@ function App() {
         <section id="expertise" className="section">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="Product playbooks"
-              title="Repeatable systems that move ideas from insight to impact"
-              description="Execution frameworks tuned for velocity, learning, and resilience — honed across marketplaces, mobility, and AI-led experiences."
+              kicker="Focus areas"
+              title="Where I spend the most time inside your product"
+              description="The mix of strategy, design, and engineering work I cycle through each week."
             />
             <div className="specialties-grid">
               {specialties.map((item) => (
@@ -255,44 +248,64 @@ function App() {
         <section id="experience" className="section section--accent">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="Engagement history"
-              title="Trusted by global teams to ship critical mobile products"
+              kicker="Experience"
+              title="Trusted by global teams to ship critical software products"
             />
-            <ol className="experience-timeline">
-              {experiences.map((item) => (
-                <Motion.li key={`${item.role}-${item.company}`} className="experience-card" variants={fadeUp}>
-                  <div className="experience-meta">
-                    <span className="experience-period">{item.period}</span>
-                    <h3>
-                      {item.role} ·{' '}
-                      {item.link ? (
-                        <a
-                          href={item.link}
-                          className="experience-company"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {item.company}
-                        </a>
-                      ) : (
-                        <span className="experience-company">{item.company}</span>
-                      )}
-                    </h3>
-                    <p>{item.summary}</p>
-                    <div className="experience-tech">
-                      {item.tech.map((tech) => (
-                        <Pill key={tech}>{tech}</Pill>
-                      ))}
-                    </div>
-                  </div>
-                  <ul className="experience-bullets">
-                    {item.contributions.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                </Motion.li>
-              ))}
-            </ol>
+            <div className="experience-timeline" role="list">
+              {experiences.map((item, index) => {
+                const isExpanded = expandedExperience === index
+                const summaryText = isExpanded
+                  ? item.summary
+                  : `${item.summary.slice(0, 160)}${item.summary.length > 160 ? '…' : ''}`
+
+                return (
+                  <Motion.div
+                    key={`${item.role}-${item.company}`}
+                    className={`experience-item ${isExpanded ? 'is-expanded' : ''}`}
+                    variants={fadeUp}
+                    role="listitem"
+                  >
+                    <button
+                      type="button"
+                      className="experience-toggle"
+                      onClick={() => setExpandedExperience(isExpanded ? null : index)}
+                    >
+                      <div className="experience-header">
+                        <div className="experience-header__title">
+                          <span className="experience-role">{item.role}</span>
+                          {item.link ? (
+                            <a href={item.link} className="experience-company" target="_blank" rel="noreferrer">
+                              {item.company}
+                            </a>
+                          ) : (
+                            <span className="experience-company">{item.company}</span>
+                          )}
+                        </div>
+                        <div className="experience-header__meta">
+                          <span className="experience-period">{item.period}</span>
+                          <FiChevronDown className={`experience-chevron ${isExpanded ? 'is-open' : ''}`} aria-hidden="true" />
+                        </div>
+                      </div>
+                      <p className={`experience-summary ${isExpanded ? 'is-open' : ''}`}>{summaryText}</p>
+                      <div className="experience-tech">
+                        {item.tech.map((tech) => (
+                          <Pill key={tech}>{tech}</Pill>
+                        ))}
+                      </div>
+                    </button>
+                    {isExpanded ? (
+                      <div className="experience-details">
+                        <ul>
+                          {item.contributions.map((point) => (
+                            <li key={point}>{point}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                  </Motion.div>
+                )
+              })}
+            </div>
           </Motion.div>
         </section>
 
@@ -300,43 +313,62 @@ function App() {
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
               kicker="Projects"
-              title="Selected projects shipped with product-first execution"
+              title="Curated projects illustrating principles or having trials"
               description="Crafting resilient Flutter products that align UX research, engineering quality, and measurable growth."
             />
-            <div className="projects-grid">
-              {projects.map((project) => (
-                <Motion.article
-                  key={project.name}
-                  className="project-card"
-                  variants={fadeUp}
-                  whileHover={surfaceMotion.whileHover}
-                  transition={surfaceMotion.transition}
-                >
-                  {project.url ? (
-                    <a
-                      href={project.url}
-                      className="project-heading"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <h3>{project.name}</h3>
-                      <FiArrowUpRight aria-hidden="true" />
-                    </a>
-                  ) : (
-                    <div className="project-heading">
-                      <h3>{project.name}</h3>
-                      <FiArrowUpRight aria-hidden="true" />
+            <div className="projects-scroll">
+              <button
+                type="button"
+                className="projects-nav projects-nav--prev"
+                onClick={() => scrollProjects(-1)}
+                aria-label="Scroll projects left"
+              >
+                <FiChevronLeft aria-hidden="true" />
+              </button>
+              <div className="projects-track" ref={projectsTrackRef} role="list">
+                {projects.map((project) => (
+                  <Motion.article
+                    key={project.name}
+                    className="project-card"
+                    variants={fadeUp}
+                    transition={surfaceMotion.transition}
+                    whileHover={surfaceMotion.whileHover}
+                    role="listitem"
+                  >
+                    {project.url ? (
+                      <a
+                        href={project.url}
+                        className="project-heading"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <h3>{project.name}</h3>
+                        <FiArrowUpRight aria-hidden="true" />
+                      </a>
+                    ) : (
+                      <div className="project-heading">
+                        <h3>{project.name}</h3>
+                        <FiArrowUpRight aria-hidden="true" />
+                      </div>
+                    )}
+                    <p>{project.description}</p>
+                    <p className="project-impact">{project.impact}</p>
+                    <div className="project-stack">
+                      {project.stack.map((item) => (
+                        <Pill key={item}>{item}</Pill>
+                      ))}
                     </div>
-                  )}
-                  <p>{project.description}</p>
-                  <p className="project-impact">{project.impact}</p>
-                  <div className="project-stack">
-                    {project.stack.map((item) => (
-                      <Pill key={item}>{item}</Pill>
-                    ))}
-                  </div>
-                </Motion.article>
-              ))}
+                  </Motion.article>
+                ))}
+              </div>
+              <button
+                type="button"
+                className="projects-nav projects-nav--next"
+                onClick={() => scrollProjects(1)}
+                aria-label="Scroll projects right"
+              >
+                <FiChevronRight aria-hidden="true" />
+              </button>
             </div>
           </Motion.div>
         </section>
@@ -381,17 +413,6 @@ function App() {
                       </div>
                       <span className="volunteering-period">{item.period}</span>
                       <p>{item.summary}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="articles">
-                <h3>Spotlight</h3>
-                <ul>
-                  {articles.map((item) => (
-                    <li key={item.title}>
-                      <span className="article-title">{item.title}</span>
-                      <p>{item.detail}</p>
                     </li>
                   ))}
                 </ul>

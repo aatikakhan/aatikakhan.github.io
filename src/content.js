@@ -9,81 +9,73 @@ export const hero = {
   name: 'Aatika Khan',
   title: 'Product-First Mobile Consultant',
   statement:
-    'I plug in as an independent product-first partner - owning the full software lifecycle from discovery through launch.',
+    'I operate as a solo developer for founders who need ideas shaped, built, and launched without adding headcount.',
   highlights: [
     {
-      label: 'Independent partner',
-      value: 'Hands-on solo',
-      description: 'You work directly with me across product strategy, engineering, QA, and release — no handoffs.',
+      label: 'Where I add lift',
+      value: 'Launch-ready start',
+      description: 'Turn early signals into scoped betas with accountable outcomes.',
     },
     {
-      label: 'Flexible cadence',
-      value: 'Across time zones',
-      description: 'Comfortable working around the clock to match founder schedules and launch windows.',
+      label: 'Execution style',
+      value: 'Design-build loop',
+      description: 'Design flows, code Flutter, wire APIs, and ship releases end-to-end.',
     },
     {
-      label: 'Community leadership',
-      value: 'Built-for-collab',
-      description: 'I co-create, mentor, and volunteer to keep collaboration habits sharp and inclusive.',
+      label: 'Collaboration cadence',
+      value: 'Structured async',
+      description: 'Weekly notes, Loom walkthroughs, and transparent backlogs that respect time zones.',
     },
   ],
 }
 
 export const about = {
-  tagline: 'Product-first partner across discovery, design, build, and growth',
+  tagline: 'Solo partner from first discovery call to confident launch',
   paragraphs: [
-    'I am a product-first engineer working independently: every engagement starts with framing outcomes, mapping risks, and aligning the roadmap to the customer jobs we are solving — then stays with the team through design, build, launch, and iteration.',
-    'From marketplaces and mobility platforms to AI-powered assistants, I connect UX research, UI systems, and technical architecture so teams see signal faster — with Flutter as a core specialty alongside web, backend, and platform tooling.',
-    'I collaborate closely with founders, PMs, designers, engineers, and volunteer communities, keeping communication tight and transparent across time zones.',
-    'Bring your product idea — we will co-design discovery artifacts, success metrics, and delivery cadence before writing a single line of code, then iterate in flexible, always-on loops.',
+    'We start by agreeing on the user job, constraint, and signal that prove value.',
+    'I stay hands-on across research, UX, Flutter builds, and backend wiring so context never fragments.',
+    'Expect candid trade-offs, tight async updates, and the energy of someone who loves shipping products.',
   ],
 }
 
 export const principles = [
   {
-    title: 'Outcomes over outputs',
-    description:
-      'Set the north-star metric and define evidence thresholds before locking scope so everyone ships with clarity on what success looks like.',
-    signals: ['North-star scorecards', 'Opportunity solution trees', 'Release success criteria'],
+    title: 'Start with a shared story',
+    description: 'Narrative briefs keep scope anchored in user jobs and measurable outcomes.',
+    signals: ['Outcome briefs', 'Metrics guardrails'],
   },
   {
-    title: 'Evidence before ego',
-    description:
-      'Pair qualitative discovery with instrumented experiments. Prototypes, betas, and telemetry reduce guesswork and keep the roadmap honest.',
-    signals: ['Rapid experiment loops', 'Triangulated research', 'Metrics-informed decisions'],
+    title: 'Prototype the risky slice first',
+    description: 'Short experiments surface risk before the roadmap hardens.',
+    signals: ['Discovery sprints', 'Instrumented pilots'],
   },
   {
-    title: 'Design the system, not just the feature',
-    description:
-      'Architect feedback loops, delivery rituals, and governance that help teams execute independently long after launch.',
-    signals: ['Operating cadences', 'Runbooks & rituals', 'Capability handoffs'],
+    title: 'Ship with telemetry',
+    description: 'Releases include analytics, QA automation, and support runbooks by default.',
+    signals: ['Launch runbooks', 'Dashboards & alerts'],
   },
   {
-    title: 'Delight within constraints',
-    description:
-      'Blend craftsmanship with technical pragmatism — choosing the smallest lovable solution that can scale when traction hits.',
-    signals: ['Experience benchmarks', 'Tech-for-design audits', 'Progressive enhancement plans'],
+    title: 'Leave teams stronger',
+    description: 'Documentation and enablement keep teams shipping confidently after handoff.',
+    signals: ['Design kits', 'Enablement sessions'],
   },
 ]
 
 export const specialties = [
   {
     title: 'Discovery to delivery',
-    blurb:
-      'Frame opportunities, validate problem-solution fit, and translate insights into prioritized product backlogs with traceable success metrics.',
+    blurb: 'Align outcomes, map journeys, and turn insight into a focused backlog.',
     deliverables: ['Opportunity sizing', 'Experience mapping', 'Delivery cadences'],
   },
   {
     title: 'Experience craft',
-    blurb:
-      'Design design systems, interaction models, and content strategy that elevate usability while keeping brand and accessibility intact.',
-    deliverables: ['Design system ops', 'Motion & microcopy', 'Accessibility audits'],
+    blurb: 'Build flows, systems, and content that keep multi-platform products cohesive.',
+    deliverables: ['Design system ops', 'Motion & microcopy', 'Accessibility checks'],
   },
   {
     title: 'Reliability & momentum',
-    blurb:
-      'Build resilient Flutter apps with automated quality guardrails, analytics, and growth funnels that reveal signal quickly.',
-    deliverables: ['Resilience playbooks', 'CI/CD & QA automation', 'Product telemetry'],
+    blurb: 'Ship resilient Flutter apps with automation and telemetry wired in.',
+    deliverables: ['CI/CD guardrails', 'Product telemetry', 'Launch playbooks'],
   },
 ]
 
@@ -93,7 +85,7 @@ export const experiences = [
     company: 'Treasure Fox · Michigan, USA (Remote)',
     period: 'Dec 2024 – Present',
     summary:
-      'Building a B2B and B2C marketplace for Mid Century Models from the ground up with Flutter, FastAPI, MySQL, and AWS.',
+      'Leading Treasure Fox marketplace across Flutter, FastAPI, MySQL, and AWS.',
     contributions: [
       'Delivered core marketplace experiences spanning subscriptions, offers, chat, and payouts.',
       'Integrated image processing, model integrations, and revenue infrastructure with Stripe.',
@@ -103,23 +95,11 @@ export const experiences = [
     link: 'http://treasurefox.ai',
   },
   {
-    role: 'Full Stack Engineer',
-    company: 'Anuvad.pro · Remote',
-    period: '2024',
-    summary:
-      'Built a GenAI-powered translation platform that converts PDF documents to English with production-grade APIs.',
-    contributions: [
-      'Developed FastAPI services for authentication, translation, and document workflow.',
-      'Implemented GenAI-assisted translation pipelines and deployed on Google Cloud.',
-    ],
-    tech: ['FastAPI', 'GenAI', 'GCP'],
-  },
-  {
     role: 'Lead Mobile Developer ',
     company: 'Auto Claims Ltd · Birmingham, UK (Remote)',
     period: 'Jun 2023 – May 2024',
     summary:
-      'Led the development of eBUYgumm, a reselling shopping app available on iOS and Android.',
+      'Led eBUYgumm reselling app delivery across iOS and Android.',
     contributions: [
       'Redesigned listing flows and streamlined selling to increase seller conversion.',
       'Integrated secure payment systems and automated negotiations and offers.',
@@ -133,7 +113,7 @@ export const experiences = [
     company: '1ne Studio Inc · Tokyo, Japan (Remote)',
     period: 'Nov 2022 – May 2023',
     summary:
-      'Built portfolio and project management apps for foriio creators, enabling collaboration at scale.',
+      'Built foriio creator tooling covering project management and collaboration.',
     contributions: [
       'Integrated Twilio-powered messaging for real-time collaboration and updates.',
       'Enhanced iOS and Android apps with new project workflows and creative tooling.',
@@ -146,7 +126,7 @@ export const experiences = [
     company: 'Keep Works Technologies · Bengaluru, India (Remote)',
     period: 'May 2022 – Jul 2022',
     summary:
-      'Created an open-source Flutter analytics SDK that unlocks no-code insights.',
+      'Built an open-source Flutter analytics SDK for no-code insights.',
     contributions: [
       'Built Flutter plugins bridging native SDKs via platform channels.',
       'Shipped DashX-powered analytics, CMS, invoicing, and marketing tools.',
@@ -160,7 +140,7 @@ export const experiences = [
     company: 'Machine + Love · Canada (Remote)',
     period: 'Jan 2022 – Feb 2022',
     summary:
-      'Built an iOS invoicing app focused on speed and usability for contractors and traders.',
+      'Shipped an iOS invoicing app tuned for fast workflows.',
     contributions: [
       'Implemented RevenueCat subscriptions and offline-ready Hive storage.',
       'Collaborated closely with design to deliver a refined experience end-to-end.',
@@ -173,7 +153,7 @@ export const experiences = [
     company: 'uRyde · Erlangen, Germany (Remote)',
     period: 'May 2021 – Sep 2021',
     summary:
-      'Built mobility applications using Flutter and Firebase to foster sustainable commuting.',
+      'Built Flutter + Firebase mobility apps enabling sustainable commuting.',
     contributions: [
       'Implemented BLoC-driven state management for ride-sharing flows.',
       'Shipped Android and iOS apps that connect organizations with shared mobility.',
@@ -186,7 +166,7 @@ export const experiences = [
     company: 'Elements EYL Services · Mumbai, India (Hybrid)',
     period: 'Nov 2020 – Dec 2021',
     summary:
-      'Built and refactored mobile apps for delivery knights focused on operational efficiency.',
+      'Built and refactored delivery apps that improved operational visibility.',
     contributions: [
       'Integrated Firebase realtime data, push notifications, and geolocation.',
       'Delivered income visibility, task lifecycle tracking, and payment breakdowns.',
@@ -200,91 +180,79 @@ export const projects = [
   {
     name: 'Treasure Fox',
     description:
-      'Mid-century marketplace spanning chat, subscriptions, and Stripe-powered payouts for collectors.',
-    impact: 'Accelerated global launch timelines while maintaining a premium UX.',
+      'Mid-century marketplace with chat, subscriptions, and Stripe payouts.',
+    impact: 'Accelerated launch without trading off premium UX.',
     stack: ['Flutter', 'FastAPI', 'AWS', 'Stripe'],
     url: 'https://treasurefox.ai/',
   },
   {
     name: 'Anuvad Translation Tool',
     description:
-      'GenAI-assisted PDF translation workflow delivering secure language conversions for enterprises.',
-    impact: 'Deployed to production on GCP with FastAPI microservices.',
+      'GenAI PDF translation workflow for secure enterprise conversions.',
+    impact: 'Deployed on GCP using FastAPI microservices.',
     stack: ['FastAPI', 'GenAI', 'GCP'],
     url: 'https://anuvad.pro/',
   },
   {
     name: 'Skin Disease Detection',
     description:
-      'ML-driven assistant that classifies skin conditions from imagery with clinician handoff capability.',
-    impact: 'Established end-to-end pipelines for automatic detection and triage support.',
+      'ML assistant classifying skin conditions with clinician handoff.',
+    impact: 'Built end-to-end detection and triage pipelines.',
     stack: ['Python', 'ML', 'Computer Vision'],
     url: 'https://github.com/aatikakhan/skin-disease-prediction',
   },
   {
     name: 'Weight Tracking',
     description:
-      'Personal health tracker with scheduling logic and reminders to maintain consistency.',
-    impact: 'Automates notifications and highlights missed entries for user accountability.',
+      'Daily health tracker with scheduling logic and reminders.',
+    impact: 'Automates notifications and flags missed entries for accountability.',
     stack: ['Flutter', 'Local Notifications'],
     url: 'https://github.com/aatikakhan/weight-tracker',
   },
   {
     name: 'Unsplash Gallery',
     description:
-      'Media browsing experience with advanced filtering powered by the Unsplash API.',
-    impact: 'Showcases performant API integration and responsive galleries.',
+      'Media browser with advanced Unsplash API filtering.',
+    impact: 'Highlights performant API integration and responsive galleries.',
     stack: ['Flutter', 'Unsplash API'],
     url: 'https://github.com/aatikakhan/Unsplash-Gallery',
   },
   {
     name: 'Guardian-ai',
     description:
-      'Cybersecurity project for proactive spam detection presented in the Gemini AI competition.',
-    impact: 'Combined Flutter, Firebase, and custom models for explainable threat triage.',
+      'Cybersecurity project for proactive spam detection shown in the Gemini AI competition.',
+    impact: 'Combined Flutter, Firebase, and custom models for explainable triage.',
     stack: ['Flutter', 'Firebase', 'GenAI'],
     url: 'https://ai.google.dev/competition/projects/guaridan-ai',
   },
   {
     name: 'TodoApp',
     description:
-      'Trello-inspired task management with drag-and-drop columns and productivity flows.',
-    impact: 'Improves team task visibility across mobile surfaces.',
+      'Trello-inspired task management with drag-and-drop boards.',
+    impact: 'Improves team visibility across mobile surfaces.',
     stack: ['Flutter', 'State Management'],
   },
   {
     name: 'NASA Gallery',
     description:
-      'Content-rich application rendering NASA feeds with a news-style UX.',
-    impact: 'Demonstrates data storytelling with curated space exploration content.',
+      'Content-rich app rendering NASA feeds in a news-style UX.',
+    impact: 'Demonstrates data storytelling with curated space content.',
     stack: ['Flutter', 'REST APIs'],
   },
 ]
 
 export const skills = [
   {
-    category: 'Mobile & Flutter',
-    items: ['Flutter', 'Dart', 'Swift', 'Kotlin', 'iOS', 'Android'],
+    category: 'Core capabilities',
+    items: ['Product strategy', 'UX research', 'Design systems', 'Engineering leadership'],
   },
   {
-    category: 'Frontend',
-    items: ['React', 'CSS', 'Tailwind', 'Bootstrap', 'Reactstrap', 'Vanilla JS'],
+    category: 'Trusted stack',
+    items: ['Flutter', 'React', 'Node', 'FastAPI', 'Python', 'PostgreSQL'],
   },
   {
-    category: 'Backend & APIs',
-    items: ['Python', 'FastAPI', 'RESTful APIs', 'MySQL'],
-  },
-  {
-    category: 'Firebase Platform',
-    items: ['Auth', 'Firestore', 'Functions', 'Realtime DB', 'FCM', 'Hosting'],
-  },
-  {
-    category: 'Cloud & DevOps',
-    items: ['AWS EC2', 'AWS Lambda', 'Google Cloud', 'CI/CD'],
-  },
-  {
-    category: 'Machine Learning & LLMs',
-    items: ['RAG applications', 'Image processing', 'OpenAI APIs'],
+    category: 'Depth areas',
+    items: ['Experimentation & analytics', 'Payments & subscriptions', 'Observability & reliability', 'ML & LLM integrations'],
   },
 ]
 
@@ -301,29 +269,13 @@ export const volunteering = [
     period: 'Nov 2019 – Jul 2022',
     summary: 'Hosted community events to learn, share, and grow around Flutter.',
   },
-  {
-    role: 'Organiser',
-    org: 'First Step to 0rganizing · Bangalore',
-    period: 'Apr 2020 – Present',
-    summary:
-      'Building a community that supports tech workers through workshops, events, and shared experiences.',
-  },
-]
 
-export const articles = [
-  {
-    title: 'Guardian-ai: Gen AI for proactive spam detection',
-    detail:
-      'Participated in the Gemini AI competition to build Guardian-ai, combining Flutter, Firebase, and GenAI for cyber defense.',
-  },
 ]
 
 export const contact = {
   email: 'aatikakhan869@gmail.com',
   github: 'https://github.com/aatikakhan',
   linkedin: 'https://linkedin.com/in/aatikakhan',
-  twitter: 'https://www.twitter.com/_aatikakhan_',
-  resume: 'https://docs.google.com/document/d/1MMZ1AhC_CDdHeXCnr8Q2hqw0vKWdOOmg81LHuxA6Q0E/export?format=pdf',
-  phone: '+918268274827',
-  note: 'Bring your product ideas and we will explore the smartest ways to bring them to life together.',
+  twitter: 'https://x.com/_aatikakhan_',
+  note: 'Bring your product idea; we will map the smartest path to launch together.',
 }
