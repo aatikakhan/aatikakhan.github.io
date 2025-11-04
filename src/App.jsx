@@ -37,12 +37,14 @@ const surfaceMotion = {
   transition: { type: 'spring', stiffness: 220, damping: 18 },
 }
 
-const SectionTitle = ({ kicker, title, description }) => (
-  <Motion.div className="section-title" variants={fadeUp}>
-    <span className="section-kicker">{kicker}</span>
-    <h2>{title}</h2>
-    {description ? <p>{description}</p> : null}
-  </Motion.div>
+const SectionTitle = ({ kicker, title, description, align = 'left' }) => (
+  <Motion.header className={`section-title section-title--${align}`} variants={fadeUp}>
+    {kicker ? <span className="section-kicker">{kicker}</span> : null}
+    <div className="section-title__heading">
+      <h2>{title}</h2>
+      {description ? <p>{description}</p> : null}
+    </div>
+  </Motion.header>
 )
 
 const Pill = ({ children }) => <span className="pill">{children}</span>
@@ -83,12 +85,6 @@ function App() {
 
   return (
     <div className="app-shell">
-      <div className="ambient-grid" aria-hidden="true">
-        <div className="ambient-glow ambient-glow--one" />
-        <div className="ambient-glow ambient-glow--two" />
-        <div className="grid-overlay" />
-      </div>
-
       <Motion.header
         className="top-nav"
         initial={{ opacity: 0, y: -12 }}
@@ -121,7 +117,7 @@ function App() {
               animate="visible"
               variants={stagger}
             >
-              <Motion.span className="hero__kicker" variants={fadeUp}>
+              <Motion.span className="hero__eyebrow" variants={fadeUp}>
                 Mobile · Cloud · Product Consulting
               </Motion.span>
               <Motion.h1 variants={fadeUp}>
@@ -139,21 +135,35 @@ function App() {
                   <FiPhoneCall aria-hidden="true" /> Book a discovery call
                 </a>
               </Motion.div>
+              <Motion.ul className="hero__metrics" variants={stagger}>
+                {hero.highlights.map((item) => (
+                  <Motion.li key={item.label} className="hero__metric" variants={fadeUp}>
+                    <span className="hero__metric-value">{item.value}</span>
+                    <span className="hero__metric-label">{item.label}</span>
+                  </Motion.li>
+                ))}
+              </Motion.ul>
             </Motion.div>
 
-            <Motion.div
-              className="hero__metrics"
+            <Motion.aside
+              className="hero__sidebar"
               initial="hidden"
               animate="visible"
-              variants={stagger}
+              variants={fadeUp}
             >
-              {hero.highlights.map((item) => (
-                <Motion.div key={item.label} className="metric-card" variants={fadeUp}>
-                  <span className="metric-value">{item.value}</span>
-                  <span className="metric-label">{item.label}</span>
-                </Motion.div>
-              ))}
-            </Motion.div>
+              <div className="hero__sidebar-block">
+                <span className="hero__sidebar-label">Currently</span>
+                <p>Guiding founding teams from discovery to launch with Flutter, FastAPI, and GenAI integrations.</p>
+              </div>
+              <div className="hero__sidebar-block">
+                <span className="hero__sidebar-label">Why clients choose me</span>
+                <p>{about.paragraphs[1]}</p>
+              </div>
+              <div className="hero__sidebar-block">
+                <span className="hero__sidebar-label">Availability</span>
+                <p>Accepting new product partnerships worldwide · Remote-first</p>
+              </div>
+            </Motion.aside>
           </div>
         </section>
 
@@ -164,11 +174,21 @@ function App() {
               title="Partnering with you from strategy to shipped apps"
               description={about.tagline}
             />
-            <Motion.div className="about-card" variants={fadeUp}>
-              {about.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </Motion.div>
+            <div className="about__grid">
+              <Motion.div className="about__story" variants={fadeUp}>
+                {about.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </Motion.div>
+              <Motion.div className="about__outline" variants={fadeUp}>
+                <span className="about__outline-label">Core outcomes</span>
+                <ul>
+                  <li>Designing resilient mobile-first journeys across iOS, Android, and web touchpoints.</li>
+                  <li>Embedding growth-ready analytics, payments, and automation from day one.</li>
+                  <li>Coaching teams and communities to scale with clarity and confidence.</li>
+                </ul>
+              </Motion.div>
+            </div>
           </Motion.div>
         </section>
 
@@ -249,10 +269,22 @@ function App() {
                   whileHover={surfaceMotion.whileHover}
                   transition={surfaceMotion.transition}
                 >
-                  <div className="project-heading">
-                    <h3>{project.name}</h3>
-                    <FiArrowUpRight aria-hidden="true" />
-                  </div>
+                  {project.url ? (
+                    <a
+                      href={project.url}
+                      className="project-heading"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <h3>{project.name}</h3>
+                      <FiArrowUpRight aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <div className="project-heading">
+                      <h3>{project.name}</h3>
+                      <FiArrowUpRight aria-hidden="true" />
+                    </div>
+                  )}
                   <p>{project.description}</p>
                   <p className="project-impact">{project.impact}</p>
                   <div className="project-stack">
@@ -331,6 +363,7 @@ function App() {
               kicker="Let’s build"
               title="Ready for your next product sprint?"
               description="I consult with founders, product leaders, and agencies across time zones. Book a strategy session to explore how we can accelerate your roadmap."
+              align="center"
             />
             <Motion.div className="contact-card" variants={fadeUp} whileHover={surfaceMotion.whileHover} transition={surfaceMotion.transition}>
               <div className="contact-details">

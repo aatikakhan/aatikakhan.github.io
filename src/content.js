@@ -160,6 +160,7 @@ export const projects = [
       'Mid-century marketplace spanning chat, subscriptions, and Stripe-powered payouts for collectors.',
     impact: 'Accelerated global launch timelines while maintaining a premium UX.',
     stack: ['Flutter', 'FastAPI', 'AWS', 'Stripe'],
+    url: 'https://treasurefox.ai/',
   },
   {
     name: 'Anuvad Translation Tool',
@@ -167,6 +168,7 @@ export const projects = [
       'GenAI-assisted PDF translation workflow delivering secure language conversions for enterprises.',
     impact: 'Deployed to production on GCP with FastAPI microservices.',
     stack: ['FastAPI', 'GenAI', 'GCP'],
+    url: 'https://anuvad.pro/',
   },
   {
     name: 'Skin Disease Detection',
@@ -174,6 +176,7 @@ export const projects = [
       'ML-driven assistant that classifies skin conditions from imagery with clinician handoff capability.',
     impact: 'Established end-to-end pipelines for automatic detection and triage support.',
     stack: ['Python', 'ML', 'Computer Vision'],
+    url: 'https://github.com/aatikakhan/skin-disease-prediction',
   },
   {
     name: 'Weight Tracking',
@@ -181,6 +184,7 @@ export const projects = [
       'Personal health tracker with scheduling logic and reminders to maintain consistency.',
     impact: 'Automates notifications and highlights missed entries for user accountability.',
     stack: ['Flutter', 'Local Notifications'],
+    url: 'https://github.com/aatikakhan/weight-tracker',
   },
   {
     name: 'Unsplash Gallery',
@@ -188,6 +192,7 @@ export const projects = [
       'Media browsing experience with advanced filtering powered by the Unsplash API.',
     impact: 'Showcases performant API integration and responsive galleries.',
     stack: ['Flutter', 'Unsplash API'],
+    url: 'https://github.com/aatikakhan/Unsplash-Gallery',
   },
   {
     name: 'Guardian-ai',
@@ -195,6 +200,7 @@ export const projects = [
       'Cybersecurity project for proactive spam detection presented in the Gemini AI competition.',
     impact: 'Combined Flutter, Firebase, and custom models for explainable threat triage.',
     stack: ['Flutter', 'Firebase', 'GenAI'],
+    url: 'https://ai.google.dev/competition/projects/guaridan-ai',
   },
   {
     name: 'TodoApp',
