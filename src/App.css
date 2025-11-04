@@ -700,23 +700,6 @@ button {
   max-width: 40ch;
 }
 
-.cal-embed {
-  margin-top: clamp(1.1rem, 3vw, 1.6rem);
-  padding: clamp(0.8rem, 2.4vw, 1.2rem);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(8, 8, 8, 0.82);
-  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35);
-}
-
-.cal-embed iframe {
-  width: 100%;
-  min-height: 580px;
-  border: none;
-  border-radius: calc(var(--radius-md) - 0.4rem);
-  background: #0d0d0d;
-}
-
 .footer {
   max-width: var(--layout-max);
   margin: 0 auto clamp(2rem, 6vw, 4rem);
@@ -746,6 +729,24 @@ button {
   gap: clamp(1.1rem, 2.8vw, 1.6rem);
   margin: 0;
   padding: 0;
+}
+
+.experience-load {
+  margin: clamp(1.2rem, 3vw, 1.8rem) auto 0;
+  padding: 0.6rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  transition: background 150ms ease, transform 150ms ease, border 150ms ease;
+}
+
+.experience-load:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
 }
 
 .experience-toggle {

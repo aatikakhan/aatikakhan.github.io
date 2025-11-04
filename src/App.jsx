@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { motion as Motion } from 'framer-motion'
 import {
   navigation,
@@ -53,30 +53,24 @@ const Pill = ({ children }) => <span className="pill">{children}</span>
 
 function App() {
   const [expandedExperience, setExpandedExperience] = useState(null)
+  const [showAllExperiences, setShowAllExperiences] = useState(false)
   const projectsTrackRef = useRef(null)
-
-  useEffect(() => {
-    const scriptId = 'cal-embed-script'
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement('script')
-      script.src = 'https://cal.com/embed.js'
-      script.async = true
-      script.id = scriptId
-      document.body.appendChild(script)
-      return () => {
-        if (document.body.contains(script)) {
-          document.body.removeChild(script)
-        }
-      }
-    }
-    return undefined
-  }, [])
 
   const scrollProjects = (direction) => {
     if (!projectsTrackRef.current) return
     const container = projectsTrackRef.current
     const scrollAmount = container.clientWidth * 0.8 * direction
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  }
+
+  const toggleExperienceLength = () => {
+    setShowAllExperiences((prev) => {
+      const next = !prev
+      if (!next && expandedExperience !== null && expandedExperience >= 2) {
+        setExpandedExperience(null)
+      }
+      return next
+    })
   }
 
   const contactLinks = [
@@ -149,8 +143,8 @@ function App() {
                 <a className="button button--primary" href={contact.resume} download="Aatika-Khan-Resume.pdf">
                   <FiDownload aria-hidden="true" /> Download résumé
                 </a>
-                <a className="button button--ghost" href="#cal" data-cal-link="aatikakhan/discovery">
-                  <FiArrowUpRight aria-hidden="true" /> View my calendar
+                <a className="button button--ghost" href="https://cal.com/aatikakhan/30min" target="_blank" rel="noreferrer">
+                  <FiArrowUpRight aria-hidden="true" /> Book a discovery call
                 </a>
               </Motion.div>
               <Motion.div className="hero__insights" variants={stagger}>
@@ -223,6 +217,9 @@ function App() {
             />
             <div className="experience-timeline" role="list">
               {experiences.map((item, index) => {
+                if (!showAllExperiences && index >= 2) {
+                  return null
+                }
                 const isExpanded = expandedExperience === index
                 const summaryText = isExpanded
                   ? item.summary
@@ -233,6 +230,10 @@ function App() {
                     key={`${item.role}-${item.company}`}
                     className={`experience-item ${isExpanded ? 'is-expanded' : ''}`}
                     variants={fadeUp}
+                    initial="hidden"
+                    animate="visible"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.1 }}
                     role="listitem"
                   >
                     <button
@@ -276,6 +277,15 @@ function App() {
                 )
               })}
             </div>
+            {experiences.length > 2 ? (
+              <button
+                type="button"
+                className="experience-load"
+                onClick={toggleExperienceLength}
+              >
+                {showAllExperiences ? 'Show fewer engagements' : 'Show all experiences'}
+              </button>
+            ) : null}
           </Motion.div>
         </section>
 
@@ -417,19 +427,6 @@ function App() {
                 ))}
       </div>
               <p className="contact-note">{contact.note}</p>
-            </Motion.div>
-            <Motion.div
-              id="cal"
-              className="cal-embed"
-              variants={fadeUp}
-              transition={surfaceMotion.transition}
-            >
-              <iframe
-                src="https://cal.com/aatikakhan/discovery?embed=true"
-                title="Schedule with Aatika Khan"
-                loading="lazy"
-                allow="fullscreen"
-              />
             </Motion.div>
           </Motion.div>
         </section>
