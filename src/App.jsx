@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import {
   navigation,
@@ -21,6 +21,8 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiDownload,
+  FiMoon,
+  FiSun,
 } from 'react-icons/fi'
 import './App.css'
 
@@ -39,6 +41,24 @@ const surfaceMotion = {
   transition: { type: 'spring', stiffness: 220, damping: 18 },
 }
 
+const getInitialTheme = () => {
+  if (typeof window === 'undefined') {
+    return 'dark'
+  }
+
+  const root = window.document.documentElement
+  const stored = window.localStorage.getItem('aatika-theme')
+  if (stored === 'light' || stored === 'dark') {
+    root.dataset.theme = stored
+    return stored
+  }
+
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const initial = prefersDark ? 'dark' : 'light'
+  root.dataset.theme = initial
+  return initial
+}
+
 const SectionTitle = ({ kicker, title, description, align = 'left' }) => (
   <Motion.header className={`section-title section-title--${align}`} variants={fadeUp}>
     {kicker ? <span className="section-kicker">{kicker}</span> : null}
@@ -52,6 +72,15 @@ const SectionTitle = ({ kicker, title, description, align = 'left' }) => (
 const Pill = ({ children }) => <span className="pill">{children}</span>
 
 function App() {
+  const [theme, setTheme] = useState(getInitialTheme)
+  const [isManual, setIsManual] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+
+    const stored = window.localStorage.getItem('aatika-theme')
+    return stored === 'light' || stored === 'dark'
+  })
   const [expandedExperience, setExpandedExperience] = useState(null)
   const [showAllExperiences, setShowAllExperiences] = useState(false)
   const projectsTrackRef = useRef(null)
@@ -61,6 +90,42 @@ function App() {
     const container = projectsTrackRef.current
     const scrollAmount = container.clientWidth * 0.8 * direction
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const root = window.document.documentElement
+    root.dataset.theme = theme
+
+    if (isManual) {
+      window.localStorage.setItem('aatika-theme', theme)
+    } else {
+      window.localStorage.removeItem('aatika-theme')
+    }
+  }, [theme, isManual])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = (event) => {
+      if (!isManual) {
+        setTheme(event.matches ? 'dark' : 'light')
+      }
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [isManual])
+
+  const toggleTheme = () => {
+    setIsManual(true)
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }
 
   const toggleExperienceLength = () => {
@@ -108,7 +173,6 @@ function App() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <a className="brand" href="#hero" aria-label="Back to top" title="Back to top"></a>
         <nav className="nav-links" aria-label="Primary navigation">
           {navigation.map((item) => (
             <a key={item.href} href={item.href}>
@@ -116,6 +180,14 @@ function App() {
             </a>
           ))}
         </nav>
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        >
+          {theme === 'dark' ? <FiSun aria-hidden="true" /> : <FiMoon aria-hidden="true" />}
+        </button>
       </Motion.header>
 
       <main>
