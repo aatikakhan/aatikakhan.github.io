@@ -1,12 +1,10 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import {
   navigation,
   hero,
   about,
-  principles,
   specialties,
-  approachStages,
   experiences,
   projects,
   skills,
@@ -56,6 +54,23 @@ const Pill = ({ children }) => <span className="pill">{children}</span>
 function App() {
   const [expandedExperience, setExpandedExperience] = useState(null)
   const projectsTrackRef = useRef(null)
+
+  useEffect(() => {
+    const scriptId = 'cal-embed-script'
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script')
+      script.src = 'https://cal.com/embed.js'
+      script.async = true
+      script.id = scriptId
+      document.body.appendChild(script)
+      return () => {
+        if (document.body.contains(script)) {
+          document.body.removeChild(script)
+        }
+      }
+    }
+    return undefined
+  }, [])
 
   const scrollProjects = (direction) => {
     if (!projectsTrackRef.current) return
@@ -134,100 +149,46 @@ function App() {
                 <a className="button button--primary" href={contact.resume} download="Aatika-Khan-Resume.pdf">
                   <FiDownload aria-hidden="true" /> Download résumé
                 </a>
-                <a className="button button--ghost" href="https://cal.com/aatikakhan/discovery" target="_blank" rel="noreferrer">
-                  <FiArrowUpRight aria-hidden="true" /> Book a discovery call
+                <a className="button button--ghost" href="#cal" data-cal-link="aatikakhan/discovery">
+                  <FiArrowUpRight aria-hidden="true" /> View my calendar
                 </a>
               </Motion.div>
               <Motion.div className="hero__insights" variants={stagger}>
-                <Motion.div className="hero__points" variants={fadeUp}>
-                  <span className="hero__section-label">Where I add lift</span>
-                  <ul className="hero__list">
+                <Motion.section className="hero-notes" variants={fadeUp}>
+                  <span className="hero-notes__label">Highlights</span>
+                  <dl>
                     {hero.highlights.map((item) => (
-                      <li key={item.label}>
-                        <strong>{item.value}</strong> — {item.description}
-                      </li>
+                      <div key={item.label} className="hero-note">
+                        <dt>{item.value}</dt>
+                        <dd>{item.description}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </Motion.section>
+                <Motion.section className="hero-notes" variants={fadeUp}>
+                  <span className="hero-notes__label">How I work</span>
+                  <ul>
+                    {about.paragraphs.map((point) => (
+                      <li key={point}>{point}</li>
                     ))}
                   </ul>
-                </Motion.div>
-                <Motion.div className="hero__points" variants={fadeUp}>
-                  <span className="hero__section-label">Partnering style</span>
-                  <ul className="hero__list">
-                    {about.paragraphs.map((paragraph) => (
-                      <li key={paragraph}>{paragraph}</li>
-                    ))}
-                  </ul>
-                </Motion.div>
-                <Motion.div className="hero__points" variants={fadeUp}>
-                  <span className="hero__section-label">Cadence & status</span>
-                  <ul className="hero__list">
-                    {about.rituals.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                    <li>
-                      <strong>Currently:</strong> {hero.status.current}
-                    </li>
-                    <li>
-                      <strong>Availability:</strong> {hero.status.availability}
-                    </li>
-                  </ul>
-                </Motion.div>
+                </Motion.section>
+                <Motion.section className="hero-notes hero-notes--availability" variants={fadeUp}>
+                  <span className="hero-notes__label">Availability</span>
+                  <div className="hero-availability">
+                    <div>
+                      <span className="hero-availability__label">Current</span>
+                      <p>{hero.status.current}</p>
+                    </div>
+                    <div>
+                      <span className="hero-availability__label">Open slots</span>
+                      <p>{hero.status.availability}</p>
+                    </div>
+                  </div>
+                </Motion.section>
               </Motion.div>
             </Motion.div>
           </div>
-        </section>
-
-        <section id="approach" className="section section--accent">
-          <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
-            <SectionTitle
-              kicker="Delivery cadence"
-              title="Three loops that keep momentum moving"
-              description="Each phase bundles outcomes, comms, and measurable signals."
-            />
-            <div className="approach-grid">
-              {approachStages.map((stage) => (
-                <Motion.article
-                  key={stage.title}
-                  className="approach-card"
-                  variants={fadeUp}
-                  whileHover={surfaceMotion.whileHover}
-                  transition={surfaceMotion.transition}
-                >
-                  <span className="approach-card__stage">{stage.title}</span>
-                  <p className="approach-card__summary">{stage.summary}</p>
-                
-                </Motion.article>
-              ))}
-            </div>
-          </Motion.div>
-        </section>
-
-        <section id="principles" className="section">
-          <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
-            <SectionTitle
-              kicker="Operating principles"
-              title="Guardrails that keep momentum honest"
-              description="These are the habits I rely on across marketplaces, mobility products, and AI-powered assistants."
-            />
-            <div className="principles-grid">
-              {principles.map((principle) => (
-                <Motion.article
-                  key={principle.title}
-                  className="principle-card"
-                  variants={fadeUp}
-                  whileHover={surfaceMotion.whileHover}
-                  transition={surfaceMotion.transition}
-                >
-                  <h3>{principle.title}</h3>
-                  <p>{principle.description}</p>
-                  <ul className="principle-signals">
-                    {principle.signals.map((signal) => (
-                      <li key={signal}>{signal}</li>
-                    ))}
-                  </ul>
-                </Motion.article>
-              ))}
-            </div>
-          </Motion.div>
         </section>
 
         <section id="expertise" className="section">
@@ -258,7 +219,7 @@ function App() {
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
               kicker="Experience"
-              title="Trusted by global teams to ship critical software products"
+              title="Experience across global product teams"
             />
             <div className="experience-timeline" role="list">
               {experiences.map((item, index) => {
@@ -456,6 +417,19 @@ function App() {
                 ))}
       </div>
               <p className="contact-note">{contact.note}</p>
+            </Motion.div>
+            <Motion.div
+              id="cal"
+              className="cal-embed"
+              variants={fadeUp}
+              transition={surfaceMotion.transition}
+            >
+              <iframe
+                src="https://cal.com/aatikakhan/discovery?embed=true"
+                title="Schedule with Aatika Khan"
+                loading="lazy"
+                allow="fullscreen"
+              />
             </Motion.div>
           </Motion.div>
         </section>

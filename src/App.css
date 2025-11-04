@@ -266,32 +266,74 @@ button {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-.hero__points {
+.hero-notes {
   display: grid;
-  gap: 0.6rem;
+  gap: 0.7rem;
+  padding: clamp(0.9rem, 2.2vw, 1.3rem);
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.hero__section-label {
-  font-size: 0.75rem;
+.hero-notes__label {
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
 
-.hero__list {
+.hero-notes dl,
+.hero-notes ul {
   margin: 0;
-  padding-left: 1.1rem;
+  padding: 0;
   display: grid;
-  gap: 0.45rem;
-  list-style: disc;
-  color: var(--text-secondary);
-  font-size: 0.96rem;
-  line-height: 1.55;
+  gap: 0.5rem;
+  list-style: none;
 }
 
-.hero__list li strong {
-  color: var(--text-primary);
+.hero-note {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.hero-note dt {
+  font-size: 1rem;
   font-weight: 600;
+  color: var(--text-primary);
+}
+
+.hero-note dd {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.hero-notes ul li {
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.hero-notes--availability {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.hero-availability {
+  display: grid;
+  gap: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero-availability__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.hero-availability p {
+  margin: 0.15rem 0 0;
+  color: var(--text-secondary);
+  line-height: 1.45;
 }
 
 .approach-grid {
@@ -322,24 +364,6 @@ button {
   color: var(--text-primary);
   font-size: 1.05rem;
   line-height: 1.55;
-}
-
-.approach-card__signals {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.approach-card__signals li {
-  padding: 0.3rem 0.6rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.82rem;
-  letter-spacing: 0.05em;
-  color: var(--text-secondary);
 }
 
 .principles-grid {
@@ -615,7 +639,7 @@ button {
 }
 
 .contact-section {
-  padding-bottom: clamp(5rem, 10vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
 }
 
 .contact-card {
@@ -674,6 +698,23 @@ button {
   color: var(--text-secondary);
   line-height: 1.55;
   max-width: 40ch;
+}
+
+.cal-embed {
+  margin-top: clamp(1.1rem, 3vw, 1.6rem);
+  padding: clamp(0.8rem, 2.4vw, 1.2rem);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 8, 8, 0.82);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35);
+}
+
+.cal-embed iframe {
+  width: 100%;
+  min-height: 580px;
+  border: none;
+  border-radius: calc(var(--radius-md) - 0.4rem);
+  background: #0d0d0d;
 }
 
 .footer {

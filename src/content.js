@@ -7,68 +7,46 @@ export const navigation = [
 
 export const hero = {
   name: 'Aatika Khan',
-  title: 'Product-First Mobile Consultant',
+  title: 'Product-First Software Consultant',
   statement:
-    'I operate as a solo Flutter partner for founders who need ideas shaped, built, and launched without adding headcount.',
+    'I operate as a solo software developer for founders who need ideas shaped, built, and launched. I have expertise in crossplatform app development for 6+ years and now I\'m focusing on other areas in tech.',
   highlights: [
     {
       label: 'Where I add lift',
       value: 'Launch-ready start',
-      description: 'Turn early signals into scoped betas fast.',
+      description: 'Turn ideas into scoped builds fast.',
     },
     {
       label: 'Execution style',
       value: 'Design-build loop',
-      description: 'Design, code, and ship Flutter releases end-to-end.',
+      description: 'Design flows, build UI and backend, wire APIs, ship releases.',
     },
     {
       label: 'Collaboration cadence',
       value: 'Structured async',
-      description: 'Weekly notes, Loom walkthroughs, and transparent boards.',
+      description: 'Weekly calls, flexible updates, clear boards.',
     },
   ],
   status: {
-    current: 'Scaling Treasure Fox marketplace with weekly ship notes.',
-    availability: 'Next opening Q1 2026 · Remote-first.',
+    current: 'Scaling Treasure Fox marketplace.',
+    availability: 'Open for new gigs globally · Remote-first.',
   },
 }
 
 export const about = {
-  tagline: 'Solo partner from first discovery call to confident launch',
+  tagline: 'Solo developer from first discovery call to confident launch',
   paragraphs: [
-    'Align on the user job, constraint, and success signal.',
-    'Stay hands-on across research, UX, Flutter, and backend so context sticks.',
-    'Communicate candid trade-offs with tight async loops.',
+    'Align job, constraint, metric upfront.',
+    'Stay hands-on across mobile, web, backend.',
+    'Share trade-offs with flexible async loops.',
+    "With flexible schedule and async communication."
   ],
   rituals: [
-    'Kickoff brief captures risks, jobs, and metrics.',
-    'Weekly updates.',
-    'Launch checklist covers analytics, QA, and support.',
+    'Kickoff: risks + metrics.',
+    'Weekly or as-needed meetings.',
+    'Launch checklist: analytics, QA, support.',
   ],
 }
-
-export const principles = [
-  {
-    title: 'Start with a shared story',
-    description: 'Narrative briefs keep scope anchored in user jobs and measurable outcomes.',
-    signals: ['Outcome briefs', 'Metrics guardrails'],
-  },
-  {
-    title: 'Prototype the risky slice first',
-    description: 'Short experiments surface risk before the roadmap hardens.',
-    signals: ['Discovery sprints', 'Instrumented pilots'],
-  },
-  {
-    title: 'Ship as per your need',
-    description: 'Releases include analytics, QA automation, and support runbooks by default.',
-    signals: ['Launch runbooks', 'Dashboards & alerts'],
-  },
-  {
-    title: 'Leave teams stronger',
-    description: 'Documentation and enablement keep teams shipping confidently after handoff.',
-    signals: ['Design kits', 'Enablement sessions'],
-  },
-]
 
 export const specialties = [
   {
@@ -81,7 +59,7 @@ export const specialties = [
   },
   {
     title: 'Reliability & momentum',
-    blurb: 'Ship Flutter apps with checks, automation, and signals built in.',
+    blurb: 'Ship software with checks, automation, and signals built in.',
   },
 ]
 
@@ -93,7 +71,7 @@ export const approachStages = [
   },
   {
     title: '02 Build the proof',
-    summary: 'Rapid cycles blending UX prototypes, Flutter builds, and API wiring.',
+    summary: 'Rapid cycles blending UX prototypes, product builds, and API wiring.',
     signals: ['Clickable flows', 'Instrumented betas'],
   },
   {
@@ -206,7 +184,7 @@ export const projects = [
     description:
       'Mid-century marketplace with chat, subscriptions, and Stripe payouts.',
     impact: 'Accelerated launch without trading off premium UX.',
-    stack: ['Flutter', 'FastAPI', 'AWS', 'Stripe'],
+    stack: ['Flutter', 'FastAPI', 'AWS', 'Stripe, AI/ML, Vision RAG'],
     url: 'https://treasurefox.ai/',
   },
   {
