@@ -2,7 +2,7 @@
   "name": "aatika-portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://aatikakhan.github.io/portfolio/",
+  "homepage": "https://aatikakhan.github.io/",
   "type": "module",
   "scripts": {
     "dev": "vite",
