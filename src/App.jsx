@@ -77,9 +77,10 @@ function App() {
     },
     {
       href: contact.resume,
-      label: 'Résumé',
+      label: 'Résumé (PDF)',
       Icon: FiDownload,
-      external: true,
+      external: false,
+      download: 'Aatika-Khan-Resume.pdf',
     },
   ]
 
@@ -128,8 +129,8 @@ function App() {
                 {hero.statement}
               </Motion.p>
               <Motion.div className="hero__actions" variants={fadeUp}>
-                <a className="button button--primary" href={contact.resume} target="_blank" rel="noreferrer">
-                  <FiDownload aria-hidden="true" /> View résumé
+                <a className="button button--primary" href={contact.resume} download="Aatika-Khan-Resume.pdf">
+                  <FiDownload aria-hidden="true" /> Download résumé
                 </a>
                 <a className="button button--ghost" href="#contact">
                   <FiPhoneCall aria-hidden="true" /> Book a discovery call
@@ -374,6 +375,7 @@ function App() {
                     className="contact-link"
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noreferrer' : undefined}
+                    download={link.download}
                   >
                     <link.Icon aria-hidden="true" />
                     {link.label}
