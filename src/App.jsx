@@ -108,9 +108,7 @@ function App() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <a className="brand" href="#hero">
-          <span className="brand-name">Aatika Khan</span>
-        </a>
+        <a className="brand" href="#hero" aria-label="Back to top" title="Back to top"></a>
         <nav className="nav-links" aria-label="Primary navigation">
           {navigation.map((item) => (
             <a key={item.href} href={item.href}>
@@ -323,13 +321,11 @@ function App() {
                         rel="noreferrer"
                       >
                         <h3>{project.name}</h3>
-                        <FiArrowUpRight aria-hidden="true" />
-                      </a>
+                          </a>
                     ) : (
                       <div className="project-heading">
                         <h3>{project.name}</h3>
-                        <FiArrowUpRight aria-hidden="true" />
-                      </div>
+                          </div>
                     )}
                     <p>{project.description}</p>
                     <p className="project-impact">{project.impact}</p>
@@ -422,7 +418,6 @@ function App() {
                   >
                     <link.Icon aria-hidden="true" />
                     {link.label}
-                    <FiArrowUpRight aria-hidden="true" />
                   </a>
                 ))}
       </div>
