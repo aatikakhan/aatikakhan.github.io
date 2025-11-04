@@ -32,80 +32,78 @@
 
 .top-nav {
   position: sticky;
-  top: 1.5rem;
-  margin: 0 auto clamp(3rem, 7vw, 4.5rem);
+  top: 1.2rem;
+  margin: 0 auto clamp(1.2rem, 4vw, 2.4rem);
   max-width: var(--layout-max);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.05rem 1.6rem;
-  background: rgba(8, 8, 8, 0.82);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  backdrop-filter: blur(18px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  gap: 1.2rem;
+  padding: 0 1.2rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 5;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.45rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-size: 1rem;
 }
 
 .brand-mark {
-  width: 13px;
-  height: 13px;
-  border-radius: 3px;
-  background: var(--text-primary);
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+  display: none;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.1rem;
+  gap: 0.9rem;
   font-size: 0.95rem;
 }
 
 .nav-links a {
-  padding: 0.45rem 0.85rem;
-  border-radius: 999px;
+  padding: 0.35rem 0;
   color: var(--text-secondary);
-  transition: color 200ms ease, background 200ms ease;
+  border-bottom: 1px solid transparent;
+  transition: color 200ms ease, border-color 200ms ease;
 }
 
 .nav-links a:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .nav-cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.55rem 1.35rem;
-  border-radius: 999px;
-  font-weight: 600;
+  gap: 0.45rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.04em;
-  background: var(--text-primary);
-  color: var(--bg);
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  transition: background 200ms ease, transform 200ms ease;
 }
 
 .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 38px rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .section {
   position: relative;
   max-width: var(--layout-max);
-  margin: 0 auto clamp(4rem, 10vw, 7rem);
-  padding: clamp(2.6rem, 6vw, 3.8rem) clamp(1.6rem, 5vw, 3.6rem);
+  margin: 0 auto clamp(2.6rem, 8vw, 4.8rem);
+  padding: clamp(1.6rem, 4.5vw, 2.8rem) clamp(1.2rem, 4vw, 2.8rem);
   z-index: 1;
 }
 
@@ -152,15 +150,15 @@
 }
 
 .hero {
-  padding-top: clamp(6rem, 12vw, 9rem);
-  padding-bottom: clamp(2.4rem, 6vw, 3.6rem);
+  padding-top: clamp(4.8rem, 10vw, 7.5rem);
+  padding-bottom: clamp(1.6rem, 4.5vw, 2.6rem);
 }
 
 .hero__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-  gap: clamp(2.5rem, 6vw, 4.5rem);
-  align-items: end;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+  gap: clamp(1.6rem, 4.5vw, 3rem);
+  align-items: stretch;
 }
 
 .hero__intro {
@@ -243,21 +241,23 @@
 .hero__metrics {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(1.2rem, 3vw, 2rem);
-  margin: 0;
-  padding: 2.2rem 0 0;
+  gap: clamp(0.65rem, 2vw, 1.2rem);
+  margin: clamp(1.2rem, 3vw, 1.8rem) 0 0;
+  padding: 0;
   list-style: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .hero__metric {
-  min-width: 12rem;
+  min-width: 9rem;
   display: grid;
-  gap: 0.25rem;
+  gap: 0.18rem;
+  padding: 0.75rem 0.95rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .hero__metric-value {
-  font-size: clamp(1.75rem, 2.7vw, 2.3rem);
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
   font-weight: 600;
 }
 
@@ -271,12 +271,12 @@
 .hero__sidebar {
   position: relative;
   display: grid;
-  gap: 1.6rem;
-  padding: clamp(1.8rem, 3vw, 2.4rem);
+  gap: 1.2rem;
+  padding: clamp(1.2rem, 2.2vw, 1.8rem);
   border-radius: var(--radius-md);
   background: rgba(12, 12, 12, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.4);
 }
 
 .hero__sidebar::before {
@@ -362,16 +362,58 @@
   line-height: 1.6;
 }
 
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1.2rem, 2.6vw, 1.6rem);
+}
+
+.principle-card {
+  display: grid;
+  gap: 0.75rem;
+  padding: clamp(1.4rem, 2.4vw, 1.9rem);
+  border-radius: var(--radius-md);
+  background: rgba(11, 11, 11, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.42);
+}
+
+.principle-card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.principle-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.principle-signals {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.principle-signals li {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
 .specialties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(1.5rem, 3vw, 2rem);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1.2rem, 2.6vw, 1.7rem);
 }
 
 .specialty-card {
   display: grid;
-  gap: 1.2rem;
-  padding: clamp(1.8rem, 3vw, 2.4rem);
+  gap: 0.75rem;
+  padding: clamp(1.4rem, 2.2vw, 1.9rem);
   border-radius: var(--radius-md);
   background: rgba(10, 10, 10, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -497,13 +539,13 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1.5rem, 3vw, 2rem);
+  gap: clamp(1.3rem, 2.8vw, 1.8rem);
 }
 
 .project-card {
   display: grid;
-  gap: 1.2rem;
-  padding: clamp(1.9rem, 3vw, 2.4rem);
+  gap: 0.9rem;
+  padding: clamp(1.6rem, 2.6vw, 2.1rem);
   border-radius: var(--radius-md);
   background: rgba(9, 9, 9, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -761,7 +803,7 @@
   }
 
   .section {
-    padding: clamp(2.2rem, 6vw, 3.4rem) 1.5rem;
+    padding: clamp(1.9rem, 6vw, 2.8rem) 1.5rem;
   }
 
   .section--accent {
@@ -792,7 +834,7 @@
 
   .section {
     margin-bottom: 3.5rem;
-    padding: clamp(2rem, 7vw, 3rem) 1.25rem;
+    padding: clamp(1.8rem, 7vw, 2.6rem) 1.25rem;
   }
 
   .hero__actions {

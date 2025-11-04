@@ -3,6 +3,7 @@ import {
   navigation,
   hero,
   about,
+  principles,
   specialties,
   experiences,
   projects,
@@ -93,7 +94,6 @@ function App() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <a className="brand" href="#hero">
-          <span className="brand-mark" />
           <span className="brand-name">Aatika Khan</span>
         </a>
         <nav className="nav-links" aria-label="Primary navigation">
@@ -103,10 +103,6 @@ function App() {
             </a>
           ))}
         </nav>
-        <a className="nav-cta" href="mailto:aatikakhan869@gmail.com">
-          Let&apos;s collaborate
-          <FiArrowUpRight aria-hidden="true" />
-        </a>
       </Motion.header>
 
       <main>
@@ -119,7 +115,7 @@ function App() {
               variants={stagger}
             >
               <Motion.span className="hero__eyebrow" variants={fadeUp}>
-                Mobile · Cloud · Product Consulting
+                Product-first · Mobile · UX
               </Motion.span>
               <Motion.h1 variants={fadeUp}>
                 {hero.name}
@@ -154,7 +150,7 @@ function App() {
             >
               <div className="hero__sidebar-block">
                 <span className="hero__sidebar-label">Currently</span>
-                <p>Guiding founding teams from discovery to launch with Flutter, FastAPI, and GenAI integrations.</p>
+                <p>Partnering with founding teams on outcome framing, UX research loops, and Flutter delivery that ships faster.</p>
               </div>
               <div className="hero__sidebar-block">
                 <span className="hero__sidebar-label">Why clients choose me</span>
@@ -168,11 +164,11 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="section section--accent">
+        <section id="approach" className="section section--accent">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="About"
-              title="Partnering with you from strategy to shipped apps"
+              kicker="Product approach"
+              title="Partnering with you from problem framing to measurable outcomes"
               description={about.tagline}
             />
             <div className="about__grid">
@@ -182,13 +178,42 @@ function App() {
                 ))}
               </Motion.div>
               <Motion.div className="about__outline" variants={fadeUp}>
-                <span className="about__outline-label">Core outcomes</span>
+                <span className="about__outline-label">Product levers</span>
                 <ul>
-                  <li>Designing resilient mobile-first journeys across iOS, Android, and web touchpoints.</li>
-                  <li>Embedding growth-ready analytics, payments, and automation from day one.</li>
-                  <li>Coaching teams and communities to scale with clarity and confidence.</li>
+                  <li>North-star alignment with measurable success metrics and decision narratives.</li>
+                  <li>Experiment loops that blend research, prototyping, and instrumentation.</li>
+                  <li>Delivery rituals and runbooks that enable teams to scale independently.</li>
                 </ul>
               </Motion.div>
+            </div>
+          </Motion.div>
+        </section>
+
+        <section id="principles" className="section">
+          <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+            <SectionTitle
+              kicker="Product principles"
+              title="Guiding beliefs that keep shipping disciplined and outcome-led"
+              description="These principles shape every engagement — from discovery workshops to post-launch iteration — so teams stay aligned and confident."
+            />
+            <div className="principles-grid">
+              {principles.map((principle) => (
+                <Motion.article
+                  key={principle.title}
+                  className="principle-card"
+                  variants={fadeUp}
+                  whileHover={surfaceMotion.whileHover}
+                  transition={surfaceMotion.transition}
+                >
+                  <h3>{principle.title}</h3>
+                  <p>{principle.description}</p>
+                  <ul className="principle-signals">
+                    {principle.signals.map((signal) => (
+                      <li key={signal}>{signal}</li>
+                    ))}
+                  </ul>
+                </Motion.article>
+              ))}
             </div>
           </Motion.div>
         </section>
@@ -196,9 +221,9 @@ function App() {
         <section id="expertise" className="section">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="Consulting focus"
-              title="End-to-end execution across mobile, backend, and growth"
-              description="I partner with founders and product teams to translate ideas into revenue-ready experiences with measurable outcomes."
+              kicker="Product playbooks"
+              title="Repeatable systems that move ideas from insight to impact"
+              description="Execution frameworks tuned for velocity, learning, and resilience — honed across marketplaces, mobility, and AI-led experiences."
             />
             <div className="specialties-grid">
               {specialties.map((item) => (
@@ -269,9 +294,9 @@ function App() {
         <section id="projects" className="section">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="Selected builds"
-              title="Case studies from launch-critical initiatives"
-              description="Crafting delightful, resilient products that align mobile experiences, backend services, and payment flows."
+              kicker="Projects"
+              title="Selected projects shipped with product-first execution"
+              description="Crafting resilient Flutter products that align UX research, engineering quality, and measurable growth."
             />
             <div className="projects-grid">
               {projects.map((project) => (
@@ -394,7 +419,7 @@ function App() {
                     <FiArrowUpRight aria-hidden="true" />
                   </a>
                 ))}
-              </div>
+      </div>
               <p className="contact-note">{contact.note}</p>
             </Motion.div>
           </Motion.div>

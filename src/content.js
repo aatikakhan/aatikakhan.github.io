@@ -1,52 +1,77 @@
 export const navigation = [
-  { label: 'About', href: '#about' },
-  { label: 'Expertise', href: '#expertise' },
+  { label: 'Approach', href: '#approach' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Community', href: '#community' },
   { label: 'Contact', href: '#contact' },
 ]
 
 export const hero = {
   name: 'Aatika Khan',
-  title: 'Senior Mobile, Software Engineer & Consultant',
+  title: 'Product-First Mobile Consultant',
   statement:
-    'I help international teams ship Flutter-first, cloud-ready products that convert — pairing polished UX with reliable APIs and infrastructure.',
+    'I lead with product principles before pixels — shaping Flutter experiences that blend validated UX, reliable engineering, and revenue-centric roadmaps.',
   highlights: [
     { label: 'Years in mobile', value: '6+' },
-    { label: 'Launch-ready apps', value: 'E-commerce · Mobility · AI' },
+    { label: 'Markets served', value: 'USA · UK · Japan · India' },
     { label: 'Communities led', value: 'Women Who Code · Flutter Mumbai' },
   ],
 }
 
 export const about = {
-  tagline: 'Passionate software engineer and mobile developer',
+  tagline: 'Product-first partner across discovery, design, build, and growth',
   paragraphs: [
-    'I am a passionate Software Engineer and Mobile Developer with 6+ years of experience, specializing in Flutter and mobile application development.',
-    'My expertise spans from e-commerce marketplaces to mobility solutions, and I am always exploring new technologies to broaden my skill set and deliver impactful products.',
-    'When I am not coding, I actively contribute to the tech community through volunteering, organizing meetups, and participating in events because I believe we grow faster together.',
-    'Bring your product ideas — we will talk tech, life, tactics, and everything in between to uncover the best way I can deliver value for you.',
+    'I am a product-first engineer: every engagement starts with framing outcomes, mapping risks, and aligning the roadmap to the customer jobs we are solving.',
+    'From marketplaces and mobility platforms to AI-powered assistants, I connect UX research, UI systems, and technical architecture so teams see signal faster.',
+    'I embed with founders, product leaders, and design partners to define the problem space, run experiments, and scale the rituals that keep momentum high.',
+    'Bring your product idea — we will co-design discovery artifacts, success metrics, and delivery cadence before writing a single line of code.',
   ],
 }
 
+export const principles = [
+  {
+    title: 'Outcomes over outputs',
+    description:
+      'Set the north-star metric and define evidence thresholds before locking scope so everyone ships with clarity on what success looks like.',
+    signals: ['North-star scorecards', 'Opportunity solution trees', 'Release success criteria'],
+  },
+  {
+    title: 'Evidence before ego',
+    description:
+      'Pair qualitative discovery with instrumented experiments. Prototypes, betas, and telemetry reduce guesswork and keep the roadmap honest.',
+    signals: ['Rapid experiment loops', 'Triangulated research', 'Metrics-informed decisions'],
+  },
+  {
+    title: 'Design the system, not just the feature',
+    description:
+      'Architect feedback loops, delivery rituals, and governance that help teams execute independently long after launch.',
+    signals: ['Operating cadences', 'Runbooks & rituals', 'Capability handoffs'],
+  },
+  {
+    title: 'Delight within constraints',
+    description:
+      'Blend craftsmanship with technical pragmatism — choosing the smallest lovable solution that can scale when traction hits.',
+    signals: ['Experience benchmarks', 'Tech-for-design audits', 'Progressive enhancement plans'],
+  },
+]
+
 export const specialties = [
   {
-    title: 'Product Acceleration',
+    title: 'Discovery to delivery',
     blurb:
-      'Rapidly architect and launch MVPs with Flutter, FastAPI, and managed cloud services. I plug in as an embedded CTO partner to own the SDLC end-to-end.',
-    deliverables: ['Full-stack architecture', 'CI/CD automation', 'Operational playbooks'],
+      'Frame opportunities, validate problem-solution fit, and translate insights into prioritized product backlogs with traceable success metrics.',
+    deliverables: ['Opportunity sizing', 'Experience mapping', 'Delivery cadences'],
   },
   {
-    title: 'Revenue-Ready Mobile',
+    title: 'Experience craft',
     blurb:
-      'Design conversion-driven mobile experiences with in-app payments, subscription flows, and compliance-ready analytics.',
-    deliverables: ['Stripe, PayPal, RevenueCat', 'Experiment-ready funnels', 'Accessibility-first UX'],
+      'Design design systems, interaction models, and content strategy that elevate usability while keeping brand and accessibility intact.',
+    deliverables: ['Design system ops', 'Motion & microcopy', 'Accessibility audits'],
   },
   {
-    title: 'Cloud Reliability',
+    title: 'Reliability & momentum',
     blurb:
-      'Build resilient infrastructure across AWS and GCP with observability, autoscaling, and defensible security baselines.',
-    deliverables: ['AWS EC2 · Lambda', 'Global CDN & caching', 'Telemetry dashboards'],
+      'Build resilient Flutter apps with automated quality guardrails, analytics, and growth funnels that reveal signal quickly.',
+    deliverables: ['Resilience playbooks', 'CI/CD & QA automation', 'Product telemetry'],
   },
 ]
 
@@ -78,7 +103,7 @@ export const experiences = [
     tech: ['FastAPI', 'GenAI', 'GCP'],
   },
   {
-    role: 'Lead Mobile Developer (Contract)',
+    role: 'Lead Mobile Developer ',
     company: 'Auto Claims Ltd · Birmingham, UK (Remote)',
     period: 'Jun 2023 – May 2024',
     summary:
@@ -92,7 +117,7 @@ export const experiences = [
     link: 'https://www.ebuygumm.co.uk/shop/Online_market_stall',
   },
   {
-    role: 'Lead Mobile Engineer (Contract)',
+    role: 'Lead Mobile Engineer ',
     company: '1ne Studio Inc · Tokyo, Japan (Remote)',
     period: 'Nov 2022 – May 2023',
     summary:
@@ -105,7 +130,7 @@ export const experiences = [
     tech: ['Flutter', 'Twilio', 'Realtime Messaging'],
   },
   {
-    role: 'Flutter Engineer (Contract)',
+    role: 'Flutter Engineer ',
     company: 'Keep Works Technologies · Bengaluru, India (Remote)',
     period: 'May 2022 – Jul 2022',
     summary:
@@ -119,7 +144,7 @@ export const experiences = [
     link: 'https://dashx.com/',
   },
   {
-    role: 'Mobile Developer (Contract)',
+    role: 'Mobile Developer ',
     company: 'Machine + Love · Canada (Remote)',
     period: 'Jan 2022 – Feb 2022',
     summary:
