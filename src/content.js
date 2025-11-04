@@ -9,32 +9,41 @@ export const hero = {
   name: 'Aatika Khan',
   title: 'Product-First Mobile Consultant',
   statement:
-    'I operate as a solo developer for founders who need ideas shaped, built, and launched without adding headcount.',
+    'I operate as a solo Flutter partner for founders who need ideas shaped, built, and launched without adding headcount.',
   highlights: [
     {
       label: 'Where I add lift',
       value: 'Launch-ready start',
-      description: 'Turn early signals into scoped betas with accountable outcomes.',
+      description: 'Turn early signals into scoped betas fast.',
     },
     {
       label: 'Execution style',
       value: 'Design-build loop',
-      description: 'Design flows, code Flutter, wire APIs, and ship releases end-to-end.',
+      description: 'Design, code, and ship Flutter releases end-to-end.',
     },
     {
       label: 'Collaboration cadence',
       value: 'Structured async',
-      description: 'Weekly notes, Loom walkthroughs, and transparent backlogs that respect time zones.',
+      description: 'Weekly notes, Loom walkthroughs, and transparent boards.',
     },
   ],
+  status: {
+    current: 'Scaling Treasure Fox marketplace with weekly ship notes.',
+    availability: 'Next opening Q1 2026 · Remote-first.',
+  },
 }
 
 export const about = {
   tagline: 'Solo partner from first discovery call to confident launch',
   paragraphs: [
-    'We start by agreeing on the user job, constraint, and signal that prove value.',
-    'I stay hands-on across research, UX, Flutter builds, and backend wiring so context never fragments.',
-    'Expect candid trade-offs, tight async updates, and the energy of someone who loves shipping products.',
+    'Align on the user job, constraint, and success signal.',
+    'Stay hands-on across research, UX, Flutter, and backend so context sticks.',
+    'Communicate candid trade-offs with tight async loops.',
+  ],
+  rituals: [
+    'Kickoff brief captures risks, jobs, and metrics.',
+    'Weekly updates.',
+    'Launch checklist covers analytics, QA, and support.',
   ],
 }
 
@@ -50,7 +59,7 @@ export const principles = [
     signals: ['Discovery sprints', 'Instrumented pilots'],
   },
   {
-    title: 'Ship with telemetry',
+    title: 'Ship as per your need',
     description: 'Releases include analytics, QA automation, and support runbooks by default.',
     signals: ['Launch runbooks', 'Dashboards & alerts'],
   },
@@ -64,18 +73,33 @@ export const principles = [
 export const specialties = [
   {
     title: 'Discovery to delivery',
-    blurb: 'Align outcomes, map journeys, and turn insight into a focused backlog.',
-    deliverables: ['Opportunity sizing', 'Experience mapping', 'Delivery cadences'],
+    blurb: 'Set the goal, plan the work, and keep the releases on track.',
   },
   {
     title: 'Experience craft',
-    blurb: 'Build flows, systems, and content that keep multi-platform products cohesive.',
-    deliverables: ['Design system ops', 'Motion & microcopy', 'Accessibility checks'],
+    blurb: 'Shape clear flows and tidy interfaces your customers understand.',
   },
   {
     title: 'Reliability & momentum',
-    blurb: 'Ship resilient Flutter apps with automation and telemetry wired in.',
-    deliverables: ['CI/CD guardrails', 'Product telemetry', 'Launch playbooks'],
+    blurb: 'Ship Flutter apps with checks, automation, and signals built in.',
+  },
+]
+
+export const approachStages = [
+  {
+    title: '01 Align outcomes',
+    summary: 'Week one: outcome brief, risk map, and metric guardrails.',
+    signals: ['Outcome brief', 'Risk map'],
+  },
+  {
+    title: '02 Build the proof',
+    summary: 'Rapid cycles blending UX prototypes, Flutter builds, and API wiring.',
+    signals: ['Clickable flows', 'Instrumented betas'],
+  },
+  {
+    title: '03 Launch & support',
+    summary: 'Release, QA automation, and support rituals in place.',
+    signals: ['Launch runbook', 'Live dashboards'],
   },
 ]
 

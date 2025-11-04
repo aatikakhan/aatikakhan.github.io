@@ -6,6 +6,7 @@ import {
   about,
   principles,
   specialties,
+  approachStages,
   experiences,
   projects,
   skills,
@@ -137,26 +138,39 @@ function App() {
                   <FiArrowUpRight aria-hidden="true" /> Book a discovery call
                 </a>
               </Motion.div>
-              <Motion.div className="hero__insights" variants={fadeUp}>
-                <Motion.div className="hero__highlights" variants={stagger}>
-                  {hero.highlights.map((item) => (
-                    <Motion.div key={item.label} className="hero-highlight" variants={fadeUp}>
-                      <span className="hero-highlight__label">{item.label}</span>
-                      <span className="hero-highlight__title">{item.value}</span>
-                      {item.description ? <p className="hero-highlight__caption">{item.description}</p> : null}
-                    </Motion.div>
-                  ))}
+              <Motion.div className="hero__insights" variants={stagger}>
+                <Motion.div className="hero__points" variants={fadeUp}>
+                  <span className="hero__section-label">Where I add lift</span>
+                  <ul className="hero__list">
+                    {hero.highlights.map((item) => (
+                      <li key={item.label}>
+                        <strong>{item.value}</strong> — {item.description}
+                      </li>
+                    ))}
+                  </ul>
                 </Motion.div>
-                <div className="hero__signals">
-                  <div className="hero__signal">
-                    <span className="hero__signal-label">Currently</span>
-                    <p>Co-driving Treasure Fox marketplace scale-up with weekly product diaries and shipped Flutter releases.</p>
-                  </div>
-                  <div className="hero__signal hero__signal--availability">
-                    <span className="hero__signal-label">Availability</span>
-                    <p>Opening one new product partnership for Q1 2026 · Remote-friendly and async-first.</p>
-                  </div>
-                </div>
+                <Motion.div className="hero__points" variants={fadeUp}>
+                  <span className="hero__section-label">Partnering style</span>
+                  <ul className="hero__list">
+                    {about.paragraphs.map((paragraph) => (
+                      <li key={paragraph}>{paragraph}</li>
+                    ))}
+                  </ul>
+                </Motion.div>
+                <Motion.div className="hero__points" variants={fadeUp}>
+                  <span className="hero__section-label">Cadence & status</span>
+                  <ul className="hero__list">
+                    {about.rituals.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                    <li>
+                      <strong>Currently:</strong> {hero.status.current}
+                    </li>
+                    <li>
+                      <strong>Availability:</strong> {hero.status.availability}
+                    </li>
+                  </ul>
+                </Motion.div>
               </Motion.div>
             </Motion.div>
           </div>
@@ -165,24 +179,24 @@ function App() {
         <section id="approach" className="section section--accent">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
-              kicker="Working model"
-              title="How an engagement moves from idea to live release"
-              description={about.tagline}
+              kicker="Delivery cadence"
+              title="Three loops that keep momentum moving"
+              description="Each phase bundles outcomes, comms, and measurable signals."
             />
-            <div className="about__grid">
-              <Motion.div className="about__story" variants={fadeUp}>
-                {about.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </Motion.div>
-              <Motion.div className="about__outline" variants={fadeUp}>
-                <span className="about__outline-label">Engagement rituals</span>
-                <ul>
-                  <li>Kickoff briefs link user jobs, constraints, and success signals into one narrative.</li>
-                  <li>Weekly Loom walkthroughs and async notes tie design choices to telemetry and code.</li>
-                  <li>Launch checklists cover analytics dashboards, QA automation, and support follow-ups.</li>
-                </ul>
-              </Motion.div>
+            <div className="approach-grid">
+              {approachStages.map((stage) => (
+                <Motion.article
+                  key={stage.title}
+                  className="approach-card"
+                  variants={fadeUp}
+                  whileHover={surfaceMotion.whileHover}
+                  transition={surfaceMotion.transition}
+                >
+                  <span className="approach-card__stage">{stage.title}</span>
+                  <p className="approach-card__summary">{stage.summary}</p>
+                
+                </Motion.article>
+              ))}
             </div>
           </Motion.div>
         </section>
@@ -234,11 +248,6 @@ function App() {
                 >
                   <h3>{item.title}</h3>
                   <p>{item.blurb}</p>
-                  <div className="specialty-deliverables">
-                    {item.deliverables.map((deliverable) => (
-                      <Pill key={deliverable}>{deliverable}</Pill>
-                    ))}
-                  </div>
                 </Motion.article>
               ))}
             </div>
