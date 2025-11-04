@@ -9,21 +9,33 @@ export const hero = {
   name: 'Aatika Khan',
   title: 'Product-First Mobile Consultant',
   statement:
-    'I lead with product principles before pixels — shaping Flutter experiences that blend validated UX, reliable engineering, and revenue-centric roadmaps.',
+    'I plug in as an independent product-first partner - owning the full software lifecycle from discovery through launch.',
   highlights: [
-    { label: 'Years in mobile', value: '6+' },
-    { label: 'Markets served', value: 'USA · UK · Japan · India' },
-    { label: 'Communities led', value: 'Women Who Code · Flutter Mumbai' },
+    {
+      label: 'Independent partner',
+      value: 'Hands-on solo',
+      description: 'You work directly with me across product strategy, engineering, QA, and release — no handoffs.',
+    },
+    {
+      label: 'Flexible cadence',
+      value: 'Across time zones',
+      description: 'Comfortable working around the clock to match founder schedules and launch windows.',
+    },
+    {
+      label: 'Community leadership',
+      value: 'Built-for-collab',
+      description: 'I co-create, mentor, and volunteer to keep collaboration habits sharp and inclusive.',
+    },
   ],
 }
 
 export const about = {
   tagline: 'Product-first partner across discovery, design, build, and growth',
   paragraphs: [
-    'I am a product-first engineer: every engagement starts with framing outcomes, mapping risks, and aligning the roadmap to the customer jobs we are solving.',
-    'From marketplaces and mobility platforms to AI-powered assistants, I connect UX research, UI systems, and technical architecture so teams see signal faster.',
-    'I embed with founders, product leaders, and design partners to define the problem space, run experiments, and scale the rituals that keep momentum high.',
-    'Bring your product idea — we will co-design discovery artifacts, success metrics, and delivery cadence before writing a single line of code.',
+    'I am a product-first engineer working independently: every engagement starts with framing outcomes, mapping risks, and aligning the roadmap to the customer jobs we are solving — then stays with the team through design, build, launch, and iteration.',
+    'From marketplaces and mobility platforms to AI-powered assistants, I connect UX research, UI systems, and technical architecture so teams see signal faster — with Flutter as a core specialty alongside web, backend, and platform tooling.',
+    'I collaborate closely with founders, PMs, designers, engineers, and volunteer communities, keeping communication tight and transparent across time zones.',
+    'Bring your product idea — we will co-design discovery artifacts, success metrics, and delivery cadence before writing a single line of code, then iterate in flexible, always-on loops.',
   ],
 }
 
@@ -312,5 +324,6 @@ export const contact = {
   linkedin: 'https://linkedin.com/in/aatikakhan',
   twitter: 'https://www.twitter.com/_aatikakhan_',
   resume: 'https://docs.google.com/document/d/1MMZ1AhC_CDdHeXCnr8Q2hqw0vKWdOOmg81LHuxA6Q0E/export?format=pdf',
+  phone: '+918268274827',
   note: 'Bring your product ideas and we will explore the smartest ways to bring them to life together.',
 }

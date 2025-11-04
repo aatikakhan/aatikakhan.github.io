@@ -59,6 +59,12 @@ function App() {
       external: false,
     },
     {
+      href: `tel:${contact.phone}`,
+      label: contact.phone,
+      Icon: FiPhoneCall,
+      external: false,
+    },
+    {
       href: contact.linkedin,
       label: 'LinkedIn',
       Icon: FiLinkedin,
@@ -128,39 +134,38 @@ function App() {
                 <a className="button button--primary" href={contact.resume} download="Aatika-Khan-Resume.pdf">
                   <FiDownload aria-hidden="true" /> Download résumé
                 </a>
-                <a className="button button--ghost" href="#contact">
+                <a className="button button--ghost" href="tel:+918268274827">
                   <FiPhoneCall aria-hidden="true" /> Book a discovery call
                 </a>
               </Motion.div>
-              <Motion.ul className="hero__metrics" variants={stagger}>
-                {hero.highlights.map((item) => (
-                  <Motion.li key={item.label} className="hero__metric" variants={fadeUp}>
-                    <span className="hero__metric-value">{item.value}</span>
-                    <span className="hero__metric-label">{item.label}</span>
-                  </Motion.li>
-                ))}
-              </Motion.ul>
+              <Motion.div className="hero__insights" variants={fadeUp}>
+                <Motion.ul className="hero__metrics" variants={stagger}>
+                  {hero.highlights.map((item) => (
+                    <Motion.li key={item.label} className="hero__metric" variants={fadeUp}>
+                      <div className="hero__metric-header">
+                        <span className="hero__metric-badge">{item.label}</span>
+                        <span className="hero__metric-value">{item.value}</span>
+                      </div>
+                      {item.description ? <p className="hero__metric-caption">{item.description}</p> : null}
+                    </Motion.li>
+                  ))}
+                </Motion.ul>
+                <div className="hero__signals">
+                  <div className="hero__signal">
+                    <span className="hero__signal-label">Currently</span>
+                    <p>Partnering with founding teams on outcome framing, UX research loops, and Flutter delivery that ships faster.</p>
+                  </div>
+                  <div className="hero__signal">
+                    <span className="hero__signal-label">Why clients choose me</span>
+                    <p>{about.paragraphs[1]}</p>
+                  </div>
+                  <div className="hero__signal hero__signal--availability">
+                    <span className="hero__signal-label">Availability</span>
+                    <p>Accepting new product partnerships worldwide · Remote-first</p>
+                  </div>
+                </div>
+              </Motion.div>
             </Motion.div>
-
-            <Motion.aside
-              className="hero__sidebar"
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
-              <div className="hero__sidebar-block">
-                <span className="hero__sidebar-label">Currently</span>
-                <p>Partnering with founding teams on outcome framing, UX research loops, and Flutter delivery that ships faster.</p>
-              </div>
-              <div className="hero__sidebar-block">
-                <span className="hero__sidebar-label">Why clients choose me</span>
-                <p>{about.paragraphs[1]}</p>
-              </div>
-              <div className="hero__sidebar-block">
-                <span className="hero__sidebar-label">Availability</span>
-                <p>Accepting new product partnerships worldwide · Remote-first</p>
-              </div>
-            </Motion.aside>
           </div>
         </section>
 
