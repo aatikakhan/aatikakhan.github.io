@@ -278,5 +278,6 @@ export const contact = {
   github: 'https://github.com/aatikakhan',
   linkedin: 'https://linkedin.com/in/aatikakhan',
   twitter: 'https://x.com/_aatikakhan_',
+  resume: 'https://docs.google.com/document/d/1MMZ1AhC_CDdHeXCnr8Q2hqw0vKWdOOmg81LHuxA6Q0E/export?format=pdf',
   note: 'Bring your product idea; we will map the smartest path to launch together.',
 }
