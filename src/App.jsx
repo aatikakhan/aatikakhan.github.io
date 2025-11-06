@@ -210,7 +210,7 @@ function App() {
                 {hero.statement}
               </Motion.p>
               <Motion.div className="hero__actions" variants={fadeUp}>
-                <a className="button button--primary" href={contact.resume} download="Aatika-Khan-Resume.pdf">
+                <a className="button button--primary" href={contact.resume} target="_blank" rel="noreferrer">
                   <FiDownload aria-hidden="true" /> Download résumé
                 </a>
                 <a className="button button--ghost" href="https://cal.com/aatikakhan/30min" target="_blank" rel="noreferrer">
