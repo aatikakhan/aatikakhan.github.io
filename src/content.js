@@ -6,59 +6,91 @@ export const navigation = [
 
 export const hero = {
   name: 'Aatika Khan',
-  title: 'Product-First Software Consultant',
+  title: 'Founding Engineer • AI & Product Builder',
+
   statement:
-    'I operate as a solo software developer for founders who need ideas shaped, built, and launched. I have expertise in crossplatform app development for 6+ years and now I\'m focusing on other areas in tech.',
+    'I help founders build AI-powered products, marketplaces, and SaaS platforms from idea to production. From architecture and backend systems to AI search, payments, cloud infrastructure, and polished user experiences.',
+
   highlights: [
     {
-      label: 'Where I add lift',
-      value: 'Launch-ready start',
-      description: 'Turn ideas into scoped builds fast.',
+      label: 'Products Built',
+      value: '20+',
+      description: 'Delivered across startups in USA, UK, Japan, Canada, Germany and India.',
     },
     {
-      label: 'Execution style',
-      value: 'Design-build loop',
-      description: 'Design flows, build UI and backend, wire APIs, ship releases.',
+      label: 'Specialization',
+      value: 'AI + Marketplace Systems',
+      description: 'Search, recommendations, payments and scalable backend infrastructure.',
     },
     {
-      label: 'Collaboration cadence',
-      value: 'Structured async',
-      description: 'Weekly calls, flexible updates, clear boards.',
+      label: 'Engagement',
+      value: 'Fractional Founding Engineer',
+      description: 'Helping startups launch and scale products without hiring a full team.',
     },
   ],
+
   status: {
-    current: 'Scaling Treasure Fox marketplace.',
-    availability: 'Open for new gigs globally · Remote-first.',
+    current: 'Building AI-powered marketplace experiences at Treasure Fox.',
+    availability: 'Available for select founder-led engagements worldwide.',
   },
 }
 
+const services = [
+  {
+    title: "AI Products",
+    blurb: "Search assistants, RAG systems, recommendations and AI workflows."
+  },
+  {
+    title: "Marketplace Platforms",
+    blurb: "Buying, selling, offers, messaging, subscriptions and payouts."
+  },
+  {
+    title: "Backend Systems",
+    blurb: "FastAPI, cloud infrastructure, APIs, databases and integrations."
+  },
+  {
+    title: "Fractional Founding Engineer",
+    blurb: "Technical leadership for startups building their first product."
+  }
+]
+
 export const about = {
-  tagline: 'Solo developer from first discovery call to confident launch',
+  tagline: 'Helping startups turn ideas into production-ready products',
+
   paragraphs: [
-    'Align job, constraint, metric upfront.',
-    'Stay hands-on across mobile, web, backend.',
-    'Share trade-offs with flexible async loops.',
-    "With flexible schedule and async communication."
+    'AI product development and LLM integrations.',
+    'Marketplace platforms with payments, messaging and subscriptions.',
+    'Backend architecture, cloud infrastructure and scalable APIs.',
+    'End-to-end product ownership from MVP to launch.',
   ],
+
   rituals: [
-    'Kickoff: risks + metrics.',
-    'Weekly or as-needed meetings.',
-    'Launch checklist: analytics, QA, support.',
+    'Product discovery and technical strategy.',
+    'Rapid MVP execution and iterative delivery.',
+    'Launch planning, analytics and scaling support.',
   ],
 }
 
 export const specialties = [
   {
-    title: 'Discovery to delivery',
-    blurb: 'Set the goal, plan the work, and keep the releases on track.',
+    title: 'AI Product Development',
+    blurb:
+      'Search assistants, RAG systems, recommendation engines and AI-powered workflows.',
   },
   {
-    title: 'Experience craft',
-    blurb: 'Shape clear flows and tidy interfaces your customers understand.',
+    title: 'Marketplace Platforms',
+    blurb:
+      'Buying, selling, messaging, subscriptions, offers, payments and seller payouts.',
   },
   {
-    title: 'Reliability & momentum',
-    blurb: 'Ship software with checks, automation, and signals built in.',
+    title: 'Backend Systems',
+    blurb:
+      'FastAPI, scalable APIs, cloud infrastructure, databases and integrations.',
+  },
+  {
+    title: 'Fractional Founding Engineer',
+    blurb:
+      'Technical leadership for startups building and launching new products.',
   },
 ]
 
@@ -85,15 +117,29 @@ export const experiences = [
     role: 'Founding Senior Engineer',
     company: 'Treasure Fox · Michigan, USA (Remote)',
     period: 'Dec 2024 – Present',
+
     summary:
-      'Leading Treasure Fox marketplace across Flutter, FastAPI, MySQL, and AWS.',
+      'Built and launched an AI-powered marketplace platform from scratch.',
+
     contributions: [
-      'Delivered core marketplace experiences spanning subscriptions, offers, chat, and payouts.',
-      'Integrated image processing, model integrations, and revenue infrastructure with Stripe.',
-      'Scaled infrastructure across AWS (EC2, S3, RDS) with reliable deployment pipelines.',
+      'Architected the entire platform using Flutter, FastAPI, MySQL and AWS.',
+      'Developed 20+ production APIs powering authentication, listings, offers, messaging and transactions.',
+      'Built an AI-powered marketplace search assistant using OpenAI and semantic search technologies.',
+      'Implemented Stripe payments, subscriptions and seller payouts.',
+      'Owned cloud infrastructure, CI/CD pipelines and production deployments.',
+      'Led all engineering functions including architecture, backend, AI systems and mobile applications.',
     ],
-    tech: ['Flutter', 'FastAPI', 'AWS'],
-    link: 'http://treasurefox.ai',
+
+    tech: [
+      'Python',
+      'FastAPI',
+      'AWS',
+      'OpenAI',
+      'Stripe',
+      'MySQL',
+    ],
+
+    link: 'https://treasurefox.ai',
   },
   {
     role: 'Lead Mobile Developer ',
@@ -181,79 +227,128 @@ export const projects = [
   {
     name: 'Treasure Fox',
     description:
-      'Mid-century marketplace with chat, subscriptions, and Stripe payouts.',
-    impact: 'Accelerated launch without trading off premium UX.',
-    stack: ['Flutter', 'FastAPI', 'AWS', 'Stripe, AI/ML, Vision RAG'],
+      'AI-powered marketplace platform for buying and selling curated furniture and decor.',
+
+    impact:
+      'Built from scratch with AI search, messaging, payments, subscriptions and seller payouts.',
+
+    stack: [
+      'FastAPI',
+      'AWS',
+      'OpenAI',
+      'Stripe',
+      'Flutter',
+    ],
+
     url: 'https://treasurefox.ai/',
   },
+
   {
-    name: 'Anuvad Translation Tool',
+    name: 'AI Marketplace Search Assistant',
+
     description:
-      'GenAI PDF translation workflow for secure enterprise conversions.',
-    impact: 'Deployed on GCP using FastAPI microservices.',
-    stack: ['FastAPI', 'GenAI', 'GCP'],
+      'Conversational AI search experience enabling natural language product discovery.',
+
+    impact:
+      'Semantic search, recommendations and context-aware product retrieval.',
+
+    stack: [
+      'OpenAI',
+      'RAG',
+      'FastAPI',
+      'Vector Search',
+    ],
+  },
+
+  {
+    name: 'Anuvad',
+
+    description:
+      'Enterprise-grade AI translation platform for PDF and document workflows.',
+
+    impact:
+      'Production deployment using FastAPI microservices and GCP.',
+
+    stack: [
+      'FastAPI',
+      'GenAI',
+      'GCP',
+    ],
+
     url: 'https://anuvad.pro/',
   },
+
   {
-    name: 'Skin Disease Detection',
+    name: 'Guardian AI',
+
     description:
-      'ML assistant classifying skin conditions with clinician handoff.',
-    impact: 'Built end-to-end detection and triage pipelines.',
-    stack: ['Python', 'ML', 'Computer Vision'],
-    url: 'https://github.com/aatikakhan/skin-disease-prediction',
-  },
-  {
-    name: 'Weight Tracking',
-    description:
-      'Daily health tracker with scheduling logic and reminders.',
-    impact: 'Automates notifications and flags missed entries for accountability.',
-    stack: ['Flutter', 'Local Notifications'],
-    url: 'https://github.com/aatikakhan/weight-tracker',
-  },
-  {
-    name: 'Unsplash Gallery',
-    description:
-      'Media browser with advanced Unsplash API filtering.',
-    impact: 'Highlights performant API integration and responsive galleries.',
-    stack: ['Flutter', 'Unsplash API'],
-    url: 'https://github.com/aatikakhan/Unsplash-Gallery',
-  },
-  {
-    name: 'Guardian-ai',
-    description:
-      'Cybersecurity project for proactive spam detection shown in the Gemini AI competition.',
-    impact: 'Combined Flutter, Firebase, and custom models for explainable triage.',
-    stack: ['Flutter', 'Firebase', 'GenAI'],
+      'AI-powered spam detection and cybersecurity assistant.',
+
+    impact:
+      'Presented in the Google Gemini AI Competition.',
+
+    stack: [
+      'Flutter',
+      'Firebase',
+      'GenAI',
+    ],
+
     url: 'https://ai.google.dev/competition/projects/guaridan-ai',
-  },
-  {
-    name: 'TodoApp',
-    description:
-      'Trello-inspired task management with drag-and-drop boards.',
-    impact: 'Improves team visibility across mobile surfaces.',
-    stack: ['Flutter', 'State Management'],
-  },
-  {
-    name: 'NASA Gallery',
-    description:
-      'Content-rich app rendering NASA feeds in a news-style UX.',
-    impact: 'Demonstrates data storytelling with curated space content.',
-    stack: ['Flutter', 'REST APIs'],
   },
 ]
 
 export const skills = [
   {
-    category: 'Core capabilities',
-    items: ['Product strategy', 'UX research', 'Design systems', 'Engineering leadership'],
+    category: 'Backend',
+    items: [
+      'Python',
+      'FastAPI',
+      'REST APIs',
+      'MySQL',
+      'PostgreSQL',
+      'AWS',
+      'System Design',
+      'Microservices',
+    ],
   },
+
   {
-    category: 'Trusted stack',
-    items: ['Flutter', 'React', 'Node', 'FastAPI', 'Python', 'PostgreSQL'],
+    category: 'AI & LLM',
+    items: [
+      'OpenAI APIs',
+      'RAG Systems',
+      'Semantic Search',
+      'AI Chatbots',
+      'Recommendation Systems',
+      'Vector Search',
+      'Prompt Engineering',
+    ],
   },
+
   {
-    category: 'Depth areas',
-    items: ['Experimentation & analytics', 'Payments & subscriptions', 'Observability & reliability', 'ML & LLM integrations'],
+    category: 'Cloud & DevOps',
+    items: [
+      'AWS EC2',
+      'AWS S3',
+      'AWS RDS',
+      'Docker',
+      'CI/CD',
+      'GitHub Actions',
+      'Linux',
+    ],
+  },
+
+  {
+    category: 'Product Delivery',
+    items: [
+      'Marketplace Platforms',
+      'Payments',
+      'Subscriptions',
+      'Mobile Apps',
+      'Stripe',
+      'PayPal',
+      'Twilio',
+    ],
   },
 ]
 
@@ -279,5 +374,6 @@ export const contact = {
   linkedin: 'https://linkedin.com/in/aatikakhan',
   twitter: 'https://x.com/_aatikakhan_',
   resume: 'https://docs.google.com/document/d/1MMZ1AhC_CDdHeXCnr8Q2hqw0vKWdOOmg81LHuxA6Q0E/export?format=pdf',
-  note: 'Bring your product idea; we will map the smartest path to launch together.',
+  note:
+    'Need a Founding Engineer? Whether you are validating an idea, building an MVP, or scaling an existing product, I can help move your product from concept to production.'
 }
