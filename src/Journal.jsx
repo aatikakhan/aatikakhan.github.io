@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
-import { FiMoon, FiSun } from 'react-icons/fi'
 import { links, writing } from './writing'
-import { contact } from './content'
 
 const Rich = ({ parts }) => {
   const list = Array.isArray(parts) ? parts : [parts]
@@ -18,34 +16,6 @@ const Rich = ({ parts }) => {
   })
 }
 
-const JournalHeader = ({ theme, onToggleTheme }) => (
-  <header className="journal-bar">
-    <a className="journal-brand" href="#hero">
-      Aatika Khan
-    </a>
-    <div className="journal-bar__tools">
-      <nav className="journal-nav" aria-label="Journal">
-        <a href="#blog">Blog</a>
-        <a href="#experience">Experience</a>
-        <a href={links.fox} target="_blank" rel="noreferrer">
-          Treasure Fox
-        </a>
-        <a href={contact.resume} target="_blank" rel="noreferrer">
-          Résumé
-        </a>
-      </nav>
-      <button
-        type="button"
-        className="theme-toggle"
-        onClick={onToggleTheme}
-        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      >
-        {theme === 'dark' ? <FiSun aria-hidden="true" /> : <FiMoon aria-hidden="true" />}
-      </button>
-    </div>
-  </header>
-)
-
 const Byline = ({ essay }) => (
   <p className="journal-byline">
     <span>Founding engineer, head of engineering · </span>
@@ -56,62 +26,77 @@ const Byline = ({ essay }) => (
   </p>
 )
 
-const JournalIndex = () => {
-  const [featured, ...rest] = writing
+const JournalIndex = () => (
+  <main className="journal-main">
+    <p className="journal-kicker">Inside the build</p>
+    <h1>Blog</h1>
+    <p className="journal-lede">
+      Notes from heading engineering at Treasure Fox. Seven years of crafting products, currently a
+      one-person engineering team on a very specific marketplace.
+    </p>
+    <ul className="journal-list">
+      {writing.map((essay) => (
+        <li key={essay.slug}>
+          <a href={`#blog/${essay.slug}`}>
+            <span className="journal-kicker">{essay.kicker}</span>
+            <h2>{essay.title}</h2>
+            <p>{essay.dek}</p>
+          </a>
+          <Byline essay={essay} />
+        </li>
+      ))}
+    </ul>
+  </main>
+)
+
+const JournalArticle = ({ essay }) => {
+  const index = writing.findIndex((item) => item.slug === essay.slug)
+  const previous = index > 0 ? writing[index - 1] : null
+  const next = index >= 0 && index < writing.length - 1 ? writing[index + 1] : null
+
   return (
-    <main className="journal-main">
-      <p className="journal-kicker">Inside the build</p>
-      <h1>Blog</h1>
-      <p className="journal-lede">
-        Notes from heading engineering at Treasure Fox. Seven years of crafting products, currently a
-        one-person engineering team on a very specific marketplace.
-      </p>
-      <article className="journal-feature">
-        <a href={`#blog/${featured.slug}`}>
-          <span className="journal-kicker">{featured.kicker}</span>
-          <h2>{featured.title}</h2>
-          <p>{featured.dek}</p>
-        </a>
-        <Byline essay={featured} />
-      </article>
-      <ul className="journal-list">
-        {rest.map((essay) => (
-          <li key={essay.slug}>
-            <a href={`#blog/${essay.slug}`}>
-              <span className="journal-kicker">{essay.kicker}</span>
-              <h2>{essay.title}</h2>
-              <p>{essay.dek}</p>
-            </a>
-          </li>
-        ))}
-      </ul>
+    <main className="journal-main journal-article">
+      <a className="journal-back" href="#blog">
+        All notes
+      </a>
+      <p className="journal-kicker">{essay.kicker}</p>
+      <h1>{essay.title}</h1>
+      <p className="journal-lede">{essay.dek}</p>
+      <Byline essay={essay} />
+      {essay.sections.map((section, sectionIndex) => (
+        <section key={section.heading || sectionIndex}>
+          {section.heading ? <h2>{section.heading}</h2> : null}
+          {section.paragraphs.map((paragraph, paragraphIndex) => (
+            <p key={paragraphIndex}>
+              <Rich parts={paragraph} />
+            </p>
+          ))}
+        </section>
+      ))}
+      <nav className="journal-switch" aria-label="More notes">
+        {previous ? (
+          <a href={`#blog/${previous.slug}`}>
+            <span>Read previous</span>
+            {previous.title}
+          </a>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <a href={`#blog/${next.slug}`}>
+            <span>Read next</span>
+            {next.title}
+          </a>
+        ) : null}
+      </nav>
     </main>
   )
 }
 
-const JournalArticle = ({ essay }) => (
-  <main className="journal-main journal-article">
-    <a className="journal-back" href="#blog">
-      All notes
-    </a>
-    <p className="journal-kicker">{essay.kicker}</p>
-    <h1>{essay.title}</h1>
-    <p className="journal-lede">{essay.dek}</p>
-    <Byline essay={essay} />
-    {essay.sections.map((section) => (
-      <section key={section.heading || section.paragraphs[0][0].t}>
-        {section.heading ? <h2>{section.heading}</h2> : null}
-        {section.paragraphs.map((paragraph, index) => (
-          <p key={index}>
-            <Rich parts={paragraph} />
-          </p>
-        ))}
-      </section>
-    ))}
-  </main>
-)
-
-function Journal({ hash, theme, onToggleTheme }) {
+function Journal({ hash, listOnly = false }) {
+  if (listOnly) {
+    return <JournalIndex />
+  }
   const slug = hash.startsWith('#blog/') ? hash.slice('#blog/'.length) : ''
   const essay = slug ? writing.find((item) => item.slug === slug) : null
 
@@ -120,8 +105,7 @@ function Journal({ hash, theme, onToggleTheme }) {
   }, [hash])
 
   return (
-    <div className="journal">
-      <JournalHeader theme={theme} onToggleTheme={onToggleTheme} />
+    <div className="section journal">
       {slug && !essay ? (
         <main className="journal-main">
           <h1>That note is gone.</h1>

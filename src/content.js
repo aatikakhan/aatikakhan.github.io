@@ -1,7 +1,6 @@
 export const navigation = [
-  { label: 'Experience', href: '#experience' },
+  { label: 'Home', href: '#home' },
   { label: 'Blog', href: '#blog' },
-  { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -52,7 +51,7 @@ export const hero = {
     current:
       'Founding engineer and head of engineering at Treasure Fox. One-person engineering team.',
     availability:
-      'Open to 1–2 founder or investor-backed engagements (US / UK / UAE / Singapore).',
+      'Always available for consulting. US, UK, UAE, Singapore, and remote.',
   },
 }
 
@@ -102,7 +101,7 @@ export const specialties = [
   {
     title: 'Marketplace Platforms',
     blurb:
-      'Buying, selling, messaging, subscriptions, offers, payments and seller payouts.',
+      'Buying, selling, messaging, offers, payments, seller payouts, reports, and reviews.',
   },
   {
     title: 'Backend Systems',
@@ -142,15 +141,10 @@ export const experiences = [
     summary:
       'Heading engineering as a one-person team on an AI marketplace for mid-century furniture. Architecture, the app, payments, freight, and the models all sit at the same desk.',
     contributions: [
-      'Led end-to-end product development, building the full-stack marketplace from scratch with Flutter, FastAPI, AWS, and WebView integrations.',
-      'Headed engineering with no separate backend or DevOps hire: system architecture, CI/CD, infrastructure, and production deploys.',
-      'Shipped 30+ production REST APIs for authentication, listings, buying and selling, dispute reporting, and offers in messaging, including an automatic decline under the seller’s minimum.',
-      'Ran AWS on EC2, S3, and RDS, with GitHub Actions deploys, at 98% uptime.',
-      'Built a semantic search assistant with OpenAI and RAG so people can find pieces, makers, and designers in plain language.',
-      'Built MCM furniture identification with vision models and a RAG pipeline that returns context from a verified corpus, and blocks non-MCM scans from going live.',
-      'Implemented Stripe payments, subscriptions, and seller payouts that wait until delivery and a short inspection window.',
-      'Shipped furniture delivery across parcel, LTL freight, and white-glove, with quotes, cancels, and exception fees that follow the mode.',
-      'Tuned search indexing, ranking, filtering, and recommendations so discovery stays tied to real listings.',
+      'One-person engineering team: the app, the APIs, AWS, and production deploys.',
+      'Identification that can refuse a listing, with a manual MCM verification when the scan is wrong, plus search and a notice when a saved search becomes available.',
+      'Stripe payouts that wait until delivery and inspection. Parcel, freight, and white-glove, with the fees that follow each mode.',
+      'Listing reports stay live until Keep or Remove. An order issue pauses payout. Buyers review a seller only after they have paid.',
     ],
     tech: ['Flutter', 'FastAPI', 'PostgreSQL', 'AWS', 'OpenAI', 'Stripe', 'RAG'],
     link: 'https://treasurefox.ai',
@@ -271,7 +265,7 @@ export const projects = [
       'AI marketplace for mid-century furniture: identify a piece, list what you inherited, buy, and ship it.',
 
     impact:
-      'Vision identification, RAG search, Stripe Connect payouts after inspection, and parcel, freight, and white-glove delivery.',
+      'The product I am heading now. The engineering notes are on the blog.',
 
     stack: [
       'FastAPI',
@@ -338,61 +332,6 @@ export const projects = [
   },
 ]
 
-export const skills = [
-  {
-    category: 'Backend',
-    items: [
-      'Python',
-      'FastAPI',
-      'REST APIs',
-      'MySQL',
-      'PostgreSQL',
-      'AWS',
-      'System Design',
-      'Microservices',
-    ],
-  },
-
-  {
-    category: 'AI & LLM',
-    items: [
-      'OpenAI APIs',
-      'RAG Systems',
-      'Semantic Search',
-      'AI Chatbots',
-      'Recommendation Systems',
-      'Vector Search',
-      'Prompt Engineering',
-    ],
-  },
-
-  {
-    category: 'Cloud & DevOps',
-    items: [
-      'AWS EC2',
-      'AWS S3',
-      'AWS RDS',
-      'Docker',
-      'CI/CD',
-      'GitHub Actions',
-      'Linux',
-    ],
-  },
-
-  {
-    category: 'Product Delivery',
-    items: [
-      'Marketplace Platforms',
-      'Payments',
-      'Subscriptions',
-      'Mobile Apps',
-      'Stripe',
-      'PayPal',
-      'Twilio',
-    ],
-  },
-]
-
 export const volunteering = [
   {
     role: 'Former Founding Director',
@@ -416,7 +355,9 @@ export const contact = {
   twitter: 'https://x.com/_aatikakhan_',
   resume: 'https://docs.google.com/document/d/1bpBcVd-_sbq700t3dAhkYw1jkXmJXMuqYchZFTu2cdw/export?format=pdf',
   description:
-    'I work with founder-led teams and investors to build and scale AI products. If you are evaluating an idea, pre-seed startup, or scaling MVP — I can act as your embedded technical founder.',
+    'I consult with founders, product leaders, and agencies across time zones. Book a strategy session to explore how we can accelerate your roadmap.',
+  note:
+    'Need a Founding Engineer? Whether you are validating an idea, building an MVP, or scaling an existing product, I can help move your product from concept to production.',
 }
 
 export const credibilitySignals = [

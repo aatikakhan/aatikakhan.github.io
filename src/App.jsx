@@ -8,7 +8,6 @@ import {
   specialties,
   experiences,
   projects,
-  skills,
   volunteering,
   contact,
 } from './content'
@@ -35,11 +34,6 @@ const fadeUp = {
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12, delayChildren: 0.08 } },
-}
-
-const surfaceMotion = {
-  whileHover: { y: -6, scale: 1.01 },
-  transition: { type: 'spring', stiffness: 220, damping: 18 },
 }
 
 const getInitialTheme = () => {
@@ -103,6 +97,19 @@ function App() {
     window.addEventListener('hashchange', syncHash)
     return () => window.removeEventListener('hashchange', syncHash)
   }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!hash || hash === '#home' || hash === '#blog' || hash.startsWith('#blog/')) {
+      window.scrollTo(0, 0)
+      return
+    }
+    const id = hash.slice(1)
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ block: 'start' })
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [hash])
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -177,13 +184,7 @@ function App() {
     },
   ]
 
-  if (hash === '#blog' || hash.startsWith('#blog/')) {
-    return (
-      <div className="app-shell">
-        <Journal hash={hash} theme={theme} onToggleTheme={toggleTheme} />
-      </div>
-    )
-  }
+  const page = hash === '#blog' || hash.startsWith('#blog/') ? 'blog' : 'home'
 
   return (
     <div className="app-shell">
@@ -194,11 +195,18 @@ function App() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <nav className="nav-links" aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <a key={item.href} href={item.href}>
-              {item.label}
-            </a>
-          ))}
+          {navigation.map((item) => {
+            const current = item.href === '#home'
+              ? hash === '' || hash === '#home'
+              : item.href === '#blog'
+                ? hash === '#blog' || hash.startsWith('#blog/')
+                : hash === item.href
+            return (
+              <a key={item.href} href={item.href} aria-current={current ? 'page' : undefined}>
+                {item.label}
+              </a>
+            )
+          })}
         </nav>
         <button
           type="button"
@@ -210,7 +218,12 @@ function App() {
         </button>
       </Motion.header>
 
+      {page === 'blog' ? (
+        <Journal hash={hash} />
+      ) : (
       <main>
+        {page === 'home' ? (
+        <>
         <section id="hero" className="section hero">
           <div className="hero__layout">
             <Motion.div
@@ -231,17 +244,15 @@ function App() {
               </Motion.p>
               <Motion.div className="hero__actions" variants={fadeUp}>
                 <a className="button button--primary" href={contact.resume}>
-                  <FiDownload /> View Engineering Profile
+                  <FiDownload /> Download Resume
                 </a>
-
                 <a className="button button--ghost" href="https://cal.com/aatikakhan/30min">
-                  <FiArrowUpRight /> Book Founder Call
+                  <FiArrowUpRight /> Book a discovery call
                 </a>
               </Motion.div>
               <div className="trust-line">
                 Built production systems for founders across US, UK, UAE, Singapore and Europe — specializing in AI-first product infrastructure and marketplaces.
               </div>
-
               <Motion.div className="hero__insights" variants={stagger}>
                 <Motion.section className="hero-notes" variants={fadeUp}>
                   <span className="hero-notes__label">Highlights</span>
@@ -270,7 +281,7 @@ function App() {
                       <p>{hero.status.current}</p>
                     </div>
                     <div>
-                      <span className="hero-availability__label">Open slots</span>
+                      <span className="hero-availability__label">Consulting</span>
                       <p>{hero.status.availability}</p>
                     </div>
                   </div>
@@ -289,13 +300,7 @@ function App() {
             />
             <div className="specialties-grid">
               {specialties.map((item) => (
-                <Motion.article
-                  key={item.title}
-                  className="specialty-card"
-                  variants={fadeUp}
-                  whileHover={surfaceMotion.whileHover}
-                  transition={surfaceMotion.transition}
-                >
+                <Motion.article key={item.title} className="specialty-card" variants={fadeUp}>
                   <h3>{item.title}</h3>
                   <p>{item.blurb}</p>
                 </Motion.article>
@@ -304,8 +309,8 @@ function App() {
           </Motion.div>
         </section>
 
-        <section id="experience" className="section section--accent">
-          <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+        <section id="experience" className="section">
+          <Motion.div initial="hidden" animate="visible" variants={stagger}>
             <SectionTitle
               kicker="Experience"
               title="Experience across global product teams"
@@ -381,15 +386,29 @@ function App() {
                 {showAllExperiences ? 'Show fewer engagements' : 'Show all experiences'}
               </button>
             ) : null}
+            <div className="volunteering volunteering--page">
+              <h3>Leadership & volunteering</h3>
+              <ul>
+                {volunteering.map((item) => (
+                  <li key={item.org}>
+                    <div>
+                      <span className="volunteering-role">{item.role}</span>
+                      <span className="volunteering-org">{item.org}</span>
+                    </div>
+                    <span className="volunteering-period">{item.period}</span>
+                    <p>{item.summary}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Motion.div>
         </section>
 
         <section id="projects" className="section">
-          <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+          <Motion.div initial="hidden" animate="visible" variants={stagger}>
             <SectionTitle
               kicker="Projects"
-              title="Curated projects illustrating principles or having trials"
-              description="Crafting resilient Flutter products that align UX research, engineering quality, and measurable growth."
+              title="Selected work"
             />
             <div className="projects-scroll">
               <button
@@ -406,8 +425,6 @@ function App() {
                     key={project.name}
                     className="project-card"
                     variants={fadeUp}
-                    transition={surfaceMotion.transition}
-                    whileHover={surfaceMotion.whileHover}
                     role="listitem"
                   >
                     {project.url ? (
@@ -446,63 +463,15 @@ function App() {
           </Motion.div>
         </section>
 
-        <section className="section" aria-labelledby="skills-heading">
-          <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
-            <SectionTitle
-              kicker="Toolbox"
-              title="Platforms, SDKs, and playbooks I deploy"
-              description="From mobile UI polish to backend resilience, I bring a full-stack toolkit tuned for speed and quality."
-            />
-            <dl className="skills-grid">
-              {skills.map((group) => (
-                <div key={group.category} className="skills-group">
-                  <dt>{group.category}</dt>
-                  <dd>
-                    {group.items.map((item) => (
-                      <span key={item}>{item}</span>
-                    ))}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Motion.div>
-        </section>
-
-        <section id="community" className="section section--accent">
-          <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
-            <SectionTitle
-              kicker="Community"
-              title="Giving back to the ecosystems that fuel my craft"
-            />
-            <div className="community-layout">
-              <div className="volunteering">
-                <h3>Leadership & volunteering</h3>
-                <ul>
-                  {volunteering.map((item) => (
-                    <li key={item.org}>
-                      <div>
-                        <span className="volunteering-role">{item.role}</span>
-                        <span className="volunteering-org">{item.org}</span>
-                      </div>
-                      <span className="volunteering-period">{item.period}</span>
-                      <p>{item.summary}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </Motion.div>
-        </section>
-
         <section id="contact" className="section contact-section">
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
               kicker="Let’s build"
               title="Ready for your next product sprint?"
-              description="I consult with founders, product leaders, and agencies across time zones. Book a strategy session to explore how we can accelerate your roadmap."
+              description={contact.description}
               align="center"
             />
-            <Motion.div className="contact-card" variants={fadeUp} whileHover={surfaceMotion.whileHover} transition={surfaceMotion.transition}>
+            <Motion.div className="contact-card" variants={fadeUp}>
               <div className="contact-details">
                 {contactLinks.map((link) => (
                   <a
@@ -522,7 +491,10 @@ function App() {
             </Motion.div>
           </Motion.div>
         </section>
+        </>
+        ) : null}
       </main>
+      )}
 
       <footer className="footer">
         <span>© {new Date().getFullYear()} Aatika Khan. Available for global consulting engagements.</span>
