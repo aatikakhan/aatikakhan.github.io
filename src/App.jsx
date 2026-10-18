@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import Journal from './Journal'
 import { motion as Motion } from 'framer-motion'
 import {
   navigation,
@@ -82,6 +83,7 @@ function App() {
     return stored === 'light' || stored === 'dark'
   })
   const [expandedExperience, setExpandedExperience] = useState(null)
+  const [hash, setHash] = useState(() => (typeof window === 'undefined' ? '' : window.location.hash))
   const [showAllExperiences, setShowAllExperiences] = useState(false)
   const projectsTrackRef = useRef(null)
 
@@ -91,6 +93,16 @@ function App() {
     const scrollAmount = container.clientWidth * 0.8 * direction
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const syncHash = () => setHash(window.location.hash || '')
+    window.addEventListener('hashchange', syncHash)
+    return () => window.removeEventListener('hashchange', syncHash)
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -165,6 +177,14 @@ function App() {
     },
   ]
 
+  if (hash === '#blog' || hash.startsWith('#blog/')) {
+    return (
+      <div className="app-shell">
+        <Journal hash={hash} theme={theme} onToggleTheme={toggleTheme} />
+      </div>
+    )
+  }
+
   return (
     <div className="app-shell">
       <Motion.header
@@ -210,13 +230,18 @@ function App() {
                 {hero.statement}
               </Motion.p>
               <Motion.div className="hero__actions" variants={fadeUp}>
-                <a className="button button--primary" href={contact.resume} target="_blank" rel="noreferrer">
-                  <FiDownload aria-hidden="true" /> Download résumé
+                <a className="button button--primary" href={contact.resume}>
+                  <FiDownload /> View Engineering Profile
                 </a>
-                <a className="button button--ghost" href="https://cal.com/aatikakhan/30min" target="_blank" rel="noreferrer">
-                  <FiArrowUpRight aria-hidden="true" /> Book a discovery call
+
+                <a className="button button--ghost" href="https://cal.com/aatikakhan/30min">
+                  <FiArrowUpRight /> Book Founder Call
                 </a>
               </Motion.div>
+              <div className="trust-line">
+                Built production systems for founders across US, UK, UAE, Singapore and Europe — specializing in AI-first product infrastructure and marketplaces.
+              </div>
+
               <Motion.div className="hero__insights" variants={stagger}>
                 <Motion.section className="hero-notes" variants={fadeUp}>
                   <span className="hero-notes__label">Highlights</span>
@@ -393,11 +418,11 @@ function App() {
                         rel="noreferrer"
                       >
                         <h3>{project.name}</h3>
-                          </a>
+                      </a>
                     ) : (
                       <div className="project-heading">
                         <h3>{project.name}</h3>
-                          </div>
+                      </div>
                     )}
                     <p>{project.description}</p>
                     <p className="project-impact">{project.impact}</p>
@@ -492,7 +517,7 @@ function App() {
                     {link.label}
                   </a>
                 ))}
-      </div>
+              </div>
               <p className="contact-note">{contact.note}</p>
             </Motion.div>
           </Motion.div>
@@ -502,7 +527,7 @@ function App() {
       <footer className="footer">
         <span>© {new Date().getFullYear()} Aatika Khan. Available for global consulting engagements.</span>
       </footer>
-      </div>
+    </div>
   )
 }
 
