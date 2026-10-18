@@ -18,13 +18,6 @@ const Rich = ({ parts }) => {
 
 const Byline = ({ essay }) => (
   <p className="journal-byline">
-    <span className="journal-byline__name">Aatika Khan</span>
-    <span className="journal-byline__role">
-      Founding engineer, head of engineering
-      <a href={links.fox} target="_blank" rel="noreferrer">
-        Treasure Fox
-      </a>
-    </span>
     <span className="journal-byline__date">{essay.date}</span>
   </p>
 )

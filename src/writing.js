@@ -1,11 +1,17 @@
 export const links = {
   me: 'https://www.linkedin.com/in/aatikakhan/',
+  james: 'https://www.linkedin.com/in/jamesadame/',
+  ryan: 'https://www.linkedin.com/in/ryanearlcopeland/',
+  ali: 'https://www.linkedin.com/in/suleman-ali-saif/',
   fox: 'https://treasurefox.ai',
   resume:
     'https://docs.google.com/document/d/1bpBcVd-_sbq700t3dAhkYw1jkXmJXMuqYchZFTu2cdw/export?format=pdf',
 }
 
 const fox = { t: 'Treasure Fox', href: links.fox }
+const james = { t: 'James', href: links.james }
+const ryan = { t: 'Ryan Copeland', href: links.ryan }
+const ali = { t: 'Ali', href: links.ali }
 
 export const writing = [
   {
@@ -24,7 +30,12 @@ export const writing = [
             'A lot of these pieces never started as inventory. A chair bought new. A table that survived three houses. A lamp nobody was allowed to move. Then the house got packed, and now you are holding them. You might want to keep going and find the next one. You might be ready to let one go. Either way, the handoff was a guess. A photo in a group chat. A price pulled out of the air. A sofa nobody knew how to ship.',
           ],
           [
-            'I had already built a marketplace, and I said yes as founding engineer. There is still no second engineer. The app, the APIs, the payments, the shipping, and the call when something in production looks wrong are the same desk. What follows is the part I wish someone had told me on week one.',
+            james,
+            ' set the vision as founder and creative director. ',
+            ryan,
+            ', our lead designer, turned that vision into a product people can move through. ',
+            ali,
+            ' built the Vision AI that recognizes the furniture. I built the systems underneath it.',
           ],
         ],
       },
@@ -32,7 +43,7 @@ export const writing = [
         heading: 'The beta was a different product',
         paragraphs: [
           [
-            'Last summer we put a beta in people’s hands. You could photograph a piece, identify it, and talk to other collectors. Every serious conversation still ended on the same question: when can I buy it, and when does the seller get paid?',
+            'Last summer we shipped the beta: identify a piece, talk to other collectors, learn the stories. Buy, sell, and ship were still ahead of us. They are not anymore.',
           ],
           [
             'The second half of the build was a marketplace with a point of view. ',
@@ -132,7 +143,7 @@ export const writing = [
             'White-glove is Plycon: carry in, unpack, place. The checkout number is a sheet quote from the dimensions. Stairs and disassembly are part of the service the seller selected. Treasure Fox bills Plycon. The buyer has already paid the quoted freight.',
           ],
           [
-            'If pickup goes wrong — the driver is already on the way, the access is wrong, the dimensions were generous — the extra fee comes off the seller’s payout before Transfer. The buyer does not get a second invoice. If delivery fails and the piece is coming back, payout stays held. Once the seller confirms the item is back, the buyer is refunded for what they paid, minus the carrier’s initiated-shipping or cancellation fees. The fee comes out of money we were already holding.',
+            'If pickup goes wrong - the driver is already on the way, the access is wrong, the dimensions were generous - the extra fee comes off the seller’s payout before Transfer. The buyer does not get a second invoice. If delivery fails and the piece is coming back, payout stays held. Once the seller confirms the item is back, the buyer is refunded for what they paid, minus the carrier’s initiated-shipping or cancellation fees. The fee comes out of money we were already holding.',
           ],
         ],
       },
@@ -163,16 +174,16 @@ export const writing = [
   {
     slug: 'the-model-is-not-allowed-to-invent-the-chair',
     title: 'The model has to earn the chair',
-    dek: 'Two AI jobs, one engineering lead. Identification can block a sale. The assistant may only speak from records we already trust. Bulk upload stops at drafts.',
+    dek: 'Two model paths. A failed identification blocks the listing. The assistant can only read records we already trust. Bulk upload stops at drafts.',
     date: 'October 2026',
-    kicker: 'AI & catalog',
+    kicker: 'Models & catalog',
     sections: [
       {
         paragraphs: [
           [
-            'Take a photo of a chair from the house you just cleared. You want a name, a decade, and an honest “we will list this here” or “we will not.” You do not want a paragraph the model felt like writing. That is the whole argument of this note. ',
+            'Take a photo of a chair from a house you just cleared. The scan has to return a name, a decade, and a hard yes or no on whether that listing can go live. It does not get to write a caption. ',
             fox,
-            ' has two AI jobs, and I kept them apart because I am the person who will answer for a wrong listing. One looks at the object. The other helps you shop, and it may only talk about listings and records we already trust.',
+            ' runs two model paths, on separate code, because a wrong listing is my incident. One identifies the object. The other is the in-app assistant, and it can only read listings and records we already trust.',
           ],
         ],
       },
@@ -191,7 +202,7 @@ export const writing = [
         heading: 'A person can still verify what the scan refused',
         paragraphs: [
           [
-            'A scan is the fast path. It is not the only path. When it comes back as not mid-century, or it cannot tell, the seller can ask for a manual MCM verification on a draft they already saved. They send the item name, the maker, the period, the material, a short account of what they know, and proof photos — a label, a stamp, the piece itself. One open request per listing. They can edit it or cancel it while it is open. If they edit it after someone has started reviewing, it goes back to the queue.',
+            'A scan is the fast path. It is not the only path. When it comes back as not mid-century, or it cannot tell, the seller can ask for a manual MCM verification on a draft they already saved. They send the item name, the maker, the period, the material, a short account of what they know, and proof photos - a label, a stamp, the piece itself. One open request per listing. They can edit it or cancel it while it is open. If they edit it after someone has started reviewing, it goes back to the queue.',
           ],
           [
             'Accept sets the listing as MCM-verified, and then it can go Selling without a passing scan. Reject comes back with a note, and the seller can file a new request. Cancel does not flip the flag. I wanted that second door because a real piece with a bad photo should not be stuck, and a typed story with no photos should not skip the line either.',
@@ -218,7 +229,7 @@ export const writing = [
         heading: 'Anyone else can report the listing',
         paragraphs: [
           [
-            'A buyer who thinks a live piece is not mid-century can report it. They cannot report their own. The listing stays up while it is reviewed. The seller is told. Keep leaves it live and closes the report with a note. Remove takes it back to a draft and tells the seller why. Undoing a removal puts it back. That report is about what the object is. A problem with a paid order — not as described, damaged on the truck, missing parts — is a different report, on the order, and it is the one that pauses the seller’s payout.',
+            'A buyer who thinks a live piece is not mid-century can report it. They cannot report their own. The listing stays up while it is reviewed. The seller is told. Keep leaves it live and closes the report with a note. Remove takes it back to a draft and tells the seller why. Undoing a removal puts it back. That report is about what the object is. A problem with a paid order - not as described, damaged on the truck, missing parts - is a different report, on the order, and it is the one that pauses the seller’s payout.',
           ],
         ],
       },
@@ -229,7 +240,8 @@ export const writing = [
             'Mini-RAG is a separate table from the listings. A record is a designer, a manufacturer, and a model, plus the years, the country, the materials, the dimensions, how it is built, what you look for, stamps and signatures, known variations, common lookalikes, reference photos, and where the fact came from. The scan asks this table a question built from the photo: furniture type, material, construction, region of the style, finish, distinctive traits. It does not ask the live shop.',
           ],
           [
-            'The embedding is the part I was careful about. It is built from the visual vocabulary the scan already speaks: category, materials, construction, identifying features, aesthetic region, finish. The human-typed name, the years, and the country are stored, and they come back after a match. They stay out of the vector. A style label from a photo will never say “Denmark,” so a country word in the embedding would sit there unmatched, and it would also be the wrong thing to let a near-miss promote. Names are the answer. The photo language is the index.',
+            ali,
+            ' built the Vision AI that recognizes the furniture. I built the retrieval under it. The embedding is text-embedding-3-small over the fields the scan already returns: category, materials, construction, identifying features, aesthetic region, finish. The typed name, the years, and the country are columns. They come back after a match. They are not in the vector. A photo embedding will not contain “Denmark,” so a country token never matches a query, and it is the wrong feature to let a near neighbor promote. The name is the payload. The photo language is the index.',
           ],
           [
             'A new record, and every row from a corpus bulk import, lands unverified. Verification is one record at a time, by a person, before that row can ground a scan. The retriever returns verified rows only. A plain bulk import is a text insert, a couple of hundred rows, with no model call. The smarter path reads the reference photos and drafts the record, and that path is capped much lower because each row is a vision call. We query by vector distance. If nothing is close enough, the scan continues on the vision result alone. A threshold decides when a hit is confident, and we log the top candidate next to whichever maker the pipeline resolved, so the threshold is tuned from real decisions. The corpus may disagree with a confident caption. It may also stay silent.',

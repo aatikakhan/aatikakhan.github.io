@@ -1037,19 +1037,24 @@ button {
   font-size: 0.92rem;
 }
 
-.journal-byline a,
-.journal-article p a,
 .journal-back {
   color: var(--text-secondary);
   border-bottom: 1px solid transparent;
   text-decoration: none;
 }
 
-.journal-byline a:hover,
-.journal-article p a:hover,
-.journal-back:hover {
+.journal-article p a,
+.journal-author a {
   color: var(--text-primary);
-  border-color: var(--border-hover);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+.journal-back:hover,
+.journal-article p a:hover,
+.journal-author a:hover {
+  color: var(--text-primary);
 }
 
 .journal-kicker {

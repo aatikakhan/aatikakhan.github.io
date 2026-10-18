@@ -24,7 +24,7 @@ export const hero = {
   title: 'Fractional CTO · Founding Engineer',
 
   statement:
-    'Seven years of marketplace and ecommerce app development. Stripe payments, and a vector database that is allowed to refuse a listing. I embed as a fractional CTO. At Treasure Fox I am the founding engineer and I head engineering — a one-person team.',
+    'Seven years of marketplace and ecommerce app development. Stripe payments, and a vector database that is allowed to refuse a listing. I embed as a fractional CTO. At Treasure Fox I am the founding engineer and I head engineering - a one-person team.',
 
   highlights: [
     {
