@@ -1,7 +1,7 @@
 export const navigation = [
-  { label: 'Home', href: '#home' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 export const positioningFilter = {
@@ -24,7 +24,7 @@ export const hero = {
   title: 'Fractional CTO · Founding Engineer',
 
   statement:
-    'Seven years building products that have to survive real users: marketplaces, mobility, payments, and now AI that is allowed to refuse a listing. I embed as a fractional CTO. At Treasure Fox I am the founding engineer and I head engineering — a one-person team.',
+    'Seven years of marketplace and ecommerce app development. Stripe payments, and a vector database that is allowed to refuse a listing. I embed as a fractional CTO. At Treasure Fox I am the founding engineer and I head engineering — a one-person team.',
 
   highlights: [
     {
@@ -37,7 +37,7 @@ export const hero = {
       label: 'Core Domain',
       value: 'AI + Marketplaces',
       description:
-        'RAG systems, semantic search, payments, multi-role marketplaces, and scaling architecture.',
+        'Stripe, ecommerce marketplaces, app development, and vector database search.',
     },
     {
       label: 'Engagement Model',
@@ -79,9 +79,9 @@ export const about = {
     'I help founders turn ideas into revenue-generating AI products',
 
   paragraphs: [
-    'I design and build AI-first product systems (RAG, search, recommendations, agents).',
-    'I architect marketplace platforms with payments, subscriptions, and multi-role systems.',
-    'I build backend systems designed for scale from day one (AWS, FastAPI, distributed APIs).',
+    'I ship marketplace and ecommerce app development, from the first listing through production.',
+    'I put Stripe under the product: payments, Connect accounts, payouts, and subscriptions.',
+    'I build vector database search that only returns records a person has already verified.',
     'I work as a fractional CTO, and I head engineering as a one-person team when that is what the company needs.',
   ],
 
@@ -94,24 +94,24 @@ export const about = {
 
 export const specialties = [
   {
-    title: 'AI Product Development',
+    title: 'Stripe',
     blurb:
-      'Search assistants, RAG systems, recommendation engines and AI-powered workflows.',
+      'Payments, Connect accounts, payouts, and subscriptions. The seller sees the same state the Stripe dashboard shows.',
   },
   {
-    title: 'Marketplace Platforms',
+    title: 'Ecommerce marketplaces',
     blurb:
-      'Buying, selling, messaging, offers, payments, seller payouts, reports, and reviews.',
+      'B2B and B2C. A buyer purchases one piece. A dealer lists a room. Same checkout, offers, reports, and reviews.',
   },
   {
-    title: 'Backend Systems',
+    title: 'App development',
     blurb:
-      'FastAPI, scalable APIs, cloud infrastructure, databases and integrations.',
+      'The product, the APIs, and production. I head the build when the engineering team is one person.',
   },
   {
-    title: 'Fractional CTO',
+    title: 'Vector databases',
     blurb:
-      'Head of engineering for a startup that has one builder: architecture, shipping, and production.',
+      'Embeddings for search. Names stay out of the vector. A row is retrieved only after a person verifies it.',
   },
 ]
 
@@ -139,11 +139,11 @@ export const experiences = [
     company: 'Treasure Fox · USA (Remote)',
     period: 'Dec 2024 – Present',
     summary:
-      'Heading engineering as a one-person team on an AI marketplace for mid-century furniture. Architecture, the app, payments, freight, and the models all sit at the same desk.',
+      'Heading engineering as a one-person team on a B2B and B2C ecommerce marketplace for mid-century furniture. Architecture, the app, payments, freight, and the models all sit at the same desk.',
     contributions: [
-      'One-person engineering team: the app, the APIs, AWS, and production deploys.',
+      'One-person engineering team: the app, the APIs, AWS, and production deploys. A buyer can purchase a piece, and a dealer can list a room, on the same ecommerce system.',
       'Identification that can refuse a listing, with a manual MCM verification when the scan is wrong, plus search and a notice when a saved search becomes available.',
-      'Stripe payouts that wait until delivery and inspection. Parcel, freight, and white-glove, with the fees that follow each mode.',
+      'Stripe payouts that wait until delivery and inspection. Payments, Connect accounts, payouts, and subscriptions are read from the Stripe dashboards, and the seller sees that same state in the app. Parcel, freight, and white-glove, with the fees that follow each mode.',
       'Listing reports stay live until Keep or Remove. An order issue pauses payout. Buyers review a seller only after they have paid.',
     ],
     tech: ['Flutter', 'FastAPI', 'PostgreSQL', 'AWS', 'OpenAI', 'Stripe', 'RAG'],
@@ -154,9 +154,9 @@ export const experiences = [
     company: 'eBUYgumm Ltd · Birmingham, UK (Remote)',
     period: 'Jun 2023 – May 2024',
     summary:
-      'Headed mobile development for a Flutter reselling app, and put real state and data architecture under the listing flow.',
+      'Headed mobile development for a B2B and B2C ecommerce reselling app, and put real state and data architecture under the listing flow.',
     contributions: [
-      'Owned end-to-end development of eBUYgumm, redesigned the UX, and streamlined inventory so people could list about 50% faster.',
+      'Owned end-to-end development of eBUYgumm, a marketplace for shops and for people reselling, redesigned the UX, and streamlined inventory so people could list about 50% faster.',
       'Built a draft listing system inside the app.',
       'Shipped in-app payments with the PayPal SDK for transactions, negotiations, and subscriptions.',
       'Partnered with the UK web and backend teams so the product felt the same across platforms.',
@@ -262,7 +262,7 @@ export const projects = [
   {
     name: 'Treasure Fox',
     description:
-      'AI marketplace for mid-century furniture: identify a piece, list what you inherited, buy, and ship it.',
+      'B2B and B2C ecommerce for mid-century furniture: identify a piece, list what you inherited, buy, and ship it.',
 
     impact:
       'The product I am heading now. The engineering notes are on the blog.',

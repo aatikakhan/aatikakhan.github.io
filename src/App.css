@@ -1112,9 +1112,59 @@ button {
 }
 
 .journal-byline {
-  margin: 0.9rem 0 0;
+  display: grid;
+  gap: 0.2rem;
+  margin: 1.1rem 0 0;
   font-size: 0.92rem;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
+}
+
+.journal-byline__name {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.journal-byline__role a {
+  margin-left: 0.45rem;
+}
+
+.journal-author strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+}
+
+.journal-byline__date {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.journal-published {
+  margin: -0.4rem 0 1.2rem;
+  font-size: 0.92rem;
+  color: var(--text-tertiary);
+}
+
+.journal-author {
+  margin: 2.4rem 0 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.journal-author span {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.journal-author a {
+  margin-left: 0.35rem;
 }
 
 .journal-list {
@@ -1135,7 +1185,7 @@ button {
 }
 
 .journal-list .journal-byline {
-  margin: 0.35rem 0 1.2rem;
+  margin: 1rem 0 1.35rem;
 }
 
 .journal-list h2 {

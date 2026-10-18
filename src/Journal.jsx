@@ -18,11 +18,14 @@ const Rich = ({ parts }) => {
 
 const Byline = ({ essay }) => (
   <p className="journal-byline">
-    <span>Founding engineer, head of engineering · </span>
-    <a href={links.fox} target="_blank" rel="noreferrer">
-      Treasure Fox
-    </a>
-    <span> · {essay.date}</span>
+    <span className="journal-byline__name">Aatika Khan</span>
+    <span className="journal-byline__role">
+      Founding engineer, head of engineering
+      <a href={links.fox} target="_blank" rel="noreferrer">
+        Treasure Fox
+      </a>
+    </span>
+    <span className="journal-byline__date">{essay.date}</span>
   </p>
 )
 
@@ -37,7 +40,7 @@ const JournalIndex = () => (
     <ul className="journal-list">
       {writing.map((essay) => (
         <li key={essay.slug}>
-          <a href={`#blog/${essay.slug}`}>
+          <a href={`/blog/${essay.slug}`}>
             <span className="journal-kicker">{essay.kicker}</span>
             <h2>{essay.title}</h2>
             <p>{essay.dek}</p>
@@ -56,13 +59,13 @@ const JournalArticle = ({ essay }) => {
 
   return (
     <main className="journal-main journal-article">
-      <a className="journal-back" href="#blog">
+      <a className="journal-back" href="/blog">
         All notes
       </a>
       <p className="journal-kicker">{essay.kicker}</p>
       <h1>{essay.title}</h1>
+      <p className="journal-published">Published {essay.date}</p>
       <p className="journal-lede">{essay.dek}</p>
-      <Byline essay={essay} />
       {essay.sections.map((section, sectionIndex) => (
         <section key={section.heading || sectionIndex}>
           {section.heading ? <h2>{section.heading}</h2> : null}
@@ -73,9 +76,17 @@ const JournalArticle = ({ essay }) => {
           ))}
         </section>
       ))}
+      <p className="journal-author">
+        <span>Written by</span>
+        <strong>Aatika Khan</strong>
+        Founding engineer, head of engineering
+        <a href={links.fox} target="_blank" rel="noreferrer">
+          Treasure Fox
+        </a>
+      </p>
       <nav className="journal-switch" aria-label="More notes">
         {previous ? (
-          <a href={`#blog/${previous.slug}`}>
+          <a href={`/blog/${previous.slug}`}>
             <span>Read previous</span>
             {previous.title}
           </a>
@@ -83,7 +94,7 @@ const JournalArticle = ({ essay }) => {
           <span />
         )}
         {next ? (
-          <a href={`#blog/${next.slug}`}>
+          <a href={`/blog/${next.slug}`}>
             <span>Read next</span>
             {next.title}
           </a>
@@ -93,23 +104,20 @@ const JournalArticle = ({ essay }) => {
   )
 }
 
-function Journal({ hash, listOnly = false }) {
-  if (listOnly) {
-    return <JournalIndex />
-  }
-  const slug = hash.startsWith('#blog/') ? hash.slice('#blog/'.length) : ''
+function Journal({ path }) {
+  const slug = path.startsWith('/blog/') ? path.slice('/blog/'.length) : ''
   const essay = slug ? writing.find((item) => item.slug === slug) : null
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [hash])
+  }, [path])
 
   return (
     <div className="section journal">
       {slug && !essay ? (
         <main className="journal-main">
           <h1>That note is gone.</h1>
-          <a className="journal-back" href="#blog">
+          <a className="journal-back" href="/blog">
             Back to the blog
           </a>
         </main>

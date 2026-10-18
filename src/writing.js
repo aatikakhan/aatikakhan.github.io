@@ -37,7 +37,7 @@ export const writing = [
           [
             'The second half of the build was a marketplace with a point of view. ',
             fox,
-            ' is MCM-only, roughly the 1940s through the 1970s. If we take someone’s money for a credenza, we have to be willing to refuse pieces that are outside that, and we have to move a heavy case across the country as furniture, with a carrier, a quote, and a payout rule.',
+            ' is MCM-only, roughly the 1940s through the 1970s, and it is ecommerce for both sides. A person buys one chair. A dealer can bring a room. Same listing rules, same checkout. If we take someone’s money for a credenza, we have to be willing to refuse pieces that are outside that, and we have to move a heavy case across the country as furniture, with a carrier, a quote, and a payout rule.',
           ],
         ],
       },
@@ -87,7 +87,7 @@ export const writing = [
             'I chose a platform hold over a destination charge that splits funds at the moment of payment. The seller may still be packing. The buyer may still be inside the cancel window. A carrier can refuse the pickup. A chargeback can arrive. Holding the funds is what makes those branches possible. After our Transfer lands, Stripe pays the connected bank account on its own schedule, bi-weekly, the 1st and the 15th. That clock is separate from the moment the card was charged, and the seller dashboard has to say so.',
           ],
           [
-            'Subscriptions are a second business on the same Stripe account. Fox Gold, scan packs, and assistant usage are their own ledger. A subscription renews a plan. A sofa pays a seller. Mixing those two is how a small team creates a refund argument it cannot explain.',
+            'Subscriptions are a second business on the same Stripe account. Fox Gold, scan packs, and assistant usage are their own ledger. A subscription renews a plan. A sofa pays a seller. Mixing those two is how a small team creates a refund argument it cannot explain. The Stripe dashboards are where I read it: payments, connected accounts, payouts, and subscriptions. If the app and that dashboard disagree, I trust the dashboard until the state is fixed.',
           ],
         ],
       },

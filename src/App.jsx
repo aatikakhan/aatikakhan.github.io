@@ -11,6 +11,7 @@ import {
   volunteering,
   contact,
 } from './content'
+import { writing } from './writing'
 import {
   FiArrowUpRight,
   FiGithub,
@@ -34,6 +35,24 @@ const fadeUp = {
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12, delayChildren: 0.08 } },
+}
+
+const readRoute = () => {
+  if (typeof window === 'undefined') {
+    return { path: '/', hash: '' }
+  }
+  const path = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '') || '/'
+  return { path, hash: window.location.hash || '' }
+}
+
+const setMeta = (name, content) => {
+  const tag = document.querySelector(`meta[name="${name}"]`)
+  if (tag) tag.setAttribute('content', content)
+}
+
+const setProperty = (property, content) => {
+  const tag = document.querySelector(`meta[property="${property}"]`)
+  if (tag) tag.setAttribute('content', content)
 }
 
 const getInitialTheme = () => {
@@ -77,7 +96,7 @@ function App() {
     return stored === 'light' || stored === 'dark'
   })
   const [expandedExperience, setExpandedExperience] = useState(null)
-  const [hash, setHash] = useState(() => (typeof window === 'undefined' ? '' : window.location.hash))
+  const [route, setRoute] = useState(() => readRoute())
   const [showAllExperiences, setShowAllExperiences] = useState(false)
   const projectsTrackRef = useRef(null)
 
@@ -93,23 +112,31 @@ function App() {
       return
     }
 
-    const syncHash = () => setHash(window.location.hash || '')
-    window.addEventListener('hashchange', syncHash)
-    return () => window.removeEventListener('hashchange', syncHash)
+    const hash = window.location.hash
+    if (hash === '#blog' || hash.startsWith('#blog/')) {
+      const next = hash === '#blog' ? '/blog' : `/blog/${hash.slice('#blog/'.length)}`
+      window.history.replaceState(null, '', next)
+      setRoute(readRoute())
+    }
+    const syncRoute = () => setRoute(readRoute())
+    window.addEventListener('popstate', syncRoute)
+    window.addEventListener('hashchange', syncRoute)
+    return () => {
+      window.removeEventListener('popstate', syncRoute)
+      window.removeEventListener('hashchange', syncRoute)
+    }
   }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    if (!hash || hash === '#home' || hash === '#blog' || hash.startsWith('#blog/')) {
-      window.scrollTo(0, 0)
-      return
+    if (route.hash === '#contact' && route.path === '/') {
+      const frame = window.requestAnimationFrame(() => {
+        document.getElementById('contact')?.scrollIntoView({ block: 'start' })
+      })
+      return () => window.cancelAnimationFrame(frame)
     }
-    const id = hash.slice(1)
-    const frame = window.requestAnimationFrame(() => {
-      document.getElementById(id)?.scrollIntoView({ block: 'start' })
-    })
-    return () => window.cancelAnimationFrame(frame)
-  }, [hash])
+    window.scrollTo(0, 0)
+  }, [route.path, route.hash])
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -184,7 +211,39 @@ function App() {
     },
   ]
 
-  const page = hash === '#blog' || hash.startsWith('#blog/') ? 'blog' : 'home'
+  const { path, hash } = route
+  const page = path === '/blog' || path.startsWith('/blog/') ? 'blog' : 'home'
+  const essay = path.startsWith('/blog/') ? writing.find((item) => item.slug === path.slice('/blog/'.length)) : null
+
+  useEffect(() => {
+    const site = 'https://aatikakhan.github.io'
+    const homeTitle = 'Aatika Khan | Stripe, Ecommerce, Marketplace Apps'
+    const homeDescription =
+      'Fractional CTO for founders and hiring managers. Stripe ecommerce marketplace app development and vector database search. Heading engineering at Treasure Fox.'
+    let title = homeTitle
+    let description = homeDescription
+    let url = `${site}/`
+    if (essay) {
+      title = `${essay.title} | Aatika Khan`
+      description = essay.dek
+      url = `${site}/blog/${essay.slug}`
+    } else if (page === 'blog') {
+      title = 'Blog | Aatika Khan'
+      description =
+        'Engineering notes from heading Treasure Fox: marketplace payments, freight, MCM identification, and the rules an AI model is not allowed to break.'
+      url = `${site}/blog`
+    }
+    document.title = title
+    setMeta('description', description)
+    setProperty('og:title', title)
+    setProperty('og:description', description)
+    setProperty('og:url', url)
+    setProperty('og:type', essay ? 'article' : 'website')
+    setMeta('twitter:title', title)
+    setMeta('twitter:description', description)
+    const canonical = document.querySelector('link[rel="canonical"]')
+    if (canonical) canonical.setAttribute('href', url)
+  }, [page, essay])
 
   return (
     <div className="app-shell">
@@ -196,11 +255,11 @@ function App() {
       >
         <nav className="nav-links" aria-label="Primary navigation">
           {navigation.map((item) => {
-            const current = item.href === '#home'
-              ? hash === '' || hash === '#home'
-              : item.href === '#blog'
-                ? hash === '#blog' || hash.startsWith('#blog/')
-                : hash === item.href
+            const current = item.href === '/'
+              ? page === 'home' && hash !== '#contact'
+              : item.href === '/blog'
+                ? page === 'blog'
+                : hash === '#contact'
             return (
               <a key={item.href} href={item.href} aria-current={current ? 'page' : undefined}>
                 {item.label}
@@ -219,7 +278,7 @@ function App() {
       </Motion.header>
 
       {page === 'blog' ? (
-        <Journal hash={hash} />
+        <Journal path={path} />
       ) : (
       <main>
         {page === 'home' ? (
@@ -233,7 +292,7 @@ function App() {
               variants={stagger}
             >
               <Motion.span className="hero__eyebrow" variants={fadeUp}>
-                Product-first · Mobile · UX
+                Stripe · Ecommerce · Marketplaces
               </Motion.span>
               <Motion.h1 variants={fadeUp}>
                 {hero.name}
@@ -251,7 +310,7 @@ function App() {
                 </a>
               </Motion.div>
               <div className="trust-line">
-                Built production systems for founders across US, UK, UAE, Singapore and Europe — specializing in AI-first product infrastructure and marketplaces.
+                Stripe, ecommerce, marketplace app development, and vector databases. For founders, hiring managers, and product teams.
               </div>
               <Motion.div className="hero__insights" variants={stagger}>
                 <Motion.section className="hero-notes" variants={fadeUp}>
@@ -321,9 +380,6 @@ function App() {
                   return null
                 }
                 const isExpanded = expandedExperience === index
-                const summaryText = isExpanded
-                  ? item.summary
-                  : `${item.summary.slice(0, 160)}${item.summary.length > 160 ? '…' : ''}`
 
                 return (
                   <Motion.div
@@ -356,12 +412,6 @@ function App() {
                           <span className="experience-period">{item.period}</span>
                           <FiChevronDown className={`experience-chevron ${isExpanded ? 'is-open' : ''}`} aria-hidden="true" />
                         </div>
-                      </div>
-                      <p className={`experience-summary ${isExpanded ? 'is-open' : ''}`}>{summaryText}</p>
-                      <div className="experience-tech">
-                        {item.tech.map((tech) => (
-                          <Pill key={tech}>{tech}</Pill>
-                        ))}
                       </div>
                     </button>
                     {isExpanded ? (
