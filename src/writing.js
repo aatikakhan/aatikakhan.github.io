@@ -13,21 +13,51 @@ const james = { t: 'James', href: links.james }
 const ryan = { t: 'Ryan Copeland', href: links.ryan }
 const ali = { t: 'Ali', href: links.ali }
 
+const note = (t, slug) => ({ t, href: `/blog/${slug}` })
+const scanNote = note('how identification works', 'the-model-is-not-allowed-to-invent-the-chair')
+const listingNote = note('listing and bulk upload', 'listing-and-bulk-upload')
+const buyingNote = note('search, the assistant, and offers', 'search-assistant-and-offers')
+const moneyNote = note('payments and delivery', 'the-money-has-to-wait')
+const tokenNote = note('how tokens work', 'tokens-and-plans')
+
 export const writing = [
   {
     slug: 'from-a-grandparents-living-room',
     title: 'From a grandparent’s living room to a marketplace',
-    dek: 'A chair from a grandparent’s house had nowhere real to go next. This is how Treasure Fox became the place it goes.',
+    dek: 'You inherited a chair and have no idea what it is or what it’s worth. How that problem became Treasure Fox, and what the app does today.',
     date: 'October 2026',
-    kicker: 'Engineering',
+    kicker: 'The story',
     sections: [
       {
         paragraphs: [
           [
-            'Treasure Fox was just an idea when I joined. There was no app and no checkout, and no way to take one mid-century sofa from your grandparents’ house to someone who would actually love it.',
+            fox,
+            ' is a marketplace for mid-century modern furniture, MCM for short. Think 1940s to 1970s: Eames chairs, teak sideboards, that kind of thing.',
+          ],
+        ],
+      },
+      {
+        heading: 'How we got the idea',
+        paragraphs: [
+          [
+            'Most people don’t go looking for this furniture. They inherit it. Or they pick it up at an auction house, where someone may have written down what it is, or at a yard sale, where nobody has and you can’t tell if it’s MCM at all.',
           ],
           [
-            'A lot of these pieces never started as inventory. Someone bought the chair new, or the table survived three houses, or nobody was allowed to move the lamp. Then the house got packed, and now you’re the one holding them. Maybe you want to go find the next one, or maybe you’re ready to let one go. Either way the handoff was a guess: a photo in a group chat, a price pulled out of the air, and a sofa nobody knew how to ship.',
+            'Then they try to sell it, and every listing site wants to know the same thing first: what is it? With an inherited chair you often have no idea. You don’t know what it’s worth either, or who the right buyer is.',
+          ],
+          [
+            'So we started with the camera. You take a photo, and the app tells you what the piece is, roughly when it was made, and what it might sell for. Everything else in the app comes after that answer.',
+          ],
+        ],
+      },
+      {
+        heading: 'The beta, and what came next',
+        paragraphs: [
+          [
+            'Last summer we shipped the beta: identify a piece, talk to other collectors, learn the stories. Buy, sell, and ship were still ahead of us. They are not anymore.',
+          ],
+          [
+            'The beta worked well for individuals. Then sellers with stores showed up, and they had forty photos, not one. So we built bulk upload for them.',
           ],
           [
             james,
@@ -40,132 +70,28 @@ export const writing = [
         ],
       },
       {
-        heading: 'What changed after the beta',
+        heading: 'What it does now',
         paragraphs: [
           [
-            'Last summer we shipped the beta: identify a piece, talk to other collectors, learn the stories. Buy, sell, and ship were still ahead of us. They are not anymore.',
+            'Someone buying one chair and a dealer listing a whole room use the same app. Here is the trip, and each step has its own note.',
           ],
-          [
-            'The second half of the build was the marketplace. ',
-            fox,
-            ' only takes MCM, roughly the 1940s through the 1970s, and it sells to both sides. A person buying one chair and a dealer bringing a whole room go through the same listing rules and the same checkout. If we take someone’s money for a credenza, we have to be willing to refuse pieces outside that range, and we have to get a heavy case across the country with a carrier, a quote, and a payout rule.',
-          ],
+        ],
+        steps: [
+          ['Take a photo and see what it is: ', scanNote, '.'],
+          ['List a piece, or upload a whole estate at once: ', listingNote, '.'],
+          ['Find a piece, ask the assistant about it, or make an offer: ', buyingNote, '.'],
+          ['Pay, ship, and get paid: ', moneyNote, '.'],
+          ['Scans and assistant replies run on tokens: ', tokenNote, '.'],
         ],
       },
       {
-        heading: 'One backend for the whole order',
+        heading: 'How it’s built',
         paragraphs: [
           [
-            'The decision I’d make again is keeping the listing, scan, offer, order, shipment, and payout in one system. Flutter is the client, FastAPI is the product, and PostgreSQL holds the state. It runs on AWS (EC2, S3, RDS), and GitHub Actions deploys it. I’m also the one on call, so any shortcut in the client turns into my incident.',
+            'One backend runs all of it. The Flutter app talks to a FastAPI service, PostgreSQL holds the data, and it runs on AWS with GitHub Actions deploying it. Listings, scans, offers, orders, shipments, and payouts live in the same system, so they can’t drift apart.',
           ],
           [
-            'Saving a Draft takes almost nothing. Moving it to Selling is a separate step, and I kept them apart on purpose. To publish, the listing has to point at the seller’s own scan, and that scan has to have come back mid-century. It also needs real package dimensions and weight, a ship-from address, and a finished Stripe Connect account so we can pay the seller later. If any of that is missing, the API refuses the publish and the app tells the seller what to fix.',
-          ],
-        ],
-      },
-      {
-        heading: 'Offers live in the conversation',
-        paragraphs: [
-          [
-            'People haggle over this kind of furniture, so an offer is a record and also a message in the chat. The seller decides whether a listing takes offers and can set a floor. An offer under the floor is declined on the spot. We don’t create an offer row or a thread for it; the buyer just sees a rejected card with the minimum. Anything at or above the floor becomes a pending offer, attached to an encrypted message in the conversation the two people are already having.',
-          ],
-          [
-            'A buyer gets three tries per listing, the opening offer plus two counters, and the seller accepts or declines each one. The card updates in place, so the thread doesn’t fill up with copies of the deal. Accepting doesn’t charge the card. Checkout from an accepted offer is limited to that buyer, at the agreed amount and a quantity of one, and shipping, the Fox Fee, tax, and escrow all still apply. After payment the offer is marked purchased.',
-          ],
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'the-money-has-to-wait',
-    title: 'The money has to wait, and the sofa has to move',
-    dek: 'When someone pays for a sideboard, the seller shouldn’t see that money yet.',
-    date: 'October 2026',
-    kicker: 'Payments & freight',
-    sections: [
-      {
-        heading: 'Where the buyer’s money sits',
-        paragraphs: [
-          [
-            'People who say “just add checkout” usually skip this part. Someone pays $1,400 for a sideboard on ',
-            fox,
-            ', and the seller shouldn’t see that money yet, because the piece is still in a house, the truck hasn’t come, and the buyer hasn’t had a chance to look it over.',
-          ],
-          [
-            'The buyer’s payment lands on Treasure Fox’s Stripe balance. We pay the seller later with a Transfer, after delivery and an inspection window that defaults to three days. A sweep picks up orders whose release time has passed and that have no open dispute. If a Transfer fails, the seller can retry it.',
-          ],
-          [
-            'I chose a platform hold over a destination charge, which splits the funds the moment the card is charged. Between payment and delivery the seller may still be packing, the buyer may still be inside the cancel window, a carrier can refuse the pickup, or a chargeback can arrive, and we can only handle those cases while we still hold the money. After our Transfer lands, Stripe pays out to the seller’s bank on its own bi-weekly schedule, on the 1st and the 15th. That date has nothing to do with when the card was charged, and the seller dashboard has to make that clear.',
-          ],
-          [
-            'Subscriptions run through the same Stripe account on their own ledger: Fox Gold, scan packs, and assistant usage. A subscription renews a plan, and a sofa sale pays a seller. A small team that mixes the two ends up in refund arguments it can’t explain. I read all of it in the Stripe dashboards (payments, connected accounts, payouts, and subscriptions), and when the app disagrees with the dashboard, I trust the dashboard until the state is fixed.',
-          ],
-        ],
-      },
-      {
-        heading: 'The Fox Fee is charged on the item',
-        paragraphs: [
-          [
-            'The buyer’s Fox Fee and the seller’s Fox Fee are both calculated on the item subtotal, leaving out shipping, insurance, and tax. The seller’s payout is the item price minus the seller fee. Shipping stays with the platform, because the platform pays the carrier.',
-          ],
-          [
-            'The rate steps down as the price goes up: a higher percentage under $1,000 and a lower one on the amount above it. The buyer pays their fee at checkout, and the seller’s fee comes out at Transfer.',
-          ],
-          [
-            'Shipping a piece of furniture can cost as much as a small piece does, and a fee on the whole checkout would have taxed the white-glove quote. So I kept the fee on the thing people think they’re buying.',
-          ],
-        ],
-      },
-      {
-        heading: 'When we buy the shipping label',
-        paragraphs: [
-          [
-            'Payment marks the order paid and puts escrow on hold, but no label is bought yet. When the seller marks the order shipped, a parcel order buys a Shippo label from the platform balance, white-glove creates a Plycon bill of lading that we settle on account later, and LTL books with Old Dominion. Self-pickup has no carrier cost.',
-          ],
-          [
-            'Until a parcel order is marked shipped, the buyer can cancel inside the post-payment window and get a full refund. If we bought labels at payment, every one of those cancels would turn into chasing the carrier, so we spend the money when the piece actually ships.',
-          ],
-          [
-            'Each mode has its own cancel rule because each makes a different promise. Parcel can be cancelled inside the window until it’s marked shipped. Plycon can be cancelled by either side until pickup and is refused after that. Self-pickup follows the parcel rule until the handoff is done. One cancel button with one policy would have looked simpler in the app and been wrong in the ledger.',
-          ],
-        ],
-      },
-      {
-        heading: 'Three ways a piece can travel',
-        paragraphs: [
-          [
-            'Parcel goes through Shippo. The buyer sees live carrier rates, and we store the one they picked and buy that label when the seller ships.',
-          ],
-          [
-            'LTL goes through Old Dominion, and sellers opt in per listing. Rates cover dock-to-dock and liftgate, since a house without a dock is a different shipment from a warehouse. Freight class comes from the package dimensions and weight. If the buyer wants extra cargo liability, it has to be on the bill of lading before the truck arrives.',
-          ],
-          [
-            'White-glove is Plycon, who carry the piece in, unpack it, and place it. The checkout price is a rate-sheet quote based on the dimensions, and stairs and disassembly are part of the service the seller selected. Treasure Fox bills Plycon, and the buyer has already paid the quoted freight.',
-          ],
-          [
-            'When a pickup goes wrong, because the driver was already on the way, the access was wrong, or the dimensions were generous, the extra fee comes out of the seller’s payout before Transfer, and the buyer never gets a second invoice. If delivery fails and the piece is coming back, the payout stays on hold. Once the seller confirms the item is back, the buyer is refunded what they paid minus the carrier’s initiated-shipping or cancellation fees, which come out of money we were already holding.',
-          ],
-        ],
-      },
-      {
-        heading: 'Inspection and disputes',
-        paragraphs: [
-          [
-            'Delivery starts the inspection clock. If the buyer reports a problem (not as described, damaged in transit, missing parts), the seller’s payout pauses and a review opens. Whether to refund is a separate decision. A chargeback pauses payout too, and if we lose the dispute, the order moves to refunded and the seller isn’t paid.',
-          ],
-          [
-            'I wanted those states in the data, in words I can still read at midnight: held, then inspection, then released, refunded, or a failed payout the seller can retry. The app and the Transfer job both read them. Sales tax goes through Stripe Tax at checkout on its own path and never touches the seller’s item payout.',
-          ],
-        ],
-      },
-      {
-        heading: 'Reviewing a seller',
-        paragraphs: [
-          [
-            'A review belongs to a paid order, one per line item, and only the buyer can write it. It has overall stars and a written note, plus optional extras: whether they’d recommend the seller, tags for what they liked, separate scores for the piece, the shipping, and the service, and a few photos. Unreviewed purchases show up on the account as a count, so the prompt is a list of real orders the buyer can pick from.',
-          ],
-          [
-            'The seller’s shop shows their average and review count, and the full list is on their reviews page. Sellers can reply publicly to a review, and the rating also shows next to them in a conversation about an order. A buyer who has never sold has no shop rating. I left reviews off drafts and unpaid checkouts on purpose, because a star should only come from a piece that actually changed hands.',
+            'I’m the engineering team, which makes me the one on call too. Identification, verification, bulk upload, delivery, and payments are harder than they look from the outside, and those are what the other notes are about.',
           ],
         ],
       },
@@ -174,102 +100,327 @@ export const writing = [
   {
     slug: 'the-model-is-not-allowed-to-invent-the-chair',
     title: 'The model has to earn the chair',
-    dek: 'Identification can block a listing, the assistant only reads records we trust, and bulk upload stops at drafts.',
+    dek: 'You take a photo. Here is what happens next, what we save, and what happens when the scan says it isn’t MCM.',
     date: 'October 2026',
-    kicker: 'Models & catalog',
+    kicker: 'Identification',
     sections: [
       {
         paragraphs: [
           [
-            'Say you photograph a chair from a house you just cleared. The scan has to come back with a name, a decade, and a yes or no on whether the listing can go live, and nothing else. ',
             fox,
-            ' runs two model paths on separate code, because a wrong listing is my incident. One identifies the object. The other is the in-app assistant, which can only read listings and records we already trust.',
+            ' has two AI features: scanning a photo, and an assistant you can chat with. This note is about the scan. The assistant is in ',
+            buyingNote,
+            '.',
           ],
         ],
       },
       {
-        heading: 'How identification works',
+        heading: 'What happens when you take a photo',
         paragraphs: [
           [
-            'A scan runs a vision pipeline across OpenAI and Gemini. It returns an identification plus a flag: MCM, not MCM, or undetermined. A scan outside MCM stops before we put a year or a price on it, and an undetermined scan counts as a no for publishing, though the seller can scan again. Each run is its own record with its own id, and we keep dimensions off the photos when the pipeline can see them.',
+            'You take a few photos of a piece. They go to our vision pipeline, which uses OpenAI and Gemini models to read the object: what kind of furniture it is, what it’s made of, how it’s built, and any marks you can see.',
           ],
           [
-            'A Selling listing has to point at the current user’s scan, and that scan has to be MCM. Drafts skip that check, so someone can stage photos and a story first. Scans from before the flag existed need a rescan. I’d rather ask for four new photos than treat an empty flag as a yes.',
+            'You get back a title, a likely maker, a year, a category, a size when the photos show enough to measure, a price range, and a confidence score. You also get one flag: MCM, not MCM, or can’t tell.',
+          ],
+          [
+            'That flag matters most. If the answer is not MCM, we stop there and don’t make up a year or a price. If it can’t tell, you scan again with better photos.',
           ],
         ],
       },
       {
-        heading: 'Manual MCM verification',
+        heading: 'How it checks itself',
         paragraphs: [
           [
-            'If a scan comes back not mid-century or undetermined, the seller can ask for a manual MCM verification on a draft they’ve already saved. They send the item name, maker, period, material, a short account of what they know, and proof photos such as a label, a stamp, or the piece itself. Each listing can have one open request, which they can edit or cancel while it’s open. Editing after a review has started puts it back in the queue.',
-          ],
-          [
-            'Accepting the request marks the listing MCM-verified, so it can go to Selling without a passing scan. A rejection comes back with a note, and the seller can file a new request. Cancelling leaves the flag alone. I added this route because a real piece with a bad photo shouldn’t be stuck, and a typed story with no photos shouldn’t skip the line either.',
-          ],
-        ],
-      },
-      {
-        heading: 'Bulk upload',
-        paragraphs: [
-          [
-            'The easy case to picture is one chair on a Sunday. The harder one is a dealer who inherited a room or cleared an estate and has forty photos. Bulk upload lets that person get onto ',
-            fox,
-            ' without typing forty drafts by hand.',
-          ],
-          [
-            'They can stage the room in a folder and submit it, or send a sheet. Each row has the title, story, price, year, maker, category, condition, piece and package dimensions, shipping options, whether offers are allowed and the minimum, and photo URLs, with a cap on photos per listing. The job creates Drafts and runs the same MCM scan pipeline in the background, two at a time, within the seller’s scan quota. The seller gets a notice when each draft’s scan is ready to list and a summary when the whole job finishes. Every draft keeps its scan id and MCM flag, and the automation stops there.',
-          ],
-          [
-            'A person still has to publish. A bulk draft goes live only when someone moves it to Selling with a passing scan or an accepted manual verification, plus dimensions, a ship-from address, and Stripe Connect. I made that call on purpose: a folder of photos becomes a storefront only after every listing in it passes the same checks as a single one. Otherwise I’m the one on call, debugging a catalog that published itself overnight.',
-          ],
-        ],
-      },
-      {
-        heading: 'Reporting a listing',
-        paragraphs: [
-          [
-            'A buyer who thinks a live piece isn’t mid-century can report it, as long as it isn’t their own listing. The listing stays up during review and the seller is notified. Keep leaves it live and closes the report with a note. Remove sends it back to a draft and tells the seller why, and undoing a removal restores it. This report is about what the object is. A problem with a paid order (not as described, damaged on the truck, missing parts) is a separate report on the order, and that’s the one that pauses the seller’s payout.',
-          ],
-        ],
-      },
-      {
-        heading: 'The Mini-RAG reference corpus',
-        paragraphs: [
-          [
-            'Mini-RAG is a table separate from the listings. Each record covers a designer, manufacturer, and model, along with years, country, materials, dimensions, construction, what to look for, stamps and signatures, known variations, common lookalikes, reference photos, and where each fact came from. The scan queries it with attributes from the photo (furniture type, material, construction, style region, finish, distinctive traits) and never queries the live shop.',
-          ],
-          [
+            'A model on its own can sound sure and be wrong, so the scan also looks the piece up in a reference library of designers, makers, and models. ',
             ali,
-            ' built the Vision AI that recognizes the furniture, and I built the retrieval under it. The embedding is text-embedding-3-small over the fields the scan already returns: category, materials, construction, identifying features, aesthetic region, and finish. The typed name, years, and country are stored as columns and come back after a match, but they aren’t in the vector. A photo will never produce the word “Denmark,” so a country token in the embedding would never match a query, and it’s the wrong feature to let a near neighbor get promoted on. We match on the visual attributes and return the name.',
+            ' built the Vision AI, and I built the lookup that sits under it.',
           ],
           [
-            'New records, including every row from a bulk corpus import, start unverified. A person verifies them one at a time before a row can ground a scan, and the retriever only returns verified rows. A plain bulk import is a text insert of a couple of hundred rows with no model call. The smarter import reads the reference photos and drafts each record, so it’s capped much lower, since every row is a vision call. We query by vector distance, and if nothing is close enough, the scan continues on the vision result alone. A threshold decides when a hit counts as confident, and we log the top candidate next to the maker the pipeline resolved so the threshold gets tuned from real decisions. Sometimes the corpus disagrees with a confident caption, and sometimes it returns nothing.',
-          ],
-        ],
-      },
-      {
-        heading: 'Search and saved searches',
-        paragraphs: [
-          [
-            'Search for pieces is a third system. It runs over the catalog and only looks at listings that are Selling. Autocomplete suggests people, makers, titles, and categories as you type, and an empty box shows your recent and saved searches. A full search matches the title, maker, category, and description. A title prefix ranks above a maker prefix, which ranks above a category hit, and newer listings come after that. You can filter to people, listings, a maker, a product, or a category, and anyone you’ve blocked is left out.',
+            'Each record in the library is described the way a photo would describe it: category, materials, construction, finish, and distinctive features. We turn that description into a vector and store it in PostgreSQL with pgvector. When you scan something, we do the same with your photo and ask for the closest records. Names, years, and countries are stored with each record but kept out of the vector, because a photo never says “Denmark.”',
           ],
           [
-            'A saved search is a query you pin. When a new listing becomes available and the saved term shows up in its title, maker, category, or description, you get one notification that reopens the search. Sellers are never notified about their own pieces. Recent searches are history and saved searches are a watch, and I store both as flags on the same query. A collector hunting a Noguchi doesn’t want to retype it every Sunday, but does want to know when one lands.',
+            'Only records a person has verified can be used, and new records start unverified. If nothing is close enough, the scan goes ahead on what the vision model saw.',
           ],
         ],
       },
       {
-        heading: 'What the assistant can read',
+        heading: 'What we save',
         paragraphs: [
           [
-            'The in-app assistant handles style questions, “what else feels like this,” and help using Treasure Fox. It reads context we assembled, under a token budget.',
+            'Every successful scan goes into your scan history: your photos, the title, maker, year, category, price range, size, the MCM flag, and the confidence. You see them newest first, a page at a time, and you can open any one.',
           ],
           [
-            'On each turn the server builds a small read-only block: profile and city, plan, recent offers, likes, saves, and a short sample of orders. A listings retriever can attach real listings to the answer. The model is told the block is member context, and the raw context isn’t returned in the response. Free plans get a monthly token budget, and paid plans unlock the assistant through a setting separate from scan quota. Before each call we estimate whether the message fits the remaining budget, so a long history fails visibly.',
+            'You can give a scan a thumbs up or down, and you can delete it. Only you can see your scans. When you list a piece later, the listing points back at one of them (more in ',
+            listingNote,
+            ').',
+          ],
+        ],
+      },
+      {
+        heading: 'When the scan says no',
+        paragraphs: [
+          [
+            'A real piece can fail a scan because the photos were bad, or because nobody has recorded it yet. So a seller can ask for a manual MCM verification on any draft they’ve saved.',
           ],
           [
-            'I ruled out letting the model query Postgres. The questions worth answering are about public listings, plus a few facts the member already sees on their own dashboard. This retriever uses a different corpus from Mini-RAG; it looks up what’s for sale.',
+            'They send the name, maker, period, material, a short story, and proof photos like a label or a stamp. Each listing can have one open request, and they can edit or cancel it while it’s open. Editing after a review has started puts it back in the queue. If it’s accepted, the listing is verified. If it’s rejected, the seller gets a note and can send a new request.',
+          ],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'listing-and-bulk-upload',
+    title: 'Listing one piece, or a whole estate',
+    dek: 'Saving a draft is easy. Going live has rules. And a dealer with forty photos shouldn’t have to type forty listings.',
+    date: 'October 2026',
+    kicker: 'Selling',
+    sections: [
+      {
+        heading: 'Draft first, then Selling',
+        paragraphs: [
+          [
+            'Every listing starts as a draft. You can save one with almost nothing in it, like a few photos and a story, and come back later. On the same form you choose how the piece can ship and whether you take offers. Both have their own notes: ',
+            moneyNote,
+            ' and ',
+            buyingNote,
+            '.',
+          ],
+          [
+            'Moving a draft to Selling takes more. The listing has to point at your own scan, and that scan has to say MCM, or the listing needs an accepted manual verification. It needs real package size and weight, a ship-from address, and a connected Stripe account so we can pay you later.',
+          ],
+          [
+            'If something is missing, the app tells you what to fix. The server checks all of it too, so no screen can skip a step.',
+          ],
+        ],
+      },
+      {
+        heading: 'When you have forty photos instead of one',
+        paragraphs: [
+          [
+            'Sellers with stores don’t list one chair at a time. Bulk upload takes a folder of photos or a spreadsheet. Each row has the usual fields: title, story, price, year, maker, category, condition, sizes, shipping options, offer settings, and photo links.',
+          ],
+          [
+            'When you submit, we create one draft per row and scan the photos in the background, two at a time. You get a notice when a draft is ready to list and a summary when the whole job is done. Every draft keeps its scan and its MCM flag. These scans use the seller’s tokens (see ',
+            tokenNote,
+            ').',
+          ],
+          [
+            'Then it stops. Bulk upload makes drafts and nothing else. A person still sends each draft to Selling, and each one has to pass the same checks as a single listing. I built it that way so a folder of photos can’t turn into a live storefront on its own.',
+          ],
+        ],
+      },
+      {
+        heading: 'After it’s live',
+        paragraphs: [
+          [
+            'A buyer who thinks a live piece isn’t MCM can report it. You can’t report your own listing. The listing stays up while we review it, and the seller is told. We either keep it, with a note, or remove it, which sends it back to a draft along with the reason. A removal can be undone.',
+          ],
+          [
+            'This report is only about what the object is. A problem with a paid order, like damage or missing parts, is a separate report on the order (see ',
+            moneyNote,
+            ').',
+          ],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'search-assistant-and-offers',
+    title: 'Finding a piece, asking about it, and making an offer',
+    dek: 'How search ranks listings, how saved searches ping you, how the assistant answers, and how an offer moves through a chat.',
+    date: 'October 2026',
+    kicker: 'Buying',
+    sections: [
+      {
+        heading: 'Search',
+        paragraphs: [
+          [
+            'Search only looks at listings that are for sale. As you type, it suggests people, makers, titles, and categories. With an empty box it shows what you searched recently and what you saved.',
+          ],
+          [
+            'A full search matches the title, maker, category, and description. A match at the start of a title ranks above one at the start of a maker name, which ranks above a category match, and newer listings come after that. You can narrow the results to people, listings, a maker, a product, or a category. People you’ve blocked never show up.',
+          ],
+        ],
+      },
+      {
+        heading: 'Saved searches',
+        paragraphs: [
+          [
+            'Save a search and it becomes a watch. When a new listing appears and your term matches its title, maker, category, or description, you get one notification, and tapping it reopens the search. A seller is never notified about their own pieces.',
+          ],
+          [
+            'Recent searches and saved searches are the same record with two flags. Someone hunting a Noguchi doesn’t want to retype it every Sunday, and now they don’t have to.',
+          ],
+        ],
+      },
+      {
+        heading: 'The assistant',
+        paragraphs: [
+          [
+            'The assistant answers questions about style (“what else looks like this?”), about listings, and about using the app. It sticks to furniture, design, and the marketplace.',
+          ],
+          [
+            'When you send a message, the server builds a small read-only summary about you: your profile and city, your plan, recent offers, likes, saves, and a sample of your orders. It also searches the live catalog for listings that match your question. Then it sends the summary, the matching listings, and the recent chat to Gemini and shows you the reply. The model never talks to the database directly.',
+          ],
+          [
+            'Chats are saved as sessions in PostgreSQL, and the last 50 messages go along with each question so it remembers what you were talking about. Each reply costs one token (see ',
+            tokenNote,
+            ').',
+          ],
+        ],
+      },
+      {
+        heading: 'Making an offer',
+        paragraphs: [
+          [
+            'A seller chooses whether a listing takes offers and can set a minimum. If you offer less than the minimum, it’s declined right away. You see a rejected card showing the minimum, and nothing else is created.',
+          ],
+          [
+            'Otherwise the offer shows up as a card in your chat with the seller, sent as an encrypted message. You get three tries on a listing: your first offer and two counters. The seller accepts or declines, and the same card updates each time, so the chat doesn’t fill up with copies.',
+          ],
+          [
+            'Accepting doesn’t charge anyone. You check out at the agreed price, for a quantity of one, and only you can use that offer. Shipping, fees, and tax are added at checkout, and after payment the offer is marked purchased.',
+          ],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'the-money-has-to-wait',
+    title: 'The money has to wait, and the sofa has to move',
+    dek: 'Where the money sits after you pay, the four ways a piece can travel, and when the seller gets paid.',
+    date: 'October 2026',
+    kicker: 'Payments & delivery',
+    sections: [
+      {
+        heading: 'You pay',
+        paragraphs: [
+          [
+            'Say a buyer pays $1,400 for a sideboard. The seller shouldn’t see that money yet, because the piece is still in a house and the buyer hasn’t seen it.',
+          ],
+          [
+            'Payments run on Stripe. The money lands on Treasure Fox’s Stripe balance and stays there, and we pay the seller later with a Transfer to their connected Stripe account. We could have split the payment at checkout, but then a canceled order, a carrier problem, or a chargeback would mean taking money back from a seller. Holding it first is simpler.',
+          ],
+          [
+            'Sales tax is calculated by Stripe Tax at checkout and stays out of the seller’s payout.',
+          ],
+        ],
+      },
+      {
+        heading: 'What we charge',
+        paragraphs: [
+          [
+            'The buyer fee and the seller fee are both a percentage of the item price only. Shipping, insurance, and tax aren’t part of it, because shipping a sofa can cost nearly as much as a small piece. The percentage gets smaller as the price goes up. The buyer pays their fee at checkout, and the seller’s fee comes out when we pay them.',
+          ],
+        ],
+      },
+      {
+        heading: 'Four ways a piece can travel',
+        paragraphs: [
+          [
+            'The seller picks which options a listing allows, and the buyer sees them at checkout.',
+          ],
+          [
+            'Parcel is for smaller pieces. Live carrier rates come from Shippo, and we save the rate the buyer picked. We buy the label when the seller marks the order shipped, not when the buyer pays, so a canceled order doesn’t leave us chasing a carrier.',
+          ],
+          [
+            'LTL freight is for bigger pieces and runs through Old Dominion. Sellers turn it on per listing. The price depends on the package size and weight, and it covers dock-to-dock or liftgate delivery, since a house with no dock isn’t a warehouse.',
+          ],
+          [
+            'White-glove is Plycon. They carry the piece in, unpack it, and place it. The price is a quote worked out from the dimensions.',
+          ],
+          [
+            'Pickup means the buyer collects it themselves, so there’s no carrier cost.',
+          ],
+          [
+            'Each option has its own cancel rule, because they make different promises. A parcel order can be canceled for a full refund until the seller marks it shipped. White-glove can be canceled by either side until pickup. Pickup follows the parcel rule until the handoff. If a pickup or delivery fails, the carrier’s extra fees come out of the money we’re already holding, so the buyer never gets a second invoice.',
+          ],
+        ],
+      },
+      {
+        heading: 'Inspection',
+        paragraphs: [
+          [
+            'When the piece arrives, the buyer has a short window to look it over. The default is three days. If they report a problem (not as described, damaged, missing parts), the seller’s payout pauses while we review it. A chargeback pauses it too.',
+          ],
+        ],
+      },
+      {
+        heading: 'The seller gets paid',
+        paragraphs: [
+          [
+            'When the window ends with no open problem, the seller’s Transfer goes out, and they can retry it if it fails. After that, Stripe pays the money to their bank on its own schedule, on the 1st and the 15th. The day the seller sees money depends on that calendar, not on when the buyer paid, and the seller dashboard says so.',
+          ],
+          [
+            'Every order has a plain status: held, inspection, released, refunded, or payout failed. The app and the payout job read the same one. To check money myself, I open the Stripe dashboards for payments, connected accounts, payouts, and subscriptions. If the app and Stripe disagree, I trust Stripe until the app is fixed.',
+          ],
+        ],
+      },
+      {
+        heading: 'Then the buyer reviews the seller',
+        paragraphs: [
+          [
+            'Only the buyer of a paid order can write a review, one per item. It has stars and a note, plus optional extras: whether they’d recommend the seller, tags, scores for the piece, the shipping, and the service, and photos. The seller’s shop shows the average and the count, and the seller can reply in public. No paid order means no review, so a star always means the piece changed hands.',
+          ],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'tokens-and-plans',
+    title: 'One pool of tokens for scans and the assistant',
+    dek: 'Scans and assistant replies come out of one monthly pool. How tokens work, what a pack is, and what Gold changes.',
+    date: 'October 2026',
+    kicker: 'Plans & tokens',
+    sections: [
+      {
+        heading: 'What a token is',
+        paragraphs: [
+          [
+            'A token is one use of our AI. A scan costs one. An assistant reply costs one. They come out of the same pool, so you spend your tokens on whichever you like.',
+          ],
+          [
+            'Free accounts get a small allowance every month, and it resets at the start of the month.',
+          ],
+        ],
+      },
+      {
+        heading: 'How we count',
+        paragraphs: [
+          [
+            'Each use adds one to a usage row for that day. Before a scan or a reply, we add up the month: your allowance plus any packs you bought this month, minus what you’ve used. If there’s something left, the request goes through. If not, the app tells you to buy a pack or go Gold.',
+          ],
+        ],
+      },
+      {
+        heading: 'Token packs',
+        paragraphs: [
+          [
+            'A pack is a one-time purchase of 50, 100, or 1,000 tokens, paid through Stripe Checkout. It adds to your pool for the month.',
+          ],
+        ],
+      },
+      {
+        heading: 'Gold',
+        paragraphs: [
+          [
+            'Gold is a Stripe subscription, monthly or yearly. It makes tokens unlimited and unlocks the seller tools, like the premium dashboard and sales tracking. Unlimited accounts skip the counting, so they never hit a limit.',
+          ],
+        ],
+      },
+      {
+        heading: 'How a subscription stays in sync',
+        paragraphs: [
+          [
+            'Stripe bills you and renews you. Stripe also tells our backend about every change (a renewal, a cancellation, a plan change, a pause), and we keep a copy so the app always knows your plan. If you cancel, you keep Gold until the end of the period you paid for.',
+          ],
+          [
+            'To change your plan, update your card, or see invoices, the app opens Stripe’s customer portal, so card details stay with Stripe.',
+          ],
+          [
+            'Subscriptions and marketplace sales sit in separate ledgers on the same Stripe account. A subscription renews a plan, and a sale pays a seller. Mixing the two leads to refund arguments you can’t explain.',
           ],
         ],
       },

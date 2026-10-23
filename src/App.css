@@ -1043,7 +1043,20 @@ button {
   text-decoration: none;
 }
 
+.journal-steps {
+  margin: 0 0 1rem;
+  padding-left: 1.4rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.journal-steps li {
+  margin-bottom: 0.45rem;
+  padding-left: 0.3rem;
+}
+
 .journal-article p a,
+.journal-steps a,
 .journal-author a {
   color: var(--text-primary);
   text-decoration: underline;
@@ -1053,6 +1066,7 @@ button {
 
 .journal-back:hover,
 .journal-article p a:hover,
+.journal-steps a:hover,
 .journal-author a:hover {
   color: var(--text-primary);
 }

@@ -6,8 +6,13 @@ const Rich = ({ parts }) => {
   return list.map((part, index) => {
     if (typeof part === 'string') return <span key={index}>{part}</span>
     if (part.href) {
+      const internal = part.href.startsWith('/')
       return (
-        <a key={index} href={part.href} target="_blank" rel="noreferrer">
+        <a
+          key={index}
+          href={part.href}
+          {...(internal ? {} : { target: '_blank', rel: 'noreferrer' })}
+        >
           {part.t}
         </a>
       )
@@ -67,6 +72,15 @@ const JournalArticle = ({ essay }) => {
               <Rich parts={paragraph} />
             </p>
           ))}
+          {section.steps ? (
+            <ol className="journal-steps">
+              {section.steps.map((step, stepIndex) => (
+                <li key={stepIndex}>
+                  <Rich parts={step} />
+                </li>
+              ))}
+            </ol>
+          ) : null}
         </section>
       ))}
       <p className="journal-author">

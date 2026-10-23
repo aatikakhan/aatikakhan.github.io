@@ -16,12 +16,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aatikakhan.github.io/blog/the-model-is-not-allowed-to-invent-the-chair</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aatikakhan.github.io/blog/listing-and-bulk-upload</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aatikakhan.github.io/blog/search-assistant-and-offers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aatikakhan.github.io/blog/the-money-has-to-wait</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aatikakhan.github.io/blog/the-model-is-not-allowed-to-invent-the-chair</loc>
+    <loc>https://aatikakhan.github.io/blog/tokens-and-plans</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
