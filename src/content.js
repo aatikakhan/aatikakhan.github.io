@@ -325,6 +325,42 @@ export const projects = [
 
     url: 'https://ai.google.dev/competition/projects/guaridan-ai',
   },
+
+  {
+    name: 'uRyde',
+
+    description:
+      'Shared mobility app that matches riders with drivers for greener commutes.',
+
+    impact:
+      'Sign-in, rides, and user management on Firebase, with BLoC for state.',
+
+    stack: [
+      'Flutter',
+      'Firebase',
+      'BLoC',
+    ],
+
+    url: 'https://www.uryde.de/',
+  },
+
+  {
+    name: 'Machine+Love Invoice',
+
+    description:
+      'iOS invoicing app for traders and independent contractors.',
+
+    impact:
+      'Works offline, syncs when back online, and sells subscriptions in-app.',
+
+    stack: [
+      'iOS',
+      'RevenueCat',
+      'Hive',
+    ],
+
+    url: 'http://machinelove.co',
+  },
 ]
 
 export const volunteering = [
