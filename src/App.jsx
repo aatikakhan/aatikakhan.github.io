@@ -309,9 +309,6 @@ function App() {
                   <FiArrowUpRight /> Book a discovery call
                 </a>
               </Motion.div>
-              <div className="trust-line">
-                Stripe, ecommerce, marketplace app development, and vector databases. For founders, hiring managers, and product teams.
-              </div>
               <Motion.div className="hero__insights" variants={stagger}>
                 <Motion.section className="hero-notes" variants={fadeUp}>
                   <span className="hero-notes__label">Highlights</span>
@@ -354,8 +351,7 @@ function App() {
           <Motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
             <SectionTitle
               kicker="Focus areas"
-              title="Where I spend the most time inside your product"
-              description="The mix of strategy, design, and engineering work I cycle through each week."
+              title="Where I spend the most time"
             />
             <div className="specialties-grid">
               {specialties.map((item) => (

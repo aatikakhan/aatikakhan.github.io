@@ -24,34 +24,30 @@ export const hero = {
   title: 'Fractional CTO · Founding Engineer',
 
   statement:
-    'Seven years of marketplace and ecommerce app development. Stripe payments, and a vector database that is allowed to refuse a listing. I embed as a fractional CTO. At Treasure Fox I am the founding engineer and I head engineering - a one-person team.',
+    'I build the product and the systems under it, from the first listing to production, for founders who need one person to own the engineering.',
 
   highlights: [
     {
       label: 'Products Built',
       value: '20+',
       description:
-        'Shipped across US, UK, Germany, Japan, Canada, India with production users and transactions.',
+        'Shipped across the US, UK, Germany, Japan, Canada, and India.',
     },
     {
-      label: 'Core Domain',
-      value: 'AI + Marketplaces',
-      description:
-        'Stripe, ecommerce marketplaces, app development, and vector database search.',
+      label: 'APIs',
+      value: '30+',
+      description: 'Production APIs designed and shipped.',
     },
     {
-      label: 'Engagement Model',
-      value: 'Fractional CTO',
-      description:
-        'I head engineering when the company has one builder, from architecture through production.',
+      label: 'Current role',
+      value: 'Head of engineering',
+      description: 'Running a live marketplace at Treasure Fox as the only engineer.',
     },
   ],
 
   status: {
-    current:
-      'Founding engineer and head of engineering at Treasure Fox. One-person engineering team.',
-    availability:
-      'Always available for consulting. US, UK, UAE, Singapore, and remote.',
+    current: 'Taking on fractional CTO work.',
+    availability: 'Open for consulting. US, UK, UAE, Singapore, and remote.',
   },
 }
 
@@ -79,10 +75,9 @@ export const about = {
     'I help founders turn ideas into revenue-generating AI products',
 
   paragraphs: [
-    'I ship marketplace and ecommerce app development, from the first listing through production.',
-    'I put Stripe under the product: payments, Connect accounts, payouts, and subscriptions.',
-    'I build vector database search that only returns records a person has already verified.',
-    'I work as a fractional CTO, and I head engineering as a one-person team when that is what the company needs.',
+    'Start from the outcome, not the feature list.',
+    'Ship a production-grade first version fast.',
+    'Measure everything, so the next release runs on data.',
   ],
 
   rituals: [
@@ -96,22 +91,22 @@ export const specialties = [
   {
     title: 'Stripe',
     blurb:
-      'Payments, Connect accounts, payouts, and subscriptions. The seller sees the same state the Stripe dashboard shows.',
+      'Payments, Connect accounts, payouts, and subscriptions.',
   },
   {
     title: 'Ecommerce marketplaces',
     blurb:
-      'B2B and B2C. A buyer purchases one piece. A dealer lists a room. Same checkout, offers, reports, and reviews.',
+      'Listings, offers, checkout, and reviews for buyers and dealers.',
   },
   {
     title: 'App development',
     blurb:
-      'The product, the APIs, and production. I head the build when the engineering team is one person.',
+      'Flutter apps and FastAPI backends, running on AWS.',
   },
   {
     title: 'Vector databases',
     blurb:
-      'Embeddings for search. Names stay out of the vector. A row is retrieved only after a person verifies it.',
+      'Embedding search that only returns verified records.',
   },
 ]
 
