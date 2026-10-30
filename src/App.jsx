@@ -230,7 +230,7 @@ function App() {
     } else if (page === 'blog') {
       title = 'Blog | Aatika Khan'
       description =
-        'Engineering notes from heading Treasure Fox: marketplace payments, freight, MCM identification, and the rules an AI model is not allowed to break.'
+        'System design notes from building Treasure Fox: architecture, Stripe payments and payouts, Redis caching, background jobs, idempotent webhooks, vector search, failure modes, and trade-offs.'
       url = `${site}/blog`
     }
     document.title = title

@@ -1,25 +1,6 @@
 import { useEffect } from 'react'
 import { links, writing } from './writing'
-
-const Rich = ({ parts }) => {
-  const list = Array.isArray(parts) ? parts : [parts]
-  return list.map((part, index) => {
-    if (typeof part === 'string') return <span key={index}>{part}</span>
-    if (part.href) {
-      const internal = part.href.startsWith('/')
-      return (
-        <a
-          key={index}
-          href={part.href}
-          {...(internal ? {} : { target: '_blank', rel: 'noreferrer' })}
-        >
-          {part.t}
-        </a>
-      )
-    }
-    return <span key={index}>{part.t}</span>
-  })
-}
+import { Case, Diagram, Paragraphs, Rich, Table } from './Blocks'
 
 const Byline = ({ essay }) => (
   <p className="journal-byline">
@@ -32,8 +13,9 @@ const JournalIndex = () => (
     <p className="journal-kicker">Inside the build</p>
     <h1>Blog</h1>
     <p className="journal-lede">
-      Notes from heading engineering at Treasure Fox. Seven years of crafting products, currently a
-      one-person engineering team on a very specific marketplace.
+      System design notes from heading engineering at Treasure Fox: how a one-person team runs a
+      marketplace with Stripe payments, vector search, and Redis caching, and what I did when
+      things went wrong.
     </p>
     <ul className="journal-list">
       {writing.map((essay) => (
@@ -67,11 +49,17 @@ const JournalArticle = ({ essay }) => {
       {essay.sections.map((section, sectionIndex) => (
         <section key={section.heading || sectionIndex}>
           {section.heading ? <h2>{section.heading}</h2> : null}
-          {section.paragraphs.map((paragraph, paragraphIndex) => (
-            <p key={paragraphIndex}>
-              <Rich parts={paragraph} />
-            </p>
-          ))}
+          {section.diagram ? <Diagram /> : null}
+          <Paragraphs items={section.paragraphs} />
+          {section.bullets ? (
+            <ul className="journal-steps">
+              {section.bullets.map((item) => (
+                <li key={item}>
+                  <Rich parts={item} />
+                </li>
+              ))}
+            </ul>
+          ) : null}
           {section.steps ? (
             <ol className="journal-steps">
               {section.steps.map((step, stepIndex) => (
@@ -81,6 +69,9 @@ const JournalArticle = ({ essay }) => {
               ))}
             </ol>
           ) : null}
+          {section.cases ? section.cases.map((item) => <Case key={item.title} item={item} />) : null}
+          {section.table ? <Table table={section.table} /> : null}
+          <Paragraphs items={section.afterParagraphs} />
         </section>
       ))}
       <p className="journal-author">

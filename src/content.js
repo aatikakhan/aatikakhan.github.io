@@ -138,7 +138,7 @@ export const experiences = [
     contributions: [
       'Built 30+ REST APIs with FastAPI and PostgreSQL, and deployed them to AWS with Gunicorn, nginx, systemd, and GitHub Actions, with separate staging and production.',
       'Put Redis in front of the busiest reads: the homepage feed, user profiles, seller pages, and plan checks. Feed keys carry a version number, so one counter bump clears every page. Carts live in Redis with a 7-day expiry. If Redis is down, reads fall back to PostgreSQL.',
-      'Moved slow work off the request. Bulk-upload scans run in a worker pool, with job state in PostgreSQL so a job can be cancelled or resumed. A daily systemd timer releases seller payouts.',
+      'Moved slow work off the request. Bulk-upload scans run in a worker pool, with job state in PostgreSQL so a job can be cancelled or resumed. A 15-minute sweep, guarded by a Postgres advisory lock, releases seller payouts, with a systemd timer as backup.',
       'Made Stripe webhooks safe to repeat. Each event is logged once, failed events can retry, and payouts carry idempotency keys. Covers Connect accounts, payouts, and subscriptions.',
       'Shipped a photo scan that reads furniture with OpenAI and Gemini, then checks the result against verified records using vector search in PostgreSQL (pgvector).',
     ],
