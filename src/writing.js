@@ -13,12 +13,13 @@ const james = { t: 'James', href: links.james }
 const ryan = { t: 'Ryan Copeland', href: links.ryan }
 const ali = { t: 'Ali', href: links.ali }
 
+const scanSlug = 'the-model-is-not-allowed-to-invent-the-chair'
+const moneySlug = 'the-money-has-to-wait'
 const note = (t, slug) => ({ t, href: `/blog/${slug}` })
-const scanNote = note('how identification works', 'the-model-is-not-allowed-to-invent-the-chair')
-const listingNote = note('listing and bulk upload', 'listing-and-bulk-upload')
-const buyingNote = note('search, the assistant, and offers', 'search-assistant-and-offers')
-const moneyNote = note('payments and delivery', 'the-money-has-to-wait')
-const tokenNote = note('how tokens work', 'tokens-and-plans')
+const scanNote = note('scanning, listing, and search', scanSlug)
+const moneyNote = note('the next note', moneySlug)
+const tokenNote = note('tokens and Gold', moneySlug)
+const deliveryNote = note('delivery and payouts', moneySlug)
 
 export const writing = [
   {
@@ -73,44 +74,62 @@ export const writing = [
         heading: 'What it does now',
         paragraphs: [
           [
-            'Someone buying one chair and a dealer listing a whole room use the same app. Here is the trip, and each step has its own note.',
+            'Someone buying one chair and a dealer listing a whole room use the same app. Here is the trip. The next two notes follow it step by step.',
           ],
         ],
         steps: [
-          ['Take a photo and see what it is: ', scanNote, '.'],
-          ['List a piece, or upload a whole estate at once: ', listingNote, '.'],
-          ['Find a piece, ask the assistant about it, or make an offer: ', buyingNote, '.'],
-          ['Pay, ship, and get paid: ', moneyNote, '.'],
-          ['Scans and assistant replies run on tokens: ', tokenNote, '.'],
+          ['Take a photo and see what it is: ', note('identification and scan history', scanSlug), '.'],
+          ['List one piece or a whole estate: ', note('listing and bulk upload', scanSlug), '.'],
+          ['Find a piece and ask the assistant about it: ', note('search and the assistant', scanSlug), '.'],
+          ['Make an offer and pay: ', note('offers and payments', moneySlug), '.'],
+          ['Ship it, get paid, and review the seller: ', deliveryNote, '.'],
+          ['Use tokens for scans and replies, or go Gold: ', tokenNote, '.'],
         ],
       },
       {
         heading: 'How it’s built',
         paragraphs: [
           [
-            'One backend runs all of it. The Flutter app talks to a FastAPI service, PostgreSQL holds the data, and it runs on AWS with GitHub Actions deploying it. Listings, scans, offers, orders, shipments, and payouts live in the same system, so they can’t drift apart.',
+            'One backend runs all of it, with more than 30 REST APIs. The Flutter app talks to a FastAPI service, PostgreSQL holds the data, Redis caches the busy pages, and everything runs on AWS. Listings, scans, offers, orders, shipments, and payouts live in the same system, so they can’t drift apart.',
           ],
           [
-            'I’m the engineering team, which makes me the one on call too. Identification, verification, bulk upload, delivery, and payments are harder than they look from the outside, and those are what the other notes are about.',
+            'Code goes out through GitHub Actions to a staging server first and then to production. Gunicorn runs the app behind nginx, and systemd restarts it if it stops. A scan can run for minutes, so the app server and the proxy in front of it have to agree on how long to wait.',
+          ],
+        ],
+      },
+      {
+        heading: 'How a request travels',
+        paragraphs: [
+          [
+            'A call from the app reaches nginx, then Gunicorn, which runs several FastAPI workers. The worker reads the Bearer token and loads the user from PostgreSQL. An account that failed to log in too many times is refused for 30 minutes. Public pages treat a bad or expired token as a logged-out visitor instead of an error, so browsing never breaks.',
+          ],
+          [
+            'Each request gets its own database session. Sessions come from more than one connection pool, taken in turn, because the database caps connections per role. A session commits when the request succeeds and rolls back when it fails. Connections are checked before use and recycled every five minutes, so a dropped connection doesn’t reach a user.',
+          ],
+          [
+            'The expensive routes are rate limited. A photo scan, for example, is allowed five times a minute per IP address, because every scan costs real money in model calls.',
+          ],
+          [
+            'I’m the engineering team, which makes me the one on call too. Identification, verification, bulk upload, delivery, and payments are harder than they look from the outside, and those are what the next two notes are about.',
           ],
         ],
       },
     ],
   },
   {
-    slug: 'the-model-is-not-allowed-to-invent-the-chair',
+    slug: scanSlug,
     title: 'The model has to earn the chair',
-    dek: 'You take a photo. Here is what happens next, what we save, and what happens when the scan says it isn’t MCM.',
+    dek: 'From the first photo to a live listing, and how people find it: identification, history, bulk upload, search, and the assistant.',
     date: 'October 2026',
-    kicker: 'Identification',
+    kicker: 'Scan, list & search',
     sections: [
       {
         paragraphs: [
           [
             fox,
-            ' has two AI features: scanning a photo, and an assistant you can chat with. This note is about the scan. The assistant is in ',
-            buyingNote,
-            '.',
+            ' has two AI features: scanning a photo, and an assistant you can chat with. Both run on tokens, which are covered in ',
+            moneyNote,
+            '. This note follows a piece from the first photo to a buyer finding it.',
           ],
         ],
       },
@@ -151,9 +170,7 @@ export const writing = [
             'Every successful scan goes into your scan history: your photos, the title, maker, year, category, price range, size, the MCM flag, and the confidence. You see them newest first, a page at a time, and you can open any one.',
           ],
           [
-            'You can give a scan a thumbs up or down, and you can delete it. Only you can see your scans. When you list a piece later, the listing points back at one of them (more in ',
-            listingNote,
-            ').',
+            'You can give a scan a thumbs up or down, and you can delete it. Only you can see your scans. When you list a piece later, the listing points back at one of them.',
           ],
         ],
       },
@@ -168,30 +185,16 @@ export const writing = [
           ],
         ],
       },
-    ],
-  },
-  {
-    slug: 'listing-and-bulk-upload',
-    title: 'Listing one piece, or a whole estate',
-    dek: 'Saving a draft is easy. Going live has rules. And a dealer with forty photos shouldn’t have to type forty listings.',
-    date: 'October 2026',
-    kicker: 'Selling',
-    sections: [
       {
         heading: 'Draft first, then Selling',
         paragraphs: [
           [
-            'Every listing starts as a draft. You can save one with almost nothing in it, like a few photos and a story, and come back later. On the same form you choose how the piece can ship and whether you take offers. Both have their own notes: ',
+            'Every listing starts as a draft. You can save one with almost nothing in it, like a few photos and a story, and come back later. On the same form you choose how the piece can ship and whether you take offers, which ',
             moneyNote,
-            ' and ',
-            buyingNote,
-            '.',
+            ' covers.',
           ],
           [
-            'Moving a draft to Selling takes more. The listing has to point at your own scan, and that scan has to say MCM, or the listing needs an accepted manual verification. It needs real package size and weight, a ship-from address, and a connected Stripe account so we can pay you later.',
-          ],
-          [
-            'If something is missing, the app tells you what to fix. The server checks all of it too, so no screen can skip a step.',
+            'Moving a draft to Selling takes more. The listing has to point at your own scan, and that scan has to say MCM, or the listing needs an accepted manual verification. It needs real package size and weight, a ship-from address, and a connected Stripe account so we can pay you later. If something is missing, the app tells you what to fix. The server checks all of it too, so no screen can skip a step.',
           ],
         ],
       },
@@ -202,12 +205,16 @@ export const writing = [
             'Sellers with stores don’t list one chair at a time. Bulk upload takes a folder of photos or a spreadsheet. Each row has the usual fields: title, story, price, year, maker, category, condition, sizes, shipping options, offer settings, and photo links.',
           ],
           [
-            'When you submit, we create one draft per row and scan the photos in the background, two at a time. You get a notice when a draft is ready to list and a summary when the whole job is done. Every draft keeps its scan and its MCM flag. These scans use the seller’s tokens (see ',
-            tokenNote,
-            ').',
+            'A scan can take a minute or more, so a request can’t wait on forty of them. When you submit, we create one draft per row first. Then we hand the scans to a small worker pool that runs two at a time. Every draft keeps its own status in PostgreSQL, such as queued, scanning, failed, or cancelled, and keeps its scan and MCM flag. You get a notice when a draft is ready to list and a summary when the whole job is done.',
           ],
           [
-            'Then it stops. Bulk upload makes drafts and nothing else. A person still sends each draft to Selling, and each one has to pass the same checks as a single listing. I built it that way so a folder of photos can’t turn into a live storefront on its own.',
+            'Because the state lives in the database and not in memory, the app can show progress and a seller can cancel a job. Scans use the seller’s tokens. If tokens run out halfway, the rest of the drafts are skipped, and after the seller buys more, one call puts them back in line.',
+          ],
+          [
+            'I haven’t put a message broker in yet. At this size, a worker pool and a status column are easier to run, and they are easy to swap for a real queue when the volume asks for one.',
+          ],
+          [
+            'Then bulk upload stops. It makes drafts and nothing else. A person still sends each draft to Selling, and each one has to pass the same checks as a single listing. I built it that way so a folder of photos can’t turn into a live storefront on its own.',
           ],
         ],
       },
@@ -215,43 +222,18 @@ export const writing = [
         heading: 'After it’s live',
         paragraphs: [
           [
-            'A buyer who thinks a live piece isn’t MCM can report it. You can’t report your own listing. The listing stays up while we review it, and the seller is told. We either keep it, with a note, or remove it, which sends it back to a draft along with the reason. A removal can be undone.',
-          ],
-          [
-            'This report is only about what the object is. A problem with a paid order, like damage or missing parts, is a separate report on the order (see ',
-            moneyNote,
-            ').',
-          ],
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'search-assistant-and-offers',
-    title: 'Finding a piece, asking about it, and making an offer',
-    dek: 'How search ranks listings, how saved searches ping you, how the assistant answers, and how an offer moves through a chat.',
-    date: 'October 2026',
-    kicker: 'Buying',
-    sections: [
-      {
-        heading: 'Search',
-        paragraphs: [
-          [
-            'Search only looks at listings that are for sale. As you type, it suggests people, makers, titles, and categories. With an empty box it shows what you searched recently and what you saved.',
-          ],
-          [
-            'A full search matches the title, maker, category, and description. A match at the start of a title ranks above one at the start of a maker name, which ranks above a category match, and newer listings come after that. You can narrow the results to people, listings, a maker, a product, or a category. People you’ve blocked never show up.',
+            'A buyer who thinks a live piece isn’t MCM can report it. You can’t report your own listing. The listing stays up while we review it, and the seller is told. We either keep it, with a note, or remove it, which sends it back to a draft along with the reason. A removal can be undone. A problem with a paid order, like damage or missing parts, is a separate report on the order.',
           ],
         ],
       },
       {
-        heading: 'Saved searches',
+        heading: 'Finding a piece',
         paragraphs: [
           [
-            'Save a search and it becomes a watch. When a new listing appears and your term matches its title, maker, category, or description, you get one notification, and tapping it reopens the search. A seller is never notified about their own pieces.',
+            'Search only looks at listings that are for sale. As you type, it suggests people, makers, titles, and categories. With an empty box it shows what you searched recently and what you saved. A full search matches the title, maker, category, and description. A match at the start of a title ranks above one at the start of a maker name, which ranks above a category match, and newer listings come after that. People you’ve blocked never show up.',
           ],
           [
-            'Recent searches and saved searches are the same record with two flags. Someone hunting a Noguchi doesn’t want to retype it every Sunday, and now they don’t have to.',
+            'Save a search and it becomes a watch. When a new listing matches your term, you get one notification, and tapping it reopens the search. A seller is never notified about their own pieces. Someone hunting a Noguchi doesn’t want to retype it every Sunday, and now they don’t have to.',
           ],
         ],
       },
@@ -265,12 +247,30 @@ export const writing = [
             'When you send a message, the server builds a small read-only summary about you: your profile and city, your plan, recent offers, likes, saves, and a sample of your orders. It also searches the live catalog for listings that match your question. Then it sends the summary, the matching listings, and the recent chat to Gemini and shows you the reply. The model never talks to the database directly.',
           ],
           [
-            'Chats are saved as sessions in PostgreSQL, and the last 50 messages go along with each question so it remembers what you were talking about. Each reply costs one token (see ',
-            tokenNote,
-            ').',
+            'Chats are saved as sessions in PostgreSQL, and the last 50 messages go along with each question so it remembers what you were talking about.',
           ],
         ],
       },
+      {
+        heading: 'Keeping the busy pages fast',
+        paragraphs: [
+          [
+            'The homepage feed, your profile, and a seller’s page get read far more often than they change, so Redis sits in front of them. The feed is kept for 45 seconds, your profile for 2 minutes, and a seller page for 5 minutes.',
+          ],
+          [
+            'The hard part is clearing a cache at the right moment. When a listing changes, we don’t hunt down every cached feed page. The feed keys carry a version number, and one counter bump makes all the old pages unreachable. They expire on their own. A profile or a seller page is different: we delete that one key when something about it changes. If Redis is down or not set up, the app logs it once and reads straight from PostgreSQL. Pages get slower, and nothing breaks. The thumbnail builder also uses a short-lived Redis key as a lock, so two requests don’t build the same image at once.',
+          ],
+        ],
+      },
+    ],
+  },
+  {
+    slug: moneySlug,
+    title: 'The money has to wait, and the sofa has to move',
+    dek: 'Offers, where the money sits after you pay, the four ways a piece can travel, when the seller gets paid, and how tokens and Gold work.',
+    date: 'October 2026',
+    kicker: 'Offers, payments & plans',
+    sections: [
       {
         heading: 'Making an offer',
         paragraphs: [
@@ -285,15 +285,6 @@ export const writing = [
           ],
         ],
       },
-    ],
-  },
-  {
-    slug: 'the-money-has-to-wait',
-    title: 'The money has to wait, and the sofa has to move',
-    dek: 'Where the money sits after you pay, the four ways a piece can travel, and when the seller gets paid.',
-    date: 'October 2026',
-    kicker: 'Payments & delivery',
-    sections: [
       {
         heading: 'You pay',
         paragraphs: [
@@ -304,15 +295,42 @@ export const writing = [
             'Payments run on Stripe. The money lands on Treasure Fox’s Stripe balance and stays there, and we pay the seller later with a Transfer to their connected Stripe account. We could have split the payment at checkout, but then a canceled order, a carrier problem, or a chargeback would mean taking money back from a seller. Holding it first is simpler.',
           ],
           [
-            'Sales tax is calculated by Stripe Tax at checkout and stays out of the seller’s payout.',
+            'A cart is one pending checkout per person. It lives in Redis and expires after seven days. Sales tax is calculated by Stripe Tax at checkout and stays out of the seller’s payout.',
+          ],
+          [
+            'The buyer fee and the seller fee are both a percentage of the item price only. Shipping, insurance, and tax aren’t part of it, because shipping a sofa can cost nearly as much as a small piece. The percentage gets smaller as the price goes up. The buyer pays their fee at checkout, and the seller’s fee comes out when we pay them.',
           ],
         ],
       },
       {
-        heading: 'What we charge',
+        heading: 'One payment, start to finish',
         paragraphs: [
           [
-            'The buyer fee and the seller fee are both a percentage of the item price only. Shipping, insurance, and tax aren’t part of it, because shipping a sofa can cost nearly as much as a small piece. The percentage gets smaller as the price goes up. The buyer pays their fee at checkout, and the seller’s fee comes out when we pay them.',
+            'This is the path of one order, as the system sees it. The order matters, because any step can fail halfway.',
+          ],
+        ],
+        steps: [
+          [
+            'The buyer taps buy. The API checks the piece is still for sale (it answers 409 if another paid order exists), saves a pending order with the shipping choice, the quote, and the fee, and creates a Stripe Checkout Session.',
+          ],
+          [
+            'The buyer pays on Stripe’s page, so card details never touch our servers.',
+          ],
+          [
+            'Stripe calls our webhook. We log the event, mark the order paid with the money held, mark the piece sold, clear the cart, and tell the seller.',
+          ],
+          [
+            'If two buyers paid for the same piece, the first paid order wins and the second is refunded in full, automatically.',
+          ],
+          [
+            'If a buyer never finishes, the pending order is cancelled by a sweep after 24 hours, or right away when Stripe says the checkout expired.',
+          ],
+        ],
+      },
+      {
+        paragraphs: [
+          [
+            'The webhook marks an order paid, not the buyer’s phone. The app can close or lose signal right after payment, and the order still has to end up in the right state. The pending order is the record we can always find again.',
           ],
         ],
       },
@@ -340,84 +358,55 @@ export const writing = [
         ],
       },
       {
-        heading: 'Inspection',
+        heading: 'After it arrives',
         paragraphs: [
           [
             'When the piece arrives, the buyer has a short window to look it over. The default is three days. If they report a problem (not as described, damaged, missing parts), the seller’s payout pauses while we review it. A chargeback pauses it too.',
           ],
-        ],
-      },
-      {
-        heading: 'The seller gets paid',
-        paragraphs: [
           [
-            'When the window ends with no open problem, the seller’s Transfer goes out, and they can retry it if it fails. After that, Stripe pays the money to their bank on its own schedule, on the 1st and the 15th. The day the seller sees money depends on that calendar, not on when the buyer paid, and the seller dashboard says so.',
+            'When the window ends with no open problem, the seller’s Transfer goes out. A sweep inside the API runs every 15 minutes and releases every order that is due. A Postgres advisory lock lets only one Gunicorn worker run it at a time, and a daily systemd timer is the backup. The seller can also retry the Transfer if it fails. After that, Stripe pays the money to their bank on its own schedule, on the 1st and the 15th. The day the seller sees money depends on that calendar, not on when the buyer paid, and the seller dashboard says so.',
           ],
           [
             'Every order has a plain status: held, inspection, released, refunded, or payout failed. The app and the payout job read the same one. To check money myself, I open the Stripe dashboards for payments, connected accounts, payouts, and subscriptions. If the app and Stripe disagree, I trust Stripe until the app is fixed.',
           ],
-        ],
-      },
-      {
-        heading: 'Then the buyer reviews the seller',
-        paragraphs: [
           [
-            'Only the buyer of a paid order can write a review, one per item. It has stars and a note, plus optional extras: whether they’d recommend the seller, tags, scores for the piece, the shipping, and the service, and photos. The seller’s shop shows the average and the count, and the seller can reply in public. No paid order means no review, so a star always means the piece changed hands.',
-          ],
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'tokens-and-plans',
-    title: 'One pool of tokens for scans and the assistant',
-    dek: 'Scans and assistant replies come out of one monthly pool. How tokens work, what a pack is, and what Gold changes.',
-    date: 'October 2026',
-    kicker: 'Plans & tokens',
-    sections: [
-      {
-        heading: 'What a token is',
-        paragraphs: [
-          [
-            'A token is one use of our AI. A scan costs one. An assistant reply costs one. They come out of the same pool, so you spend your tokens on whichever you like.',
-          ],
-          [
-            'Free accounts get a small allowance every month, and it resets at the start of the month.',
+            'Only the buyer of a paid order can then write a review, one per item. It has stars and a note, plus optional extras: whether they’d recommend the seller, tags, scores for the piece, the shipping, and the service, and photos. The seller’s shop shows the average and the count, and the seller can reply in public. No paid order means no review, so a star always means the piece changed hands.',
           ],
         ],
       },
       {
-        heading: 'How we count',
+        heading: 'Webhooks that can arrive twice',
         paragraphs: [
+          [
+            'Stripe can send the same event more than once. So the first thing we do with an event is write its ID into a table. If the ID is already there, we skip it. If an earlier try failed, we let it run again. Rows are never deleted, which leaves a record of what happened. The webhook answers fast and does the follow-up work afterward.',
+          ],
+          [
+            'Payouts follow the same rule. A transfer to a seller carries an idempotency key built from the order, so a retry can’t pay the same order twice.',
+          ],
+        ],
+      },
+      {
+        heading: 'Tokens',
+        paragraphs: [
+          [
+            'A token is one use of our AI. A scan costs one. An assistant reply costs one. They come out of the same pool, so you spend your tokens on whichever you like. Free accounts get a small allowance every month, and it resets at the start of the month.',
+          ],
           [
             'Each use adds one to a usage row for that day. Before a scan or a reply, we add up the month: your allowance plus any packs you bought this month, minus what you’ve used. If there’s something left, the request goes through. If not, the app tells you to buy a pack or go Gold.',
           ],
-        ],
-      },
-      {
-        heading: 'Token packs',
-        paragraphs: [
           [
             'A pack is a one-time purchase of 50, 100, or 1,000 tokens, paid through Stripe Checkout. It adds to your pool for the month.',
           ],
         ],
       },
       {
-        heading: 'Gold',
+        heading: 'Gold and subscriptions',
         paragraphs: [
           [
             'Gold is a Stripe subscription, monthly or yearly. It makes tokens unlimited and unlocks the seller tools, like the premium dashboard and sales tracking. Unlimited accounts skip the counting, so they never hit a limit.',
           ],
-        ],
-      },
-      {
-        heading: 'How a subscription stays in sync',
-        paragraphs: [
           [
-            'Stripe bills you and renews you. Stripe also tells our backend about every change (a renewal, a cancellation, a plan change, a pause), and we keep a copy so the app always knows your plan. If you cancel, you keep Gold until the end of the period you paid for.',
-          ],
-          [
-            'To change your plan, update your card, or see invoices, the app opens Stripe’s customer portal, so card details stay with Stripe.',
+            'Stripe bills you and renews you. Stripe also tells our backend about every change (a renewal, a cancellation, a plan change, a pause), and we keep a copy so the app always knows your plan. If you cancel, you keep Gold until the end of the period you paid for. To change your plan, update your card, or see invoices, the app opens Stripe’s customer portal, so card details stay with Stripe.',
           ],
           [
             'Subscriptions and marketplace sales sit in separate ledgers on the same Stripe account. A subscription renews a plan, and a sale pays a seller. Mixing the two leads to refund arguments you can’t explain.',

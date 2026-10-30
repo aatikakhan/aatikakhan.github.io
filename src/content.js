@@ -101,7 +101,7 @@ export const specialties = [
   {
     title: 'App development',
     blurb:
-      'Flutter apps and FastAPI backends, running on AWS.',
+      'Flutter apps, and FastAPI backends with Redis caching and background jobs.',
   },
   {
     title: 'Vector databases',
@@ -134,14 +134,15 @@ export const experiences = [
     company: 'Treasure Fox · USA (Remote)',
     period: 'Dec 2024 – Present',
     summary:
-      'Heading engineering as a one-person team on a B2B and B2C ecommerce marketplace for mid-century furniture. Architecture, the app, payments, freight, and the models all sit at the same desk.',
+      'Heading engineering as a one-person team on a B2B and B2C ecommerce marketplace for mid-century furniture. I own the app, the backend, the money flow, and the servers.',
     contributions: [
-      'One-person engineering team: the app, the APIs, AWS, and production deploys. A buyer can purchase a piece, and a dealer can list a room, on the same ecommerce system.',
-      'Identification that can refuse a listing, with a manual MCM verification when the scan is wrong, plus search and a notice when a saved search becomes available.',
-      'Stripe payouts that wait until delivery and inspection. Payments, Connect accounts, payouts, and subscriptions are read from the Stripe dashboards, and the seller sees that same state in the app. Parcel, freight, and white-glove, with the fees that follow each mode.',
-      'Listing reports stay live until Keep or Remove. An order issue pauses payout. Buyers review a seller only after they have paid.',
+      'Built 30+ REST APIs with FastAPI and PostgreSQL, and deployed them to AWS with Gunicorn, nginx, systemd, and GitHub Actions, with separate staging and production.',
+      'Put Redis in front of the busiest reads: the homepage feed, user profiles, seller pages, and plan checks. Feed keys carry a version number, so one counter bump clears every page. Carts live in Redis with a 7-day expiry. If Redis is down, reads fall back to PostgreSQL.',
+      'Moved slow work off the request. Bulk-upload scans run in a worker pool, with job state in PostgreSQL so a job can be cancelled or resumed. A daily systemd timer releases seller payouts.',
+      'Made Stripe webhooks safe to repeat. Each event is logged once, failed events can retry, and payouts carry idempotency keys. Covers Connect accounts, payouts, and subscriptions.',
+      'Shipped a photo scan that reads furniture with OpenAI and Gemini, then checks the result against verified records using vector search in PostgreSQL (pgvector).',
     ],
-    tech: ['Flutter', 'FastAPI', 'PostgreSQL', 'AWS', 'OpenAI', 'Stripe', 'RAG'],
+    tech: ['FastAPI', 'PostgreSQL', 'Redis', 'AWS', 'Stripe', 'pgvector', 'GitHub Actions', 'Flutter'],
     link: 'https://treasurefox.ai',
   },
   {
